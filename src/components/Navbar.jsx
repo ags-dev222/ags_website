@@ -71,7 +71,7 @@ const Navbar = () => {
       {/* Right Side */}
       <div>
         <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded">
-          Join
+          Login
         </button>
       </div>
     </nav>
