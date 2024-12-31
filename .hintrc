@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "development"
+  ],
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_ff <= 130",
+    "not firefox <= 129",
+    "not firefox <= 130",
+    "not opera <= 114"
+  ]
+}
