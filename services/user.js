@@ -123,6 +123,19 @@ class UserService {
       throw new Error(`Database error while setting user password: ${err.message}`);
     }
   }
+
+  static async authenticateWithToken(userId) {
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user;
+    } catch (error) {
+      console.error('Error authenticating user with token:', error);
+      throw error;
+    }
+  }
 }
 
 export default UserService;

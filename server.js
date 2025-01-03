@@ -1,17 +1,19 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import express from 'express';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
+import cors from 'cors';
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
 import { authenticateWithToken } from './routes/middleware/auth.js';
-import cors from 'cors';
+import resourceRoutes from './routes/resources.js';
+import eventRoutes from './routes/events.js';
+import blogRoutes from './routes/blog.js';
+import startupRoutes from './routes/startups.js';
 
 dotenv.config();
 
-if (!process.env.DATABASE_URL || !process.env.SESSION_SECRET) {
-  console.error("Error: DATABASE_URL or SESSION_SECRET variables in .env missing.");
+if (!process.env.DATABASE_URL) {
+  console.error("Error: DATABASE_URL variable in .env missing.");
   process.exit(-1);
 }
 
@@ -26,19 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Session configuration with connect-mongo
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL }),
-  })
-);
-
-// Authentication routes
-app.use(authenticateWithToken); 
-app.use(authRoutes);
+// Apply authenticateWithToken middleware to all routes
+app.use(authenticateWithToken);
 
 // Database connection
 mongoose
@@ -52,19 +43,13 @@ mongoose
     process.exit(1);
   });
 
-// Logging session creation and destruction
+// Logging request and authentication status
 app.use((req, res, next) => {
-  const sess = req.session;
-  // Make session available to all views
-  res.locals.session = sess;
-  if (!sess.views) {
-    sess.views = 1;
-    console.log("Session created at: ", new Date().toISOString());
+  console.log("Request received: ", new Date().toISOString(), " for ", req.path);
+  if (req.user) {
+    console.log(`Authenticated user: ${req.user.email}`);
   } else {
-    sess.views++;
-    console.log(
-      `Session accessed again at: ${new Date().toISOString()}, Views: ${sess.views}, User ID: ${sess.userId || '(unauthenticated)'}`
-    );
+    console.log("No authenticated user for this request.");
   }
   next();
 });
@@ -73,6 +58,12 @@ app.use((req, res, next) => {
 app.use(basicRoutes);
 // Authentication Routes
 app.use('/api/auth', authRoutes);
+
+// Protected routes
+app.use('/api/resources', resourceRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/startups', startupRoutes);
 
 // If no routes handled the request, it's a 404
 app.use((req, res, next) => {
