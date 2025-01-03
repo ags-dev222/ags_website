@@ -1,12 +1,14 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const express = require("express");
-const session = require("express-session");
-const MongoStore = require('connect-mongo');
-const basicRoutes = require("./routes/index");
-const authRoutes = require("./routes/auth");
-const { authenticateWithToken } = require('./routes/middleware/auth');
-const cors = require("cors");
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import express from 'express';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
+import basicRoutes from './routes/index.js';
+import authRoutes from './routes/auth.js';
+import { authenticateWithToken } from './routes/middleware/auth.js';
+import cors from 'cors';
+
+dotenv.config();
 
 if (!process.env.DATABASE_URL || !process.env.SESSION_SECRET) {
   console.error("Error: DATABASE_URL or SESSION_SECRET variables in .env missing.");
@@ -24,8 +26,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+// Session configuration with connect-mongo
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL }),
+  })
+);
+
 // Authentication routes
-app.use(authenticateWithToken);
+app.use(authenticateWithToken); 
 app.use(authRoutes);
 
 // Database connection
@@ -40,21 +52,6 @@ mongoose
     process.exit(1);
   });
 
-// Session configuration with connect-mongo
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DATABASE_URL }),
-  }),
-);
-
-app.on("error", (error) => {
-  console.error(`Server error: ${error.message}`);
-  console.error(error.stack);
-});
-
 // Logging session creation and destruction
 app.use((req, res, next) => {
   const sess = req.session;
@@ -66,7 +63,7 @@ app.use((req, res, next) => {
   } else {
     sess.views++;
     console.log(
-      `Session accessed again at: ${new Date().toISOString()}, Views: ${sess.views}, User ID: ${sess.userId || '(unauthenticated)'}`,
+      `Session accessed again at: ${new Date().toISOString()}, Views: ${sess.views}, User ID: ${sess.userId || '(unauthenticated)'}`
     );
   }
   next();

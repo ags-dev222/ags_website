@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
-const { validatePassword, isPasswordHash } = require('../utils/password.js');
-const { randomUUID } = require("crypto");
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { validatePassword, isPasswordHash } from '../utils/password.js';
+import { randomUUID } from 'crypto';
 
 const schema = new mongoose.Schema({
   email: {
@@ -57,6 +58,10 @@ schema.set('toJSON', {
   },
 });
 
+schema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
 schema.methods.regenerateToken = async function regenerateToken() {
   this.token = randomUUID();
   if (!this.isNew) {
@@ -80,4 +85,5 @@ schema.statics.authenticateWithPassword = async function authenticateWithPasswor
 
 const User = mongoose.model('User', schema);
 
-module.exports = User;
+
+export default User;

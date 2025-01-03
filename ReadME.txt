@@ -1,5 +1,4 @@
 Action:  Open your web browser and visit 'http://localhost:3000.
-
 STEP 1:  REGISTERING A USER
 Expected Results: The registration page with a form for email, password, and name should be displayed.
 
@@ -22,3 +21,12 @@ Expected Results: An error message saying 'Name must be between 2 and 50 charact
 Step 6:  Submit Registration Form with Long Name
 Action:  Fill in the registration form with a valid email, a valid password, and a long name (e.g., 51 characters). Click the 'Register' button.
 Expected Results: An error message saying 'Name must be between 2 and 50 characters' should be displayed.
+
+
+Step 1:  LOGIN A USER
+Action:  Open your web browser and visit 'http://localhost:3000/login'.
+Expected Results: The login page should be displayed with fields for email and password.
+
+Step 2:  Enter Valid Credentials
+Action:  Enter the email and password of a registered user into the login form and click the 'Login' button.
+Expected Results: You should be successfully logged in and redirected to the dashboard page.

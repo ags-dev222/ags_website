@@ -1,34 +1,28 @@
-const UserService = require('../../services/user.js');
+import UserService from '../../services/user.js';
 
-const authenticateWithToken = (req, res, next) => {
-  const authHeader = req.get('Authorization');
-  if (authHeader) {
-    const m = authHeader.match(/^(Token|Bearer) (.+)/i);
-    if (m) {
-      UserService.authenticateWithToken(m[2])
-        .then((user) => {
-          req.user = user;
-          next();
-        })
-        .catch((err) => {
-          next(err);
-        });
-      return;
-    }
+export const authenticateWithToken = (req, res, next) => {
+  // Get the token from the session (not the Authorization header)
+  const token = req.session.token;
+
+  if (token) {
+    UserService.authenticateWithToken(token)
+      .then((user) => {
+        req.user = user;  // Attach the user to the request object
+        next();
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    // If there's no token in the session, move to the next middleware
+    next();
   }
-
-  next();
 };
 
-const requireUser = (req, res, next) => {
+export const requireUser = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({ error: 'Authentication required' });
   }
 
   next();
-};
-
-module.exports = {
-  authenticateWithToken,
-  requireUser,
 };
