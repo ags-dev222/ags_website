@@ -1,5 +1,3 @@
-import React from "react";
-
 const PartneringSection = () => {
   return (
     <section className="px-8 py-12 bg-gray-100">
@@ -14,7 +12,7 @@ const PartneringSection = () => {
       </div>
 
       {/* Grid Layout - Centered with Smaller Width */}
-      <div className="max-w-2xl mx-auto grid grid-cols-5 gap-5">
+      <div className="max-w-2xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
         <div className="h-24 w-24 bg-gray-300 rounded"></div>
         <div className="h-24 w-24 bg-gray-300 rounded"></div>
         <div className="h-24 w-24 bg-gray-300 rounded"></div>

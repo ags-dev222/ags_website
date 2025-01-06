@@ -4,12 +4,13 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'media', // or 'class' or false
   theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };

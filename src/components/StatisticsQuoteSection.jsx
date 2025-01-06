@@ -1,12 +1,14 @@
 const StatisticsQuoteSection = () => {
   return (
-    <section className="bg-gray-100 h-screen">
+    <section className="bg-gray-100 py-14">
       {/* Main 4-Grid Layout */}
-      <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2 gap-4 h-full w-full max-w-screen-lg mx-auto">
         {/* Top Left - Placeholder (e.g., image or blank) */}
-        <div className="bg-gray-200">
+        <div className="bg-gray-200 flex items-center justify-center">
           <img
-            
+            src="/path/to/your/image1.jpg" // Replace with your actual image path
+            alt="Placeholder"
+            className="w-full h-auto object-cover"
           />
         </div>
 
@@ -15,7 +17,7 @@ const StatisticsQuoteSection = () => {
           <h2 className="text-2xl font-bold mb-6">
             &quot;Fuel the Growth of Your Startup and Drive Business Innovation&quot;
           </h2>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="text-center">
               <p className="text-3xl font-bold text-gray-800">1000+</p>
               <p className="text-gray-500">Members Nationwide</p>
@@ -49,9 +51,11 @@ const StatisticsQuoteSection = () => {
         </div>
 
         {/* Bottom Right - Placeholder (e.g., image or blank) */}
-        <div className="bg-gray-200">
+        <div className="bg-gray-200 flex items-center justify-center">
           <img
-           
+            src="/path/to/your/image2.jpg" // Replace with your actual image path
+            alt="Placeholder"
+            className="w-full h-auto object-cover"
           />
         </div>
       </div>

@@ -1,5 +1,3 @@
-import React from "react";
-
 const ContactForm = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center p-6">
@@ -7,10 +5,10 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Section */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">Let's us talk</h2>
+            <h2 className="text-2xl font-bold mb-4">Let&apos;s talk</h2>
             <p className="mb-6">
               Questions, comments, or suggestions? Simply fill in the form, and
-              we'll be in touch shortly.
+              we&apos;ll be in touch shortly.
             </p>
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
@@ -54,10 +52,7 @@ const ContactForm = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="role"
-                  className="block text-sm font-medium"
-                >
+                <label htmlFor="role" className="block text-sm font-medium">
                   Role in company
                 </label>
                 <select
@@ -71,10 +66,7 @@ const ContactForm = () => {
                 </select>
               </div>
               <div>
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium"
-                >
+                <label htmlFor="description" className="block text-sm font-medium">
                   Description
                 </label>
                 <textarea
