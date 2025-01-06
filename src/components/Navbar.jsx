@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link } from 'react-router-dom';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
   const [isExploreOpen, setIsExploreOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-16 py-4 bg-gray-900 text-white">
@@ -12,13 +13,22 @@ const Navbar = () => {
         {/* Logo */}
         <div>
           <a href="#">
-            <img src="/src/assets/images/ags-logo.png" alt="Logo" className="h-12" /> {/* Replace with your logo */}
+            <img
+              src="/src/assets/images/ags-logo.png" // Replace with your actual logo path
+              alt="Logo"
+              className="h-12"
+            />
           </a>
         </div>
+
         {/* Explore Dropdown */}
         <div className="relative">
-          <button onClick={() => setIsExploreOpen(!isExploreOpen)} className="hover:underline">
-            Explore
+          <button
+            onClick={() => setIsExploreOpen(!isExploreOpen)}
+            className="flex items-center space-x-1 hover:text-yellow-300"
+          >
+            <span>Explore</span>
+            <span>&#9662;</span>
           </button>
           {isExploreOpen && (
             <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
@@ -31,12 +41,33 @@ const Navbar = () => {
             </div>
           )}
         </div>
-      </div>
 
-      {/* Search Icon */}
-      <button className="p-2 text-gray-300 hover:text-yellow-300">
-        <MagnifyingGlassIcon className="h-4 w-4" />
-      </button>
+        {/* About Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setIsAboutOpen(!isAboutOpen)}
+            className="flex items-center space-x-1 hover:text-yellow-300"
+          >
+            <span>About</span>
+            <span>&#9662;</span>
+          </button>
+          {isAboutOpen && (
+            <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
+              <a href="#" className="block px-4 py-2 hover:bg-gray-700">
+                Who we are
+              </a>
+              <a href="#" className="block px-4 py-2 hover:bg-gray-700">
+                Our Mission
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Search Icon */}
+        <button className="p-2 text-gray-300 hover:text-yellow-300">
+          <MagnifyingGlassIcon className="h-4 w-4" />
+        </button>
+      </div>
 
       {/* Right Side */}
       <div>
