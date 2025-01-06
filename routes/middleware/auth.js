@@ -1,6 +1,7 @@
 import UserService from '../../services/user.js';
 import { verifyToken } from '../../utils/jwt.js';
 
+//auth Headers reqyuires authorization
 export const authenticateWithToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
@@ -23,6 +24,7 @@ export const authenticateWithToken = async (req, res, next) => {
   }
 };
 
+//require Authentication before login in a user 
 export const requireAuth = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({ error: 'Authentication required' });
@@ -30,6 +32,7 @@ export const requireAuth = (req, res, next) => {
   next();
 };
 
+//cant login without a required user
 export const requireUser = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({ error: 'Authentication required' });

@@ -1,18 +1,21 @@
 import express from 'express';
 import { requireAuth } from './middleware/auth.js';
+import {
+   getAllResources, 
+   addResource, 
+   uploadFile, 
+   downloadFile, 
+   searchResources
+  } from '../controllers/resources.js';
 
-const router = express.Router();
+  const router = express.Router();
 
-router.get('/', requireAuth, (req, res) => {
-  // Implement get all resources logic
-  res.status(200).json({ message: "Fetching all resources" });
-});
+  router.get('/resources', requireAuth, getAllResources);
+  router.post('/resources', requireAuth, addResource);
+  router.post('/upload', requireAuth, uploadFile);
+  router.get('/download/:id', requireAuth, downloadFile);
+  router.get('/search', requireAuth, searchResources);
 
-router.post('/', requireAuth, (req, res) => {
-  // Implement add new resource logic
-  res.status(201).json({ message: "Adding a new resource" });
-});
 
-// ... (other resource routes)
-
+  
 export default router;

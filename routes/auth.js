@@ -1,57 +1,55 @@
-import express from 'express';
-import UserService from '../services/user.js';
-import { generateToken } from '../utils/jwt.js';
+import express from 'express'; 
+import UserService from '../services/user.js'; 
+import { generateToken } from '../utils/jwt.js'; 
 import logger from '../utils/log.js';
 import requireUser from '../routes/middleware/requireUser.js';
 
 const router = express.Router();
 const log = logger('api/routes/authRoutes');
 
-//login 
+// Login Route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
   }
 
   try {
     // Authenticate user with email and password
-    const user = await UserService.authenticateWithPassword(email, password);
+    const { user, token } = await UserService.authenticateWithPassword(email, password);
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Generate a token for the authenticated user
-    const token = generateToken(user);
-
-    // Store the token in the session
-    req.session.userId = user._id;  // Store the user ID in the session
-    req.session.token = token;  // Store the generated token in the session
+    // Optionally store the token in session (if using session-based authentication)
+    req.session.userId = user._id;  // Store the user ID in session
+    req.session.token = token;  // Store the JWT token in session (not recommended for stateless auth)
 
     // Respond with user data and token
-    res.json({ user, token });
+    res.json({
+      message: 'Login successful',
+      user: { email: user.email, name: user.name },
+      token, // Send the token back
+    });
   } catch (error) {
     log.error('Login error:', error);
     res.status(500).json({ error: 'An error occurred during login' });
   }
 });
 
-
-
-//register a user
+// Register Route
 router.post('/register', async (req, res) => {
   try {
-    const user = await UserService.createUser(req.body);
-    res.status(201).json({ message: 'User registered successfully', user });
+    const { user, token } = await UserService.createUser(req.body);
+    res.status(201).json({ message: 'User registered successfully', user, token });
   } catch (error) {
     console.error('Error while registering user', error);
     res.status(400).json({ error: error.message });
   }
 });
 
-
-
-//logout
+// Logout Route
 router.post('/logout', (req, res) => {
   req.session?.destroy(err => {
     if (err) {
@@ -62,13 +60,7 @@ router.post('/logout', (req, res) => {
   });
 });
 
-router.all('/api/auth/logout', async (req, res) => {
-  if (req.user) {
-    await UserService.regenerateToken(req.user);
-  }
-  res.status(204).send();
-});
-
+// User Profile (me)
 router.get('/me', requireUser, async (req, res) => {
   res.status(200).json(req.user);
 });

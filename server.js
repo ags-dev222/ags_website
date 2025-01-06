@@ -18,7 +18,7 @@ if (!process.env.DATABASE_URL) {
 }
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5173;
 // Pretty-print JSON responses
 app.enable('json spaces');
 // We want to be consistent with URL paths, so we enable strict routing

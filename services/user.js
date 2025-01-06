@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import User from '../models/user.js';
 import { generatePasswordHash, validatePassword } from '../utils/password.js';
+import { generateToken } from '../utils/jwt.js'; 
 
 class UserService {
   static async list() {
@@ -44,6 +45,7 @@ class UserService {
     }
   }
 
+  // Authenticate user with email and password
   static async authenticateWithPassword(email, password) {
     if (!email) throw new Error('Email is required');
     if (!password) throw new Error('Password is required');
@@ -57,38 +59,48 @@ class UserService {
 
       user.lastLoginAt = Date.now();
       const updatedUser = await user.save();
-      return updatedUser;
+
+      // Generate JWT token after successful authentication
+      const token = generateToken(updatedUser);
+
+      return { user: updatedUser, token };
     } catch (err) {
       throw new Error(`Error while authenticating user ${email} with password: ${err.message}`);
     }
   }
 
+  // Regenerate JWT token for the user
   static async regenerateToken(user) {
-    user.token = randomUUID();
-
     try {
-      if (!user.isNew) {
-        await user.save();
-      }
+      // Generate a new JWT token
+      const token = generateToken(user);
 
-      return user;
+      // Optionally, save the token if you are storing it in the database
+      user.token = token;
+      await user.save();
+
+      return token;
     } catch (err) {
-      throw new Error(`Error while generating user token: ${err.message}`);
+      throw new Error(`Error while regenerating token for user: ${err.message}`);
     }
   }
 
+  // Create a new user with hashed password
   static async createUser({ email, password, name }) {
     if (!email) throw new Error('Email is required');
     if (!password) throw new Error('Password is required');
     if (!name) throw new Error('Name is required');
 
+    // Check if the user already exists
     const existingUser = await UserService.getByEmail(email);
     if (existingUser) throw new Error('User with this email already exists');
 
+    // Password length validation
     if (password.length < 8) {
       throw new Error('Password must be at least 8 characters long');
     }
 
+    // Hash the password
     const hash = await generatePasswordHash(password);
 
     try {
@@ -98,8 +110,13 @@ class UserService {
         name,
       });
 
+      // Save the new user in the database
       await user.save();
-      return user;
+
+      // Generate JWT token after successful user creation
+      const token = generateToken(user);
+
+      return { user, token }; // Return the user and the generated token
     } catch (err) {
       if (err.name === 'ValidationError') {
         const errors = Object.values(err.errors).map(e => e.message);
@@ -109,6 +126,7 @@ class UserService {
     }
   }
 
+  // Set or update user's password
   static async setPassword(user, password) {
     if (!password) throw new Error('Password is required');
     user.password = await generatePasswordHash(password);
@@ -124,6 +142,7 @@ class UserService {
     }
   }
 
+  // Authenticate user using a token (for JWT-based authentication)
   static async authenticateWithToken(userId) {
     try {
       const user = await User.findById(userId);
