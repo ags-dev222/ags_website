@@ -16,7 +16,7 @@ const Navbar = () => {
             <img
               src="/src/assets/images/ags-logo.png" // Replace with your actual logo path
               alt="Logo"
-              className="h-12"
+              className="h-16 w-16" // Increased size
             />
           </a>
         </div>
@@ -71,11 +71,9 @@ const Navbar = () => {
 
       {/* Right Side */}
       <div>
-        <Link to="/login">
-          <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded">
-            Login
-          </button>
-        </Link>
+        <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded">
+          Login
+        </button>
       </div>
     </nav>
   );
