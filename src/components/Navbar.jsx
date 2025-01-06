@@ -7,18 +7,25 @@ const Navbar = () => {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-16 py-4 bg-gray-900 text-white">
+    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4 bg-gray-900 text-white md:px-16">
       {/* Left Side */}
-      <div className="flex space-x-6 items-center">
+      <div className="flex space-x-4 items-center md:space-x-6">
         {/* Logo */}
         <div>
-          <a href="#">
+          <Link to="/">
             <img
               src="/src/assets/images/ags-logo.png" // Replace with your actual logo path
               alt="Logo"
-              className="h-12"
+              className="h-12 w-12 md:h-16 md:w-16" // Increased size
             />
-          </a>
+          </Link>
+        </div>
+
+        {/* Home Tab */}
+        <div>
+          <Link to="/" className="hover:text-yellow-300">
+            Home
+          </Link>
         </div>
 
         {/* Explore Dropdown */}
@@ -71,10 +78,8 @@ const Navbar = () => {
 
       {/* Right Side */}
       <div>
-        <Link to="/login">
-          <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded">
-            Login
-          </button>
+        <Link to="/login" className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded md:px-8">
+          Login
         </Link>
       </div>
     </nav>

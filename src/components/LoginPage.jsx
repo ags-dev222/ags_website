@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -27,7 +27,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex-grow flex items-center justify-center bg-gray-100">
+      <div className="flex-grow flex items-center justify-center bg-gray-100 pt-32"> {/* Increased pt-32 for more top padding */}
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold text-center mb-6">Login</h1>
           <form onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ const LoginPage = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
               >
-                {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
               </button>
             </div>
             <div className="mb-4 flex items-center">
