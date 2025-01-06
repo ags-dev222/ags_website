@@ -26,9 +26,9 @@ const Footer = () => {
           {/* Logo & Description */}
           <div>
             <img
-              src="/src/assets/images/ags-logo.png"
+              src="/src/assets/images/ags-logo1.png"
               alt="Logo"
-              className="h-12 mb-4" // Replace with your logo
+              className="h-15 mb-4" // Increased size
             />
             <p>
               Lorem ipsum is simply dummy text of the print typeset industry.
