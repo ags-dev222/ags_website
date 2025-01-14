@@ -3,11 +3,10 @@ import UserService from '../services/user.js';
 import { generateToken } from '../utils/jwt.js';
 import logger from '../utils/log.js';
 import { authenticateWithToken } from './middleware/auth.js';
-import requireUser from '../routes/middleware/requireUser.js';
+import { authorizeRoles } from '../routes/middleware/auth.js';
 
 const router = express.Router();
 const log = logger('api/routes/authRoutes');
-
 
 // Register Route (No Authentication Required)
 router.post('/registerUser', async (req, res) => {
@@ -48,7 +47,7 @@ router.post('/login', async (req, res) => {
 
     res.json({
       message: 'Login successful',
-      user: { email: user.email, name: user.name },
+      user: { email: user.email, name: user.name, role: user.role },
       token,
     });
   } catch (error) {
@@ -62,9 +61,31 @@ router.get('/me', authenticateWithToken, (req, res) => {
   res.status(200).json(req.user);
 });
 
+// Admin-Only Route (Role-Based Access Control)
+router.get('/adminData', authenticateWithToken, authorizeRoles('Admin'), async (req, res) => {
+  try {
+    const adminData = await UserService.getAdminData();
+    res.status(200).json({ success: true, data: adminData });
+  } catch (error) {
+    log.error('Error fetching admin data:', error);
+    res.status(500).json({ error: 'Unable to fetch admin data' });
+  }
+});
+
+// Registered User-Only Route
+router.get('/userResources', authenticateWithToken, authorizeRoles('Registered', 'Admin'), async (req, res) => {
+  try {
+    const userResources = await UserService.getUserResources();
+    res.status(200).json({ success: true, data: userResources });
+  } catch (error) {
+    log.error('Error fetching user resources:', error);
+    res.status(500).json({ error: 'Unable to fetch user resources' });
+  }
+});
+
 // Logout Route (Authentication Required)
 router.post('/logout', authenticateWithToken, (req, res) => {
-  req.session?.destroy(err => {
+  req.session?.destroy((err) => {
     if (err) {
       log.error('Error during session destruction:', err);
       return res.status(500).json({ success: false, message: 'Error logging out' });

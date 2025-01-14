@@ -8,8 +8,10 @@ import { authenticateWithToken } from './routes/middleware/auth.js';
 import resourceRoutes from './routes/resources.js';
 import eventRoutes from './routes/events.js';
 import blogRoutes from './routes/blog.js';
-import testimonialRoutes from './routes/testimonial.js'
+import testimonialRoutes from './routes/testimonial.js';
 import startupRoutes from './routes/startup.js';
+import signupRoutes from './routes/signup.js';
+
 
 dotenv.config();
 
@@ -64,6 +66,7 @@ app.use('/api/events', eventRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/startups', startupRoutes);
 app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/signups', signupRoutes);
 
 // If no routes handled the request, it's a 404
 app.use((req, res, next) => {

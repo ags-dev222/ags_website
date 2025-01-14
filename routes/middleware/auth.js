@@ -1,14 +1,14 @@
- import UserService from '../../services/user.js';
+import UserService from '../../services/user.js';
 import { verifyToken } from '../../utils/jwt.js';
 
 // Authenticate with Token
 export const authenticateWithToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
-    console.warn('Authorization header is missing');
-    return res.status(401).json({ error: 'Authorization header is required' });
-}
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    console.warn('Authorization header is missing or improperly formatted');
+    return res.status(401).json({ error: 'Authorization token is required' });
+  }
 
   const token = authHeader.split(' ')[1];
 
@@ -16,7 +16,7 @@ export const authenticateWithToken = async (req, res, next) => {
     const decoded = verifyToken(token);
 
     if (!decoded || !decoded.id) {
-      console.error('Invalid token payload:', decoded);
+      console.error('Invalid or malformed token payload:', decoded);
       return res.status(401).json({ error: 'Invalid token payload' });
     }
 
@@ -27,29 +27,36 @@ export const authenticateWithToken = async (req, res, next) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    req.user = user; // Attach user to request
+    req.user = user; // Attach authenticated user to the request
     next();
   } catch (error) {
     console.error('Error during token authentication:', error.message);
-    return res.status(500).json({ error: 'Authentication failed' });
+    return res.status(500).json({ error: 'Token authentication failed' });
   }
 };
 
+// Role-Based Authorization Middleware
+export const authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
 
-//require Authentication before login in a user 
+    if (!roles.includes(req.user.role)) {
+      console.warn(`Access denied. Required roles: ${roles}. User role: ${req.user.role}`);
+      return res.status(403).json({ error: 'Access Denied' });
+    }
+
+    next();
+  };
+};
+
+// Require Authentication Middleware (General)
 export const requireAuth = (req, res, next) => {
   if (!req.user) {
+    console.warn('Access attempt without authentication');
     return res.status(401).json({ error: 'Authentication required' });
   }
+
   next();
 };
-
-
-
-//cant login without a required user
-export const requireUser = (req, res, next) => {
-  if (!req.user) {
-    return res.status(401).json({ error: 'Authentication required' });
-  }
-  next();
-}; 

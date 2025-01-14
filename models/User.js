@@ -27,6 +27,13 @@ const schema = new mongoose.Schema({
     minlength: [2, 'Name must be at least 2 characters long'],
     maxlength: [50, 'Name cannot exceed 50 characters'],
   },
+  //RBAC
+  role: {
+    type: String,
+    enum: ['Admin', 'Registered', 'Public'],
+    default: 'Public',
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
