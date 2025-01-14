@@ -8,7 +8,8 @@ import { authenticateWithToken } from './routes/middleware/auth.js';
 import resourceRoutes from './routes/resources.js';
 import eventRoutes from './routes/events.js';
 import blogRoutes from './routes/blog.js';
-import startupRoutes from './routes/startups.js';
+import testimonialRoutes from './routes/testimonial.js'
+import startupRoutes from './routes/startup.js';
 
 dotenv.config();
 
@@ -21,14 +22,12 @@ const app = express();
 const port = process.env.PORT || 5173;
 // Pretty-print JSON responses
 app.enable('json spaces');
-// We want to be consistent with URL paths, so we enable strict routing
 app.enable('strict routing');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Apply authenticateWithToken middleware to all routes
 app.use(authenticateWithToken);
 
 // Database connection
@@ -64,6 +63,7 @@ app.use('/api/resources', resourceRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/startups', startupRoutes);
+app.use('/api/testimonials', testimonialRoutes);
 
 // If no routes handled the request, it's a 404
 app.use((req, res, next) => {

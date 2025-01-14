@@ -1,19 +1,18 @@
-import UserService from '../../services/user.js';
+ import UserService from '../../services/user.js';
 import { verifyToken } from '../../utils/jwt.js';
 
-//auth Headers reqyuires authorization
+// Authenticate with Token
 export const authenticateWithToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
     console.warn('Authorization header is missing');
     return res.status(401).json({ error: 'Authorization header is required' });
-  }
+}
 
   const token = authHeader.split(' ')[1];
 
   try {
-    // Verify the JWT token
     const decoded = verifyToken(token);
 
     if (!decoded || !decoded.id) {
@@ -28,8 +27,8 @@ export const authenticateWithToken = async (req, res, next) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    req.user = user; 
-    next(); 
+    req.user = user; // Attach user to request
+    next();
   } catch (error) {
     console.error('Error during token authentication:', error.message);
     return res.status(500).json({ error: 'Authentication failed' });
@@ -53,4 +52,4 @@ export const requireUser = (req, res, next) => {
     return res.status(401).json({ error: 'Authentication required' });
   }
   next();
-};
+}; 

@@ -7,7 +7,7 @@ io.on('connection', (socket) => {
   console.log('New client connected');
 
   socket.on('event-created', (event) => {
-    io.emit('new-event', event); // Broadcast this event to all connected client 
+    io.emit('new-event', event);  
   });
 
   socket.on('disconnect', () => {
