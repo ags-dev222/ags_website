@@ -4,25 +4,38 @@ import { verifyToken } from '../../utils/jwt.js';
 //auth Headers reqyuires authorization
 export const authenticateWithToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(' ')[1];
-    try {
-      const decoded = verifyToken(token);
-      const user = await UserService.get(decoded.id);
-      if (user) {
-        req.user = user;
-        next();
-      } else {
-        next(new Error('User not found'));
-      }
-    } catch (error) {
-      console.error('Token verification failed:', error);
-      res.status(401).json({ error: 'Invalid token' });
+
+  if (!authHeader) {
+    console.warn('Authorization header is missing');
+    return res.status(401).json({ error: 'Authorization header is required' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    // Verify the JWT token
+    const decoded = verifyToken(token);
+
+    if (!decoded || !decoded.id) {
+      console.error('Invalid token payload:', decoded);
+      return res.status(401).json({ error: 'Invalid token payload' });
     }
-  } else {
-    next();
+
+    const user = await UserService.get(decoded.id);
+
+    if (!user) {
+      console.error(`User not found for ID: ${decoded.id}`);
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    req.user = user; 
+    next(); 
+  } catch (error) {
+    console.error('Error during token authentication:', error.message);
+    return res.status(500).json({ error: 'Authentication failed' });
   }
 };
+
 
 //require Authentication before login in a user 
 export const requireAuth = (req, res, next) => {
@@ -31,6 +44,8 @@ export const requireAuth = (req, res, next) => {
   }
   next();
 };
+
+
 
 //cant login without a required user
 export const requireUser = (req, res, next) => {

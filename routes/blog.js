@@ -1,13 +1,19 @@
 import express from 'express';
 import { requireAuth } from './middleware/auth.js';
+import {
+  createBlog,
+  updateBlog,
+  getAllBlogsPosts,
+  getBlogById,
+  deleteBlogById,
+} from '../controllers/blog.js';
 
 const router = express.Router();
 
-router.get('/', requireAuth, (req, res) => {
-  // Implement get all blog posts logic
-  res.status(200).json({ message: "Fetching all blogs..." });
-});
-
-// ... (other blog routes)
+router.post('/create', requireAuth, createBlog);
+router.put('/update/:id', requireAuth, updateBlog);
+router.get('/', getAllBlogsPosts);
+router.get('/:id', getBlogById);
+router.delete('/:id', requireAuth, deleteBlogById);
 
 export default router;

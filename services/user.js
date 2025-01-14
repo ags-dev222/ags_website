@@ -13,12 +13,20 @@ class UserService {
   }
 
   static async get(id) {
+    if (!id) throw new Error('User ID is required');
     try {
-      return User.findOne({ _id: id }).exec();
+      const user = await User.findById(id).exec();
+      if (!user) {
+        console.warn(`No user found with ID: ${id}`);
+        return null; 
+      }
+      return user;
     } catch (err) {
-      throw new Error(`Error getting the user by their ID: ${err.message}`);
+      console.error(`Error retrieving user by ID ${id}:`, err.message);
+      throw new Error(`Error fetching user: ${err.message}`);
     }
   }
+  
 
   static async getByEmail(email) {
     try {

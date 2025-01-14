@@ -22,9 +22,8 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Optionally store the token in session (if using session-based authentication)
-    req.session.userId = user._id;  // Store the user ID in session
-    req.session.token = token;  // Store the JWT token in session (not recommended for stateless auth)
+    req.session.userId = user._id;  
+    req.session.token = token;  
 
     // Respond with user data and token
     res.json({
@@ -39,15 +38,27 @@ router.post('/login', async (req, res) => {
 });
 
 // Register Route
-router.post('/register', async (req, res) => {
+router.post('/registerUser', async (req, res) => {
+  const { email, password, name } = req.body;
+
+  if (!email || !password || !name) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
   try {
-    const { user, token } = await UserService.createUser(req.body);
-    res.status(201).json({ message: 'User registered successfully', user, token });
+    const { user, token } = await UserService.createUser({ email, password, name });
+
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: { email: user.email, name: user.name },
+      token,
+    });
   } catch (error) {
-    console.error('Error while registering user', error);
+    log.error('Registration error:', error);
     res.status(400).json({ error: error.message });
   }
 });
+
 
 // Logout Route
 router.post('/logout', (req, res) => {
