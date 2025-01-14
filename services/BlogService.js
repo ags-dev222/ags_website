@@ -8,6 +8,7 @@ export const createBlog = async (data) => {
   return await newBlog.save();
 };
 
+
 // Update a blog
 export const updateBlog = async (id, data) => {
   const { title, content, author } = data;
@@ -17,6 +18,7 @@ export const updateBlog = async (id, data) => {
     { new: true }
   );
 };
+
 
 // Get all blogs with pagination
 export const getAllBlogs = async (page, limit) => {
@@ -28,10 +30,12 @@ export const getAllBlogs = async (page, limit) => {
   return { blogs, totalBlogs };
 };
 
+
 // Get a single blog by ID
 export const getBlogById = async (id) => {
   return await Blog.findById(id);
 };
+
 
 // Delete a blog
 export const deleteBlogById = async (id) => {
