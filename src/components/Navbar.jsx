@@ -3,9 +3,20 @@ import { Link } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
-  const [isExploreOpen, setIsExploreOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  const handleDropdownToggle = (dropdown) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
+  const handleMouseEnter = (dropdown) => {
+    setActiveDropdown(dropdown);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveDropdown(null);
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4 bg-gray-900 text-white md:px-16">
@@ -27,41 +38,55 @@ const Navbar = () => {
           <Link to="/" className="hover:text-yellow-300">
             Home
           </Link>
-          <div className="relative">
+          <div
+            className="relative group"
+            onMouseEnter={() => handleMouseEnter('explore')}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
-              onClick={() => setIsExploreOpen(!isExploreOpen)}
+              onClick={() => handleDropdownToggle('explore')}
               className="flex items-center space-x-1 hover:text-yellow-300"
             >
               <span>Explore</span>
               <span>&#9662;</span>
             </button>
-            {isExploreOpen && (
+            {activeDropdown === 'explore' && (
               <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
                 <Link to="/events" className="block px-4 py-2 hover:bg-gray-700">
                   Events
                 </Link>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-700">
+                <Link to="/ecosystem" className="block px-4 py-2 hover:bg-gray-700">
                   Ecosystem
-                </a>
+                </Link>
+                <Link to="/resources" className="block px-4 py-2 hover:bg-gray-700">
+                  Resources
+                </Link>
               </div>
             )}
           </div>
-          <div className="relative">
+          <div
+            className="relative group"
+            onMouseEnter={() => handleMouseEnter('about')}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
-              onClick={() => setIsAboutOpen(!isAboutOpen)}
+              onClick={() => handleDropdownToggle('about')}
               className="flex items-center space-x-1 hover:text-yellow-300"
             >
               <span>About</span>
               <span>&#9662;</span>
             </button>
-            {isAboutOpen && (
+            {activeDropdown === 'about' && (
               <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-700">
+                <Link to="/about-team" className="block px-4 py-2 hover:bg-gray-700">
                   Who we are
-                </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-700">
+                </Link>
+                <Link to="/about-mission-vission" className="block px-4 py-2 hover:bg-gray-700">
                   Our Mission
-                </a>
+                </Link>
+                <Link to="/success-stories" className="block px-4 py-2 hover:bg-gray-700">
+                  Success Story
+                </Link>
               </div>
             )}
           </div>
@@ -93,37 +118,43 @@ const Navbar = () => {
             Home
           </Link>
           <button
-            onClick={() => setIsExploreOpen(!isExploreOpen)}
+            onClick={() => handleDropdownToggle('explore')}
             className="flex items-center space-x-1 hover:text-yellow-300"
           >
             <span>Explore</span>
             <span>&#9662;</span>
           </button>
-          {isExploreOpen && (
+          {activeDropdown === 'explore' && (
             <div className="w-full bg-gray-800 shadow-lg">
               <Link to="/events" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Events
               </Link>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/ecosystem" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Ecosystem
-              </a>
+              </Link>
+              <Link to="/resources" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+                Resources
+              </Link>
             </div>
           )}
           <button
-            onClick={() => setIsAboutOpen(!isAboutOpen)}
+            onClick={() => handleDropdownToggle('about')}
             className="flex items-center space-x-1 hover:text-yellow-300"
           >
             <span>About</span>
             <span>&#9662;</span>
           </button>
-          {isAboutOpen && (
+          {activeDropdown === 'about' && (
             <div className="w-full bg-gray-800 shadow-lg">
-              <a href="#" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/about-team" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Who we are
-              </a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+              </Link>
+              <Link to="/about-mission-vission" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Our Mission
-              </a>
+              </Link>
+              <Link to="/success-stories" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+                Success Story
+              </Link>
             </div>
           )}
           <Link to="/login" className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded" onClick={() => setIsMobileMenuOpen(false)}>

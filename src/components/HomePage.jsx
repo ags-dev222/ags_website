@@ -1,5 +1,3 @@
-import Navbar from './Navbar';
-import Footer from './Footer';
 import HeroSection from './HeroSection';
 import ManifestoSection from './ManifestoSection';
 import PartneringSection from './PartneringSection';
@@ -11,7 +9,6 @@ import ContactForm from './ContactForm';
 const HomePage = () => {
   return (
     <div>
-      <Navbar />
       <HeroSection />
       <ManifestoSection />
       <PartneringSection />
@@ -19,7 +16,6 @@ const HomePage = () => {
       <StatisticsQuoteSection />
       <EventRecognitionSection />
       <ContactForm />
-      <Footer />
     </div>
   );
 };

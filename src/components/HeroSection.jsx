@@ -1,5 +1,5 @@
-import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
-
+import { Link } from 'react-router-dom';
+import { ArrowUpRightIcon } from '@heroicons/react/24/outline';
 
 const HeroSection = () => {
   return (
@@ -25,9 +25,11 @@ const HeroSection = () => {
 
         {/* Call to Action Buttons */}
         <div className="flex space-x-4">
-          <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded-lg text-lg font-medium">
-            Join now
-          </button>
+          <Link to="/register">
+            <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded-lg text-lg font-medium">
+              Join now
+            </button>
+          </Link>
           <button className="border-2 border-white text-white px-3 py-1 rounded-lg text-lg font-medium hover:bg-white hover:text-black transition flex items-center">
             Get in Touch  <ArrowUpRightIcon className="ml-1 h-7 w-7 text-white" />
           </button>
