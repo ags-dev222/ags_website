@@ -1,22 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const dropdownRefs = useRef({});
 
   const handleDropdownToggle = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
-  const handleMouseEnter = (dropdown) => {
-    setActiveDropdown(dropdown);
+  const handleClickOutside = (event) => {
+    if (
+      !Object.values(dropdownRefs.current).some((ref) =>
+        ref.contains(event.target)
+      )
+    ) {
+      setActiveDropdown(null);
+    }
   };
 
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4 bg-gray-900 text-white md:px-16">
@@ -40,8 +50,7 @@ const Navbar = () => {
           </Link>
           <div
             className="relative group"
-            onMouseEnter={() => handleMouseEnter('explore')}
-            onMouseLeave={handleMouseLeave}
+            ref={(el) => (dropdownRefs.current.explore = el)}
           >
             <button
               onClick={() => handleDropdownToggle('explore')}
@@ -51,7 +60,7 @@ const Navbar = () => {
               <span>&#9662;</span>
             </button>
             {activeDropdown === 'explore' && (
-              <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
+              <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
                 <Link to="/events" className="block px-4 py-2 hover:bg-gray-700">
                   Events
                 </Link>
@@ -66,8 +75,7 @@ const Navbar = () => {
           </div>
           <div
             className="relative group"
-            onMouseEnter={() => handleMouseEnter('about')}
-            onMouseLeave={handleMouseLeave}
+            ref={(el) => (dropdownRefs.current.about = el)}
           >
             <button
               onClick={() => handleDropdownToggle('about')}
@@ -77,7 +85,7 @@ const Navbar = () => {
               <span>&#9662;</span>
             </button>
             {activeDropdown === 'about' && (
-              <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg">
+              <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
                 <Link to="/about-team" className="block px-4 py-2 hover:bg-gray-700">
                   Who we are
                 </Link>
@@ -85,7 +93,7 @@ const Navbar = () => {
                   Our Mission
                 </Link>
                 <Link to="/success-stories" className="block px-4 py-2 hover:bg-gray-700">
-                  Success Story
+                  Success Stories
                 </Link>
               </div>
             )}
@@ -125,7 +133,7 @@ const Navbar = () => {
             <span>&#9662;</span>
           </button>
           {activeDropdown === 'explore' && (
-            <div className="w-full bg-gray-800 shadow-lg">
+            <div className="w-full bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
               <Link to="/events" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Events
               </Link>
@@ -145,7 +153,7 @@ const Navbar = () => {
             <span>&#9662;</span>
           </button>
           {activeDropdown === 'about' && (
-            <div className="w-full bg-gray-800 shadow-lg">
+            <div className="w-full bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
               <Link to="/about-team" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Who we are
               </Link>
@@ -153,7 +161,7 @@ const Navbar = () => {
                 Our Mission
               </Link>
               <Link to="/success-stories" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
-                Success Story
+                Success Stories
               </Link>
             </div>
           )}

@@ -8,6 +8,7 @@ import ForgotPassword from './components/ForgotPassword';
 import SuccessStories from './components/SuccessStories';
 import AboutTeam from './components/AboutTeam';
 import AboutMissionVission from './components/AboutMissionVission';
+import Resources from './components/Resources';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/success-stories" element={<SuccessStories />} />
           <Route path="/about-team" element={<AboutTeam />} />
           <Route path="/about-mission-vission" element={<AboutMissionVission />} />
+          <Route path="/resources" element={<Resources />} />
         </Routes>
         <Footer />
       </div>

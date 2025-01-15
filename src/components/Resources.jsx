@@ -1,6 +1,6 @@
 function HeroSection() {
   return (
-    <section className="bg-gray-800 text-white py-12">
+    <section className="bg-gray-800 text-white pt-32 pb-12">
       <div className="container mx-auto text-center">
         <h1 className="text-4xl font-bold">Resource Documents</h1>
         <p className="mt-2">Essential materials and tools to support your startup journey</p>
@@ -22,7 +22,7 @@ function OverviewSection() {
 
 function Resources() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <HeroSection />
       <OverviewSection />
       {/* Other sections and content */}
