@@ -1,8 +1,18 @@
+/**
+ * 1. register a user without authentication
+ * 2. login a user with auth
+ * 3. get a user profile with auth
+ * 4. admin only access route with auth
+ * 5. registered user access route with auth
+ * 6. logout user with auth 
+ */
+
+
 import express from 'express';
 import UserService from '../services/user.js';
 import { generateToken } from '../utils/jwt.js';
 import logger from '../utils/log.js';
-import { authenticateWithToken } from './middleware/auth.js';
+import { authenticateWithToken, requireAuth } from './middleware/auth.js';
 import { authorizeRoles } from '../routes/middleware/auth.js';
 
 const router = express.Router();
@@ -30,8 +40,8 @@ router.post('/registerUser', async (req, res) => {
   }
 });
 
-// Login Route (No Authentication Required)
-router.post('/login', async (req, res) => {
+// Login Route 
+router.post('/login', authenticateWithToken, requireAuth, async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -56,6 +66,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+
 // Profile Route (Authentication Required)
 router.get('/me', authenticateWithToken, (req, res) => {
   res.status(200).json(req.user);
@@ -72,6 +83,7 @@ router.get('/adminData', authenticateWithToken, authorizeRoles('Admin'), async (
   }
 });
 
+
 // Registered User-Only Route
 router.get('/userResources', authenticateWithToken, authorizeRoles('Registered', 'Admin'), async (req, res) => {
   try {
@@ -82,6 +94,7 @@ router.get('/userResources', authenticateWithToken, authorizeRoles('Registered',
     res.status(500).json({ error: 'Unable to fetch user resources' });
   }
 });
+
 
 // Logout Route (Authentication Required)
 router.post('/logout', authenticateWithToken, (req, res) => {

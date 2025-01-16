@@ -1,9 +1,11 @@
 import UserService from '../../services/user.js';
 import { verifyToken } from '../../utils/jwt.js';
 
-// Authenticate with Token
-export const authenticateWithToken = async (req, res, next) => {
+
+ export const authenticateWithToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+
+  console.log("Authorization header:", authHeader); // Log the header to see if it’s being passed
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     console.warn('Authorization header is missing or improperly formatted');
@@ -14,6 +16,8 @@ export const authenticateWithToken = async (req, res, next) => {
 
   try {
     const decoded = verifyToken(token);
+
+    console.log("Decoded token:", decoded); // Log the decoded token
 
     if (!decoded || !decoded.id) {
       console.error('Invalid or malformed token payload:', decoded);
@@ -34,6 +38,8 @@ export const authenticateWithToken = async (req, res, next) => {
     return res.status(500).json({ error: 'Token authentication failed' });
   }
 };
+
+
 
 // Role-Based Authorization Middleware
 export const authorizeRoles = (...roles) => {

@@ -91,7 +91,7 @@ schema.statics.authenticateWithPassword = async function authenticateWithPasswor
 };
 
 
-const User = mongoose.models.User || mongoose.model('User', schema);
+const User = mongoose.models.User || mongoose.model('User', schema, 'users');
 
 
 export default User;

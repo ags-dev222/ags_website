@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+ import mongoose from 'mongoose';
 
 const blogSchema = new mongoose.Schema(
   {
@@ -17,6 +17,7 @@ const blogSchema = new mongoose.Schema(
       required: [true, 'Author name is required'],
       trim: true,
     },
+    //category
     createdAt: {
       type: Date,
       default: Date.now,

@@ -30,7 +30,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(authenticateWithToken);
 
 // Database connection
 mongoose
@@ -43,6 +42,8 @@ mongoose
     console.error(err.stack);
     process.exit(1);
   });
+
+
 
 // Logging request and authentication status
 app.use((req, res, next) => {
@@ -60,9 +61,9 @@ app.use(basicRoutes);
 // Authentication Routes
 app.use('/api/auth', authRoutes);
 
-// Protected routes
+// Protected routes 
 app.use('/api/resources', resourceRoutes);
-app.use('/api/events', eventRoutes);
+app.use('/api/events',  eventRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/startups', startupRoutes);
 app.use('/api/testimonials', testimonialRoutes);

@@ -11,6 +11,8 @@ const startupSchema = new mongoose.Schema(
   fundingStage: { type: String, required: true },
 
   location: { type: String, required: true },
+  //founded year
+  //region
 
   achievements: [String],
   
