@@ -1,10 +1,6 @@
-import Navbar from './Navbar';
-import Footer from './Footer';
-
-function EventPage() {
+function ActivitiesPage() {
   return (
     <div>
-      <Navbar />
       {/* Header Section */}
       <header
         className="relative bg-gray-900 text-white bg-cover bg-center pt-9 pb-45" // Add padding to the top and bottom
@@ -17,7 +13,7 @@ function EventPage() {
         {/* Content */}
         <div className="container mx-auto px-4 py-16 text-center relative z-10">
           <p className="text-3xl text-yellow-500 font-bold underline">
-            Events
+            Our Activities
           </p>
           <h1 className="text-4xl font-bold mb-4">
             Ghana SMEs Startup Week
@@ -235,10 +231,9 @@ const EventPageContent = () => {
 function App() {
   return (
     <div>
-      <EventPage />
+      <ActivitiesPage />
       <OtherEvents />
       <EventPageContent />
-      <Footer />
     </div>
   );
 }

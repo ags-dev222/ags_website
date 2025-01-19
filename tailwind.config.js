@@ -6,10 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Open Sans', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
-      },
       keyframes: {
         dropdown: {
           '0%': { opacity: 0, transform: 'scaleY(0)' },

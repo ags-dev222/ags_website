@@ -157,76 +157,6 @@ function ContactSection() {
   );
 }
 
-function NewsletterSection() {
-  return (
-    <div className="bg-green-700 text-white text-center py-8 rounded-lg shadow-md">
-      <h4 className="text-xl font-bold mb-4">Subscribe to our Newsletter to get Updates to our Latest Collection</h4>
-      <form className="flex justify-center items-center space-x-4 max-w-xl mx-auto">
-        <div className="relative w-full">
-          <span className="absolute inset-y-0 left-3 flex items-center text-white">
-            <i className="fas fa-envelope"></i>
-          </span>
-          <input type="email" placeholder="Enter your email" className="w-full pl-10 pr-4 py-3 rounded-full text-gray-800" />
-        </div>
-        <button type="submit" className="bg-white text-green-700 font-bold px-6 py-3 rounded-full hover:bg-gray-200 transition">Subscribe</button>
-      </form>
-    </div>
-     );
-    }
-    
-    function FooterLinks() {
-      return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <img src="logo.png" alt="Logo" className="h-12 mb-4" />
-            <p className="text-gray-600">Lorem ipsum is simply dummy text of the print typeset industry.</p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-600 hover:text-green-600" title="Facebook">
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a href="#" className="text-gray-600 hover:text-green-600" title="Twitter">
-                <i className="fab fa-twitter"></i>
-                </a>
-          <a href="#" className="text-gray-600 hover:text-green-600" title="Instagram">
-            <i className="fab fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-      <div>
-        <h4 className="font-semibold mb-4">Company</h4>
-        <ul>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Home</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">About Us</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Portfolio</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Our Activities</a></li>
-          </ul>
-      </div>
-      <div>
-        <h4 className="font-semibold mb-4">Services</h4>
-        <ul>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Ghanastartup Week</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">About Us</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Portfolio</a></li>
-          <li><a href="#" className="text-gray-600 hover:text-green-600">Our Activities</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 className="font-semibold mb-4">Contact Us</h4>
-        <p className="text-gray-600">+233 24 315 8017</p>
-        <p className="text-gray-600">agsgha@gmail.com</p>
-      </div>
-    </div>
-  );
-}
-
-function FooterBottom() {
-  return (
-    <div className="text-center text-gray-600 mt-8">
-      <p>Copyright 2023 | Powered by Association Of Ghana Startups | Developed By (link unavailable)</p>
-    </div>
-  );
-}
-
 ExecutiveCard.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -242,9 +172,6 @@ function AboutTeam() {
       <Hero />
       <OurExecutive />
       <ContactSection />
-      <NewsletterSection />
-      <FooterLinks />
-      <FooterBottom />
     </>
   );
 }

@@ -1,4 +1,3 @@
-
 const DiscussionSection = () => {
   const discussionPoints = [
     {
@@ -82,8 +81,8 @@ const DiscussionSection = () => {
 
               {/* Speaker Details */}
               <div className="mt-20">
-                <h3 className="text-lg font-semibold">{speaker.name}</h3>
-                <p className="text-gray-700">{speaker.title}</p>
+                <h3 className="text-gray-950 font-bold">{speaker.name}</h3>
+                <p className="text-gray-900">{speaker.title}</p>
                 <p className="text-green-700 font-medium">{speaker.role}</p>
               </div>
             </div>

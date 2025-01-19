@@ -61,11 +61,17 @@ const Navbar = () => {
             </button>
             {activeDropdown === 'explore' && (
               <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
+                <Link to="/activities" className="block px-4 py-2 hover:bg-gray-700">
+                  Activities
+                </Link>
                 <Link to="/events" className="block px-4 py-2 hover:bg-gray-700">
                   Events
                 </Link>
                 <Link to="/ecosystem" className="block px-4 py-2 hover:bg-gray-700">
                   Ecosystem
+                </Link>
+                <Link to="/blog1" className="block px-4 py-2 hover:bg-gray-700">
+                  Blog
                 </Link>
                 <Link to="/resources" className="block px-4 py-2 hover:bg-gray-700">
                   Resources
@@ -134,6 +140,9 @@ const Navbar = () => {
           </button>
           {activeDropdown === 'explore' && (
             <div className="w-full bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
+              <Link to="/activities" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
+                Activities
+              </Link>
               <Link to="/events" className="block px-4 py-2 hover:bg-gray-700" onClick={() => setIsMobileMenuOpen(false)}>
                 Events
               </Link>

@@ -1,3 +1,7 @@
+import OrientationHero from './OrientationHero';
+import ManifestoSection from './ManifestoSection';
+import DiscussionSection from './DiscussionSection';
+
 const events = [
   {
     id: 1,
@@ -21,9 +25,12 @@ const events = [
 
 const EventsSection = () => {
   return (
-    <div className="bg-gray-900 text-white py-10 px-5">
+    <div className="bg-gray-900 text-white  py-10 px-5">
+      <OrientationHero />
+      <ManifestoSection />
+      <DiscussionSection />
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold mb-2">Other Events Schedules</h2>
+        <h2 className="text-3xl font-bold mb-2 pt-16">Other Events Schedules</h2>
         <p className="text-gray-400 font-sm mb-16">
           Our Major Upcoming Events With Dates And Brief Descriptions.
         </p>
