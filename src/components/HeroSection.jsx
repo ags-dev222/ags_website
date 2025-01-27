@@ -6,11 +6,11 @@ const HeroSection = () => {
     <div
       className="relative bg-cover bg-center h-screen"
       style={{
-        backgroundImage: "url('https://via.placeholder.com/1920x1080')", // Replace with your image URL
+        backgroundImage: "url('src/assets/images/landing.png')", // Replace with your image URL
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-100"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-85"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">

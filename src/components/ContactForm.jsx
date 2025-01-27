@@ -1,7 +1,7 @@
 const ContactForm = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-4xl bg-gray-800 p-8 rounded-lg shadow-lg">
+    <div className="bg-black text-white min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-4xl bg-black p-8 rounded-lg shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Section */}
           <div>
@@ -37,7 +37,7 @@ const ContactForm = () => {
                   type="text"
                   id="fullName"
                   placeholder="Enter your name"
-                  className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 rounded-lg bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 />
               </div>
               <div>
@@ -48,7 +48,7 @@ const ContactForm = () => {
                   type="email"
                   id="email"
                   placeholder="Enter your Email"
-                  className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 rounded-lg bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 />
               </div>
               <div>
@@ -57,7 +57,7 @@ const ContactForm = () => {
                 </label>
                 <select
                   id="role"
-                  className="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 >
                   <option value="">Select role</option>
                   <option value="Executive Manager">Executive Manager</option>
@@ -73,7 +73,7 @@ const ContactForm = () => {
                   id="description"
                   placeholder="Enter your message"
                   rows="4"
-                  className="w-full p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 rounded-lg bg-white text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 ></textarea>
               </div>
               <button

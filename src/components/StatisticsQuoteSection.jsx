@@ -19,15 +19,15 @@ const StatisticsQuoteSection = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-800">1000+</p>
+              <p className="text-3xl font-bold text-black">1000+</p>
               <p className="text-gray-500">Members Nationwide</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-800">$170,000+</p>
+              <p className="text-3xl font-bold text-black">$170,000+</p>
               <p className="text-gray-500">Funds Raised</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-gray-800">250+</p>
+              <p className="text-3xl font-bold text-black">250+</p>
               <p className="text-gray-500">Awards</p>
             </div>
           </div>

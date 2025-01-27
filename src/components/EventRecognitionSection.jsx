@@ -3,9 +3,13 @@ const EventRecognitionSection = () => {
   return (
     <section id="events" className="relative bg-gray-50">
       {/* Full-Width Placeholder that touches the top */}
-      <div className="w-full h-60 bg-gray-100 flex items-center justify-center">
-        <span className="text-xl text-gray-500">Full-Width Rectangle Placeholder</span>
-      </div>
+      <div className="w-full h-90 bg-gray-100 flex items-center justify-center">
+              <img
+                src="./src/assets/images/home2.png"
+                alt="Profile"
+                className="w-full h-full object-cover "
+              />
+            </div>
 
       <div className="max-w-6xl mx-auto px-4 py-16">
         {/* Main Tile */}
@@ -30,9 +34,13 @@ const EventRecognitionSection = () => {
           </div>
 
           {/* Right Section: Placeholder */}
-          <div className="w-40 h-60 bg-gray-300 flex items-center justify-center rounded-lg">
-            <span className="text-sm text-gray-500">Photo Placeholder</span>
-          </div>
+          <div className="w-36 h-48 bg-yellow-100 flex items-center justify-center rounded-lg overflow-hidden ">
+              <img
+                src="./src/assets/images/lady.png"
+                alt="Profile"
+                className="w-full h-full object-cover "
+              />
+            </div>
         </div>
 
         {/* Infinity Effect - Background Tiles */}

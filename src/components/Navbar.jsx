@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const dropdownRefs = useRef({});
@@ -29,7 +31,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4 bg-gray-900 text-white md:px-16">
+    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4  text-white md:px-16">
       {/* Left Side */}
       <div className="flex space-x-4 items-center md:space-x-6">
         {/* Logo */}
@@ -45,9 +47,6 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4 items-center">
-          <Link to="/" className="hover:text-yellow-300">
-            Home
-          </Link>
           <div
             className="relative group"
             ref={(el) => (dropdownRefs.current.explore = el)}
@@ -60,7 +59,7 @@ const Navbar = () => {
               <span>&#9662;</span>
             </button>
             {activeDropdown === 'explore' && (
-              <div className="absolute mt-2 w-40 bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
+              <div className="absolute mt-2 w-40 bg-black-800 shadow-lg transition-all duration-300 ease-in-out transform origin-top animate-dropdown">
                 <Link to="/activities" className="block px-4 py-2 hover:bg-gray-700">
                   Activities
                 </Link>
@@ -105,6 +104,24 @@ const Navbar = () => {
             )}
           </div>
         </div>
+         {/* Search Icon */}
+         <div className="relative">
+          <input
+            type="text"
+            className={`h-10 border-none p-2 text-white rounded-full bg-transparent transition-all duration-500 ease-in-out 
+              ${isSearchOpen ? "w-64 bg-transparent border-b border-white" : "w-10"}`
+            }
+            placeholder={isSearchOpen ? "Type to Search..." : ""}
+            onFocus={() => setIsSearchOpen(true)}
+            onBlur={() => setIsSearchOpen(false)}
+          />
+          <button 
+            className="absolute right-0 top-0 p-2 text-gray-300 hover:text-yellow-300"
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+          >
+            <MagnifyingGlassIcon className="h-5 w-5" />
+          </button>
+        </div>
       </div>
 
       {/* Right Side */}
@@ -127,7 +144,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-gray-900 text-white flex flex-col items-center space-y-4 py-4 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-center space-y-4 py-4 md:hidden">
           <Link to="/" className="hover:text-yellow-300" onClick={() => setIsMobileMenuOpen(false)}>
             Home
           </Link>

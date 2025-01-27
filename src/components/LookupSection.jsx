@@ -17,7 +17,7 @@ const LookupSection = () => {
   };
 
   return (
-    <section className="px-8 py-12 bg-gray-900 text-white">
+    <section className="px-8 py-12 bg-black text-white">
       <div className="max-w-screen-lg mx-auto space-y-6">
         {/* Header Section */}
         <div className="text-center">

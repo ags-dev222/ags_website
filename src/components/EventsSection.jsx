@@ -25,7 +25,7 @@ const events = [
 
 const EventsSection = () => {
   return (
-    <div className="bg-gray-900 text-white  py-10 px-5">
+    <div className="bg-black text-white  py-10 px-5">
       <OrientationHero />
       <ManifestoSection />
       <DiscussionSection />
