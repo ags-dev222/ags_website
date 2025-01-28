@@ -162,7 +162,7 @@ const Footer = () => {
       {/* Footer Bottom */}
       <div className="bg-gray-200 py-4 text-center text-xs">
         <p>
-          Copyright © 2024 | Powered by Association Of Ghana Startups | Developed
+          Copyright © {new Date().getFullYear()} | Powered by Association Of Ghana Startups | Developed
           by Frontend Dev Team - AGS
         </p>
       </div>
