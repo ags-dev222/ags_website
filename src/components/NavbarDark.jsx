@@ -43,7 +43,7 @@ const Navbar = () => {
         <div>
           <Link to="/">
             <img
-              src="/src/assets/images/AGS LOGO 2 1.png"
+              src="/src/assets/images/ags-logo1.png"
               alt="Logo"
               className="h-10 w-10 md:h-9 md:w-30"
             />
@@ -51,7 +51,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-4 items-center">
+        <div className="hidden md:flex space-x-4 items-center text-black">
           <Dropdown
             label="Explore"
             links={[
@@ -83,14 +83,14 @@ const Navbar = () => {
         <div className="relative">
           <input
             type="text"
-            className={`h-10 border-none p-2 text-white rounded-full bg-transparent transition-all duration-500 ease-in-out 
-              ${isSearchOpen ? "w-64 bg-transparent border-b border-white" : "w-10"}`}
+            className={`h-10 border-none p-2 text-black rounded-full bg-transparent transition-all duration-500 ease-in-out 
+              ${isSearchOpen ? "w-64 bg-transparent border-b border-black" : "w-10"}`}
             placeholder={isSearchOpen ? "Type to Search..." : ""}
             onFocus={() => setIsSearchOpen(true)}
             onBlur={() => setIsSearchOpen(false)}
           />
           <button
-            className="absolute right-0 top-0 p-2 text-gray-300 hover:text-yellow-300"
+            className="absolute right-0 top-0 p-2 text-black hover:text-yellow-300"
             onClick={() => setIsSearchOpen(!isSearchOpen)}
           >
             <MagnifyingGlassIcon className="h-5 w-5" />
@@ -112,16 +112,16 @@ const Navbar = () => {
       <div className="md:hidden">
         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? (
-            <XMarkIcon className="h-6 w-6 text-white" />
+            <XMarkIcon className="h-6 w-6 text-black" />
           ) : (
-            <Bars3Icon className="h-6 w-6 text-white" />
+            <Bars3Icon className="h-6 w-6 text-black" />
           )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-center space-y-4 py-4 md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-black text-black flex flex-col items-center space-y-4 py-4 md:hidden">
           <Link
             to="/"
             className="hover:text-yellow-300"
@@ -152,7 +152,7 @@ const Navbar = () => {
           />
           <Link
             to="/login"
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
+            className="bg-green-600 hover:bg-green-700 text-black px-4 py-1 rounded"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Login

@@ -1,23 +1,59 @@
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Mail } from "lucide-react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [isValid, setIsValid] = useState(false);
+
+  // Email Validation Function
+  const validateEmail = (input) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!input) {
+      setError("Email is required.");
+      setIsValid(false);
+    } else if (!emailRegex.test(input)) {
+      setError("Please enter a valid email.");
+      setIsValid(false);
+    } else {
+      setError("");
+      setIsValid(true);
+    }
+  };
+
+  // Handle Input Change
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+    validateEmail(e.target.value);
+  };
+
   return (
     <footer className="bg-gray-100 text-gray-800 pt-8">
       {/* Newsletter Section */}
-      <div className="mx-auto max-w-2xl bg-green-600 rounded-lg text-white py-6 px-6 text-center">
+      <div className="mx-auto max-w-2xl bg-green-700 rounded-lg text-white py-6 px-6 text-center">
         <h3 className="text-lg font-bold mb-3">
-          Subscribe to our Newsletter to get Updates to our Latest Collection
+          Subscribe to our Newsletter to get ,<br />Updates to our Latest Collection
         </h3>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center border border-white rounded-full px-3 py-1 w-fit mx-auto">
+          <Mail className="text-white h-5 w-5" />
           <input
             type="email"
             placeholder="Enter your email"
-            className="p-3 rounded-l-md w-64 focus:outline-none text-gray-800"
+            value={email}
+            onChange={handleChange}
+            className="p-3 w-64 bg-transparent text-white focus:outline-none placeholder-white"
           />
-          <button className="px-6 py-3 bg-white text-green-600 font-bold rounded-r-md hover:bg-gray-200">
+          <button
+            className={`px-4 py-2 bg-white font-bold rounded-full transition-all ${
+              isValid ? "text-green-900 hover:bg-gray-200" : "text-gray-700 bg-gray-300 cursor-not-allowed"
+            }`}
+            disabled={!isValid}
+          >
             Subscribe
           </button>
         </div>
+        {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
 
       {/* Footer Links */}
@@ -28,22 +64,31 @@ const Footer = () => {
             <img
               src="/src/assets/images/ags-logo1.png"
               alt="Logo"
-              className="h-15 mb-4" // Increased size
+              className="mb-4"
             />
             <p>
               Lorem ipsum is simply dummy text of the print typeset industry.
             </p>
             <div className="flex space-x-4 mt-4">
-              <a href="https://www.facebook.com/associationofghanastartups/" className="text-gray-500 hover:text-gray-700">
+              <a
+                href="https://www.facebook.com/associationofghanastartups/"
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <i className="fab fa-facebook"></i>
               </a>
               <a href="https://x.com/ags_ghana" className="text-gray-500 hover:text-gray-700">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="https://www.instagram.com/agsghana_/" className="text-gray-500 hover:text-gray-700">
+              <a
+                href="https://www.instagram.com/agsghana_/"
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://www.linkedin.com/company/agsghana/" className="text-gray-500 hover:text-gray-700">
+              <a
+                href="https://www.linkedin.com/company/agsghana/"
+                className="text-gray-500 hover:text-gray-700"
+              >
                 <i className="fab fa-linkedin"></i>
               </a>
             </div>

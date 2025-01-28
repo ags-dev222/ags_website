@@ -1,32 +1,5 @@
-function Header() {
-  return (
-    <header className="bg-white shadow py-4">
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <img src="logo.png" alt="Logo" className="h-10" />
-          <nav className="hidden md:flex space-x-6">
-            <a href="#" className="text-gray-700 hover:text-green-600">
-              Explore
-            </a>
-            <a href="#" className="text-gray-700 hover:text-green-600">
-              About
-            </a>
-          </nav>
-        </div>
-        <div className="flex items-center space-x-4">
-          <input
-            type="text"
-            placeholder="Search"
-            className="hidden md:block px-4 py-2 border rounded-lg"
-          />
-          <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-            Join
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}
+import NavbarDark from './NavbarDark';
+import ContactForm from './ContactForm';
 
 function Hero() {
   return (
@@ -129,34 +102,6 @@ function OurExecutive() {
   );
 }
 
-function ContactSection() {
-  return (
-    <section className="bg-black text-white py-16">
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 className="text-2xl font-bold mb-4">Let’s Talk</h3>
-          <p className="mb-4">Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.</p>
-          <p className="text-gray-400">Accra Digital Center</p>
-          <p className="text-gray-400">+233 24 315 8017</p>
-          <p className="text-gray-400">Contact@morailzer.com</p>
-        </div>
-        <form id="contact-form" className="space-y-4">
-          <input type="text" placeholder="Full Name" className="w-full px-4 py-2 rounded-lg focus:outline-none text-black" />
-
-          <input type="email" placeholder="Email" className="w-full px-4 py-2 rounded-lg focus:outline-none text-black" />
-          <label htmlFor="role" className="sr-only">Role in company</label>
-          <select id="role" className="w-full px-4 py-2 rounded-lg focus:outline-none text-black">
-            <option>Role in company</option>
-            <option>Executive Manager</option>
-          </select>
-          <textarea placeholder="Description" rows="4" className="w-full px-4 py-2 rounded-lg focus:outline-none text-black"></textarea>
-          <button type="submit" className="w-48 bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600">Send Message</button>
-        </form>
-      </div>
-    </section>
-  );
-}
-
 ExecutiveCard.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -168,10 +113,10 @@ ExecutiveCard.propTypes = {
 function AboutTeam() {
   return (
     <>
-      <Header />
+      <NavbarDark />
       <Hero />
       <OurExecutive />
-      <ContactSection />
+      <ContactForm />
     </>
   );
 }

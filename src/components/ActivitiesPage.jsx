@@ -1,3 +1,4 @@
+import Navbar from "./Navbar";
 function ActivitiesPage() {
   return (
     <div>
@@ -231,6 +232,7 @@ const EventPageContent = () => {
 function App() {
   return (
     <div>
+      <Navbar />
       <ActivitiesPage />
       <OtherEvents />
       <EventPageContent />

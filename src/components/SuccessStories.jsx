@@ -1,16 +1,17 @@
 import SuccessDiscussion from "./SuccessDiscussion";
 import SuccessRecognitionSection from "./SuccessRecognitionSection";
+import NavbarDark from "./NavbarDark";
 
 const HeroSection = () => {
   return (
     <div
-      className="relative bg-cover bg-center h-screen mx-auto flex flex-col md:flex-row"
+      className="relative bg-cover bg-center h-screen mx-auto flex flex-col md:flex-row mt-15"
       style={{
         backgroundImage: "url('src/assets/images/man.jpeg')", // Replace with your image URL
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gray-100 bg-opacity-20"></div>
+      <div className="absolute inset-0 bg-gray-100 opacity-0"></div>
 
       {/* Content */}
       <div className="relative z-10 ml-24 flex flex-col items-start justify-center h-full text-left text-black px-4">
@@ -32,7 +33,8 @@ const HeroSection = () => {
 function SuccessStories() {
   return (
     <div className="bg-gray-100 text-gray-800">
-<h1 className="text-4xl font-bold text-center py-2">Success Stories</h1>
+{/* <h1 className="text-4xl font-bold text-center py-2">Success Stories</h1> */}
+      <NavbarDark />
       <HeroSection />
       <SuccessDiscussion />
       <SuccessRecognitionSection/>

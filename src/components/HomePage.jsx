@@ -5,10 +5,12 @@ import LookupSection from './LookupSection';
 import StatisticsQuoteSection from './StatisticsQuoteSection';
 import EventRecognitionSection from './EventRecognitionSection';
 import ContactForm from './ContactForm';
+import Navbar from './Navbar';
 
 const HomePage = () => {
   return (
     <div>
+      <Navbar />
       <HeroSection />
       <ManifestoSection />
       <PartneringSection />

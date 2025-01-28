@@ -11,14 +11,13 @@ import AboutMissionVission from './components/AboutMissionVission';
 import Resources from './components/Resources';
 import EventsSection from './components/EventsSection';
 import NewsSection from './components/NewsSection';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 function App() {
   return (
     <Router>
       <div>
-        <Navbar />
+        
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />

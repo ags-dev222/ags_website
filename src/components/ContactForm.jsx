@@ -5,7 +5,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Section */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">Let&apos;s talk</h2>
+            <h2 className="text-2xl font-bold mb-4 mt-30">Let&apos;s talk</h2>
             <p className="mb-6">
               Questions, comments, or suggestions? Simply fill in the form, and
               we&apos;ll be in touch shortly.
@@ -52,7 +52,7 @@ const ContactForm = () => {
                 />
               </div>
               <div>
-                <label htmlFor="role" className="block text-sm font-medium">
+                <label htmlFor="role" className="block text-sm font-medium mb-0.5">
                   Role in company
                 </label>
                 <select

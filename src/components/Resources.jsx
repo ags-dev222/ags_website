@@ -1,3 +1,4 @@
+import Navbar from "./Navbar";
 function HeroSection() {
   return (
     <section className="bg-gray-800 text-white pt-32 pb-12">
@@ -23,6 +24,7 @@ function OverviewSection() {
 function Resources() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Navbar />
       <HeroSection />
       <OverviewSection />
       {/* Other sections and content */}
