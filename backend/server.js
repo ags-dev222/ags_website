@@ -1,9 +1,7 @@
-/* global process */
-import dotenv from 'dotenv';
-dotenv.config();
-import mongoose from 'mongoose';
 import express from 'express';
+import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from "dotenv";
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
 import { authenticateWithToken } from './routes/middleware/auth.js';
@@ -13,16 +11,16 @@ import blogRoutes from './routes/blog.js';
 import startupRoutes from './routes/startups.js';
 import logger from './utils/log.js';
 
+
+const app = express();
+const port = process.env.PORT || 3000;
+
 dotenv.config();
 
 if (!process.env.DATABASE_URL) {
   logger.error("Error: DATABASE_URL variable in .env missing.");
   process.exit(-1);
 }
-
-const app = express();
-const port = process.env.PORT || 3000;
-
 // Middleware
 app.use(cors());
 app.use(express.json());
