@@ -26,12 +26,27 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/', basicRoutes);
-app.use('/auth', authRoutes);
-app.use('/resources', authenticateWithToken, resourceRoutes);
-app.use('/events', authenticateWithToken, eventRoutes);
-app.use('/blog', authenticateWithToken, blogRoutes);
-app.use('/startups', authenticateWithToken, startupRoutes);
+
+// Serve static files from the 'public' directory
+// This is where your frontend build files are located
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Important: Handle React Router by sending all non-API requests to index.html
+app.get('*', (req, res) => {
+  // Don't redirect API calls
+  if (!req.url.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
+});
+
+
+// u can equally handle these routes in an index route.js file
+app.use('/api', basicRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/resources', authenticateWithToken, resourceRoutes);
+app.use('/api/events', authenticateWithToken, eventRoutes);
+app.use('/api/blog', authenticateWithToken, blogRoutes);
+app.use('/api/startups', authenticateWithToken, startupRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
