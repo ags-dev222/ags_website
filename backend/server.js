@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from "dotenv";
+import path from "path"
+import { fileURLToPath } from 'url';
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
 import { authenticateWithToken } from './routes/middleware/auth.js';
@@ -16,6 +18,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 dotenv.config();
+
+// Get directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 if (!process.env.DATABASE_URL) {
   logger.error("Error: DATABASE_URL variable in .env missing.");
