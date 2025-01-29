@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:frontend":"cd frontend && npm run dev",
-    "start:backend":"cd backend && npm start",
-    "install:frontend":"cd frontend && npm install",
-    "install:backend":"cd backend && npm install",
-    "build:frontend":"cd frontend && npm run build",
-    "move:build":"rm -rf backend/public && mv frontend/build backend/public",
-    "build:full":"npm run build:frontend && npm run move:build",
-    "start":"cd backend && npm run start"
+    "start:dev:frontend": "cd frontend && npm run dev",
+    "start:dev:backend": "cd backend && npm run dev",
+    "start:prod": "cd backend && npm start",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "build": "npm run build:frontend && npm run move:build",
+    "build:frontend": "cd frontend && npm run build",
+    "move:build": "rm -rf backend/public && mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
+    "clean": "rm -rf frontend/dist backend/public",
+    "deploy": "npm run clean && npm run build && npm run start:prod"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ags_website": "file:"
+  }
 }
