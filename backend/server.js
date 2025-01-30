@@ -15,6 +15,10 @@ import signupRoutes from './routes/signup.js';
 
 dotenv.config();
 
+// Get directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 if (!process.env.DATABASE_URL) {
   console.error("Error: DATABASE_URL variable in .env missing.");
   process.exit(-1);
