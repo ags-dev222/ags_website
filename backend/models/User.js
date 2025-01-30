@@ -27,6 +27,13 @@ const schema = new mongoose.Schema({
     minlength: [2, 'Name must be at least 2 characters long'],
     maxlength: [50, 'Name cannot exceed 50 characters'],
   },
+  //RBAC
+  role: {
+    type: String,
+    enum: ['admin', 'Registered', 'Public'],
+    //default: 'Admin',
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,
@@ -51,7 +58,7 @@ const schema = new mongoose.Schema({
 });
 
 schema.set('toJSON', {
-  transform: (doc, ret) => {
+  transform: (doc, ret, options) => {
     delete ret._id;
     delete ret.password;
     return ret;
@@ -83,7 +90,8 @@ schema.statics.authenticateWithPassword = async function authenticateWithPasswor
   return updatedUser;
 };
 
-const User = mongoose.model('User', schema);
+
+const User = mongoose.models.User || mongoose.model('User', schema, 'users');
 
 
 export default User;

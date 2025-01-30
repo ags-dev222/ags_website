@@ -1,23 +1,38 @@
 {
-  "name": "backend",
+  "name": "ags_website",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm run start",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd server && npm install",
+    "build:frontend": "cd frontend && npm run build",
+    "move:build": "rm -rf server/public && mv frontend/build server/public",
+    "build:full": "npm run build:frontend && npm run move:build",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
+    "express-session": "^1.18.1",
+    "firebase-admin": "^13.0.2",
+    "fs": "^0.0.1-security",
+    "logger": "^0.0.1",
     "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0",
+    "nodemon": "^3.1.9",
+    "path": "^0.12.7",
     "pino": "^9.6.0",
-    "pino-pretty": "^13.0.0"
+    "pino-pretty": "^13.0.0",
+    "socket.io": "^4.8.1"
   }
 }
