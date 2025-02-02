@@ -1,59 +1,90 @@
-import express from 'express';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import express from 'express';
 import cors from 'cors';
-import dotenv from "dotenv";
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
 import { authenticateWithToken } from './routes/middleware/auth.js';
 import resourceRoutes from './routes/resources.js';
 import eventRoutes from './routes/events.js';
 import blogRoutes from './routes/blog.js';
-import startupRoutes from './routes/startups.js';
-import logger from './utils/log.js';
+import testimonialRoutes from './routes/testimonial.js';
+import startupRoutes from './routes/startup.js';
+import signupRoutes from './routes/signup.js';
 
-
-const app = express();
-const port = process.env.PORT || 3000;
 
 dotenv.config();
 
+// Get directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 if (!process.env.DATABASE_URL) {
-  logger.error("Error: DATABASE_URL variable in .env missing.");
+  console.error("Error: DATABASE_URL variable in .env missing.");
   process.exit(-1);
 }
-// Middleware
-app.use(cors());
+
+const app = express();
+const port = process.env.PORT || 5173;
+// Pretty-print JSON responses
+app.enable('json spaces');
+app.enable('strict routing');
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-// Routes
-app.use('/', basicRoutes);
-app.use('/auth', authRoutes);
-app.use('/resources', authenticateWithToken, resourceRoutes);
-app.use('/events', authenticateWithToken, eventRoutes);
-app.use('/blog', authenticateWithToken, blogRoutes);
-app.use('/startups', authenticateWithToken, startupRoutes);
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-  logger.error(`Unhandled application error: ${err.message}`);
-  logger.error(err.stack);
-  if (res.headersSent) {
-    return next(err);
+// Database connection
+mongoose
+  .connect(process.env.DATABASE_URL)
+  .then(() => {
+    console.log("Database connected successfully");
+  })
+  .catch((err) => {
+    console.error(`Database connection error: ${err.message}`);
+    console.error(err.stack);
+    process.exit(1);
+  });
+
+
+
+// Logging request and authentication status
+app.use((req, res, next) => {
+  console.log("Request received: ", new Date().toISOString(), " for ", req.path);
+  if (req.user) {
+    console.log(`Authenticated user: ${req.user.email}`);
+  } else {
+    console.log("No authenticated user for this request.");
   }
+  next();
+});
+
+// Basic Routes
+app.use(basicRoutes);
+// Authentication Routes
+app.use('/api/auth', authRoutes);
+
+// Protected routes 
+app.use('/api/resources', resourceRoutes);
+app.use('/api/events',  eventRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/startups', startupRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/signups', signupRoutes);
+
+// If no routes handled the request, it's a 404
+app.use((req, res, next) => {
+  res.status(404).send("Page not found.");
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.error(`Unhandled application error: ${err.message}`);
+  console.error(err.stack);
   res.status(500).send("There was an error serving your request.");
 });
 
-// Database Connection
-mongoose.connect(process.env.DATABASE_URL)
-  .then(() => {
-    logger.info('Connected to MongoDB');
-  })
-  .catch((error) => {
-    logger.error('Error connecting to MongoDB:', error);
-    process.exit(-1);
-  });
-
-// Start Server
 app.listen(port, () => {
-  logger.info(`Server is running on port ${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });

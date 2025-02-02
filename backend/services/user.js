@@ -1,6 +1,9 @@
 import { randomUUID } from 'crypto';
-import User from '../models/user.js';
+import User from '../models/User.js';
+
 import { generatePasswordHash, validatePassword } from '../utils/password.js';
+import { generateToken } from '../utils/jwt.js'; 
+
 
 class UserService {
   static async list() {
@@ -12,12 +15,20 @@ class UserService {
   }
 
   static async get(id) {
+    if (!id) throw new Error('User ID is required');
     try {
-      return User.findOne({ _id: id }).exec();
+      const user = await User.findById(id).exec();
+      if (!user) {
+        console.warn(`No user found with ID: ${id}`);
+        return null; 
+      }
+      return user;
     } catch (err) {
-      throw new Error(`Error getting the user by their ID: ${err.message}`);
+      console.error(`Error retrieving user by ID ${id}:`, err.message);
+      throw new Error(`Error fetching user: ${err.message}`);
     }
   }
+  
 
   static async getByEmail(email) {
     try {
@@ -43,7 +54,34 @@ class UserService {
       throw new Error(`Error while deleting user ${id}: ${err.message}`);
     }
   }
+//GetRegisteredUsers Data
+static async getUserResources(){
+  try {
+    const registered = await User.findOne({ role: 'Registered' }).exec();
+    if(!registered){
+      throw new Error('No registered user found');
+    }
+    return registered;
+  }catch (err){
+    throw new Error (`Unable to fecth registered data: ${err.message}`);
+  }
+}
 
+  //GetAdmin Data
+  static async getAdminData() {
+    try {
+      const admin = await User.findOne({ role: 'Admin' }).exec();
+      if (!admin) {
+        throw new Error('No admin found');
+      }
+      return admin;
+    } catch (err) {
+      throw new Error(`Unable to fetch admin data: ${err.message}`);
+    }
+  }
+  
+
+  // Authenticate user with email and password
   static async authenticateWithPassword(email, password) {
     if (!email) throw new Error('Email is required');
     if (!password) throw new Error('Password is required');
@@ -57,49 +95,65 @@ class UserService {
 
       user.lastLoginAt = Date.now();
       const updatedUser = await user.save();
-      return updatedUser;
+
+      // Generate JWT token after successful authentication
+      const token = generateToken(updatedUser);
+
+      return { user: updatedUser, token };
     } catch (err) {
       throw new Error(`Error while authenticating user ${email} with password: ${err.message}`);
     }
   }
 
+  // Regenerate JWT token for the user
   static async regenerateToken(user) {
-    user.token = randomUUID();
-
     try {
-      if (!user.isNew) {
-        await user.save();
-      }
+      // Generate a new JWT token
+      const token = generateToken(user);
 
-      return user;
+      // Optionally, save the token if you are storing it in the database
+      user.token = token;
+      await user.save();
+
+      return token;
     } catch (err) {
-      throw new Error(`Error while generating user token: ${err.message}`);
+      throw new Error(`Error while regenerating token for user: ${err.message}`);
     }
   }
 
-  static async createUser({ email, password, name }) {
+  // Create a new user with hashed password
+  static async createUser({ email, password, name, role = 'Public' }) {
     if (!email) throw new Error('Email is required');
     if (!password) throw new Error('Password is required');
     if (!name) throw new Error('Name is required');
-
+  
+    // Check if the user already exists
     const existingUser = await UserService.getByEmail(email);
     if (existingUser) throw new Error('User with this email already exists');
-
+  
+    // Password length validation
     if (password.length < 8) {
       throw new Error('Password must be at least 8 characters long');
     }
-
+  
+    // Hash the password
     const hash = await generatePasswordHash(password);
-
+  
     try {
       const user = new User({
         email,
         password: hash,
         name,
+        role, 
       });
-
+  
+      // Save the new user in the database
       await user.save();
-      return user;
+  
+      // Generate JWT token after successful user creation
+      const token = generateToken(user);
+  
+      return { user, token }; // Return the user and the generated token
     } catch (err) {
       if (err.name === 'ValidationError') {
         const errors = Object.values(err.errors).map(e => e.message);
@@ -109,6 +163,7 @@ class UserService {
     }
   }
 
+  // Set or update user's password
   static async setPassword(user, password) {
     if (!password) throw new Error('Password is required');
     user.password = await generatePasswordHash(password);
@@ -124,6 +179,7 @@ class UserService {
     }
   }
 
+  // Authenticate user using a token (for JWT-based authentication)
   static async authenticateWithToken(userId) {
     try {
       const user = await User.findById(userId);
