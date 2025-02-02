@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const HeroSection = () => {
   const [activeDash, setActiveDash] = useState(1);
@@ -7,11 +7,11 @@ const HeroSection = () => {
     <div
       className="relative bg-cover bg-center h-screen"
       style={{
-        backgroundImage: "url('https://via.placeholder.com/1920x1080')", // Replace with your image URL
+        backgroundImage: "url('src/assets/images/blog1.jpeg')", // Replace with your image URL
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gray-900 bg-opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 pt-24">

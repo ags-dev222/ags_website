@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
-import Navbar from './Navbar';
+import NavbarDark from './NavbarDark';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex-grow flex items-center justify-center bg-gray-100 pt-32"> {/* Increased pt-32 for more top padding */}
+      <div className="flex-grow flex items-center justify-center bg-gray-100 pt-12"> {/* Increased pt-32 for more top padding */}
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
           <form onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <Navbar />
+      <NavbarDark />
     </div>
   );
 };

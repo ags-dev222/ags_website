@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import NavbarDark from './NavbarDark';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 mt-11">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ function RegisterForm() {
           </p>
         </form>
       </div>
-      <Navbar />
+      <NavbarDark />
     </div>
   );
 }

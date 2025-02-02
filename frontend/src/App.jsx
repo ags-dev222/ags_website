@@ -3,6 +3,7 @@ import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import ActivitiesPage from './components/ActivitiesPage';
 import RegisterForm from './components/JoinNow';
+import EventRegistration from './components/EventRegistration';
 import EcosystemAGS from './components/EcosystemAGS';
 import ForgotPassword from './components/ForgotPassword';
 import SuccessStories from './components/SuccessStories';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/events" element={<EventsSection />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/registerevent" element={<EventRegistration />} />
           <Route path="/ecosystem" element={<EcosystemAGS />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/success-stories" element={<SuccessStories />} />

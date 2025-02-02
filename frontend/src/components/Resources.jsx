@@ -1,8 +1,9 @@
 import Navbar from "./Navbar";
+import ResourcesAccordion from "./ResourcesAccordion";
 function HeroSection() {
   return (
-    <section className="bg-gray-800 text-white pt-32 pb-12">
-      <div className="container mx-auto text-center">
+      <section className="bg-black text-white h-[500px] flex items-center justify-center">
+      <div className="text-center">
         <h1 className="text-4xl font-bold">Resource Documents</h1>
         <p className="mt-2">Essential materials and tools to support your startup journey</p>
       </div>
@@ -13,11 +14,19 @@ function HeroSection() {
 function OverviewSection() {
   return (
     <section className="py-12">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold">Overview</h2>
-        <p className="mt-2">Here you can find an overview of all the resources available to you.</p>
+    <div className="container mx-auto text-center">
+      <h2 className="text-3xl font-bold">Overview</h2>
+      <p className="mt-4 text-gray-600">
+        Access a variety of templates, guides, and contracts designed to help you navigate the startup landscape.
+      </p>
+      <div className="mt-8">
+        <video controls className="mx-auto rounded-md w-3/4 shadow-md">
+          <source src="video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }
 
@@ -27,6 +36,7 @@ function Resources() {
       <Navbar />
       <HeroSection />
       <OverviewSection />
+      <ResourcesAccordion />
       {/* Other sections and content */}
     </div>
   );

@@ -1,5 +1,5 @@
 import OrientationHero from './OrientationHero';
-import ManifestoSection from './ManifestoSection';
+import AboutEvents from './AboutEvents';
 import DiscussionSection from './DiscussionSection';
 
 const events = [
@@ -9,7 +9,7 @@ const events = [
     date: "26.08.2024 | 6:00 PM",
     description:
       "Explore the diverse clubs at CITSA, where students connect, develop new skills, and collaborate on exciting projects. Join today to make the most of your university experience!",
-    image: "event1.jpg", // Replace with your actual image path
+    image: "src/assets/images/ott.jpeg", // Replace with your actual image path
     link: "#",
   },
   {
@@ -18,16 +18,16 @@ const events = [
     date: "26.08.2024 | 6:00 PM",
     description:
       "Explore the diverse clubs at CITSA, where students connect, develop new skills, and collaborate on exciting projects. Join today to make the most of your university experience!",
-    image: "event2.jpg", // Replace with your actual image path
+    image: "src/assets/images/ott.jpeg", // Replace with your actual image path
     link: "#",
   },
 ];
 
 const EventsSection = () => {
   return (
-    <div className="bg-black text-white  py-10 px-5">
+    <div className="bg-black text-white  py-10 px-5 ">
       <OrientationHero />
-      <ManifestoSection />
+      <AboutEvents />
       <DiscussionSection />
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold mb-2 pt-16">Other Events Schedules</h2>
@@ -38,10 +38,10 @@ const EventsSection = () => {
           {events.map((event) => (
             <div
               key={event.id}
-              className="flex flex-col sm:flex-row bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+              className="flex flex-col sm:flex-row bg-gray-950 rounded-lg shadow-lg overflow-hidden"
             >
               {/* Image Placeholder */}
-              <div className="flex-none w-full sm:w-1/3 bg-gray-700 p-4">
+              <div className="flex-none w-full sm:w-1/3 bg-gray-900 p-4">
                 <img
                   src={event.image}
                   alt={event.title}
