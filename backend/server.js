@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import express from 'express';
+import express from "express";
 import cors from 'cors';
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
@@ -11,6 +11,9 @@ import blogRoutes from './routes/blog.js';
 import testimonialRoutes from './routes/testimonial.js';
 import startupRoutes from './routes/startup.js';
 import signupRoutes from './routes/signup.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 
 
 dotenv.config();

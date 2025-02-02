@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 ags_website/
+Todo
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +24,6 @@ ags_website/
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
