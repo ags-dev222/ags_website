@@ -11,11 +11,11 @@
     "install:all": "npm run install:frontend && npm run install:backend",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
-    "build": "npm run build:frontend && npm run move:build",
+    "build": "npm run clean && npm run build:frontend && npm run move:build",
     "build:frontend": "cd frontend && npm run build",
     "move:build": "rm -rf backend/public && mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
     "clean": "rm -rf frontend/dist backend/public",
-    "deploy": "npm run clean && npm run build && npm run start:prod"
+    "start": "npm run start:prod"
   },
   "author": "",
   "license": "ISC",
