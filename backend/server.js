@@ -51,6 +51,13 @@ mongoose
   });
 
 
+  // Serve the React build
+app.use(express.static(path.join(__dirname, "public", "dist")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
+});
+
 
 // Logging request and authentication status
 app.use((req, res, next) => {
