@@ -1,3 +1,4 @@
+import Navbar from "./Navbar";
 import  { useState } from "react";
 
 const HeroSection = () => {
@@ -5,11 +6,12 @@ const HeroSection = () => {
 
   return (
     <div
-      className="relative bg-cover bg-center h-screen"
+      className="absolute inset-0 bg-cover bg-blend-overlay h-screen"
       style={{
         backgroundImage: "url('src/assets/images/blog1.jpeg')", // Replace with your image URL
       }}
     >
+      <Navbar />
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 

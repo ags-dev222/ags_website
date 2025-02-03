@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const AboutEvent = () => {
   return (
     <div className="bg-[#F8F5EC] flex items-center justify-center py-16 px-8 pt-180">
@@ -13,11 +14,11 @@ const AboutEvent = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
-            <link to="/registerevent">
-                <button className="bg-green-700 hover:bg-green-800 text-white font-medium px-6 py-2 rounded-md transition">
-                     Register Now
-                </button>
-            </link>
+          <Link to="/registerevent">
+            <button className="bg-green-700 hover:bg-green-800 text-white font-medium px-6 py-2 rounded-md transition">
+              Register Now
+            </button>
+          </Link>
         </div>
 
         {/* Right Side: Split Image Effect */}

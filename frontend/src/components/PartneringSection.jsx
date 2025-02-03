@@ -12,7 +12,7 @@ const PartneringSection = () => {
     autoplay: true,
     autoplaySpeed: 3000, // 3 seconds
     centerMode: true,
-    centerPadding: '60px', // Adjust the padding as needed
+    centerPadding: '60px', // Padding for centered slide
     responsive: [
       {
         breakpoint: 1024,
@@ -33,7 +33,7 @@ const PartneringSection = () => {
           infinite: true,
           dots: true,
           centerMode: true,
-          centerPadding: '40px',
+          centerPadding: '30px',
         },
       },
       {
@@ -44,7 +44,7 @@ const PartneringSection = () => {
           infinite: true,
           dots: true,
           centerMode: true,
-          centerPadding: '40px',
+          centerPadding: '20px',
         },
       },
     ],
@@ -65,16 +65,21 @@ const PartneringSection = () => {
       {/* Carousel */}
       <div className="max-w-6xl mx-auto">
         <Slider {...settings}>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
-          <div className="h-24 w-24 bg-gray-300 rounded mx-4"></div>
+          <div className="slick-slide flex justify-center mx-4">
+            <img src="src/assets/images/neip.png" alt="Company 1" className="h-24" />
+          </div>
+          <div className="slick-slide flex justify-center mx-4">
+            <img src="src/assets/images/gheip.png" alt="Company 2" className="h-24" />
+          </div>
+          <div className="slick-slide flex justify-center mx-4">
+            <img src="src/assets/images/ghin.png" alt="Company 3" className="h-24" />
+          </div>
+          <div className="slick-slide flex justify-center mx-4">
+            <img src="src/assets/images/ghand.png" alt="Company 4" className="h-24" />
+          </div>
+          <div className="slick-slide flex justify-center mx-4">
+            <img src="src/assets/images/ags-logo.png" alt="Company 5" className="h-24" />
+          </div>
         </Slider>
       </div>
     </div>

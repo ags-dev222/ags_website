@@ -181,7 +181,7 @@ const Dropdown = ({ label, links, isActive, onToggle, dropdownRef }) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute mt-2 w-40 bg-transparent shadow-lg"
+            className="absolute mt-2 w-40 bg-black shadow-lg"
             id={label.toLowerCase()}
           >
             {links.map((link) => (

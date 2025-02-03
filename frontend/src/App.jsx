@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
-import ActivitiesPage from './components/ActivitiesPage';
+import ActivitiesPage from './components/EventsSection';
 import RegisterForm from './components/JoinNow';
 import EventRegistration from './components/EventRegistration';
 import EcosystemAGS from './components/EcosystemAGS';
@@ -10,7 +10,7 @@ import SuccessStories from './components/SuccessStories';
 import AboutTeam from './components/AboutTeam';
 import AboutMissionVission from './components/AboutMissionVission';
 import Resources from './components/Resources';
-import EventsSection from './components/EventsSection';
+import EventsSection from './components/ActivitiesPage';
 import NewsSection from './components/NewsSection';
 import Footer from './components/Footer';
 

@@ -18,10 +18,14 @@ const EventRecognitionSection = () => {
         </div>
 
         {/* Main Content Card */}
-        <div className="relative bg-white rounded-2xl shadow-2xl p-8 flex items-center gap-8 max-w-4xl w-full">
+        <div className="relative bg-white rounded-2xl shadow-2xl p-8 flex items-center gap-8 max-w-4xl w-full h-auto">
           {/* Left Section: Text */}
           <div className="flex-1">
             <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+              A seasoned professional with expertise in scalable systems and innovative design.<br />
+              A seasoned professional with expertise in scalable systems and innovative design.<br />
+              A seasoned professional with expertise in scalable systems and innovative design.<br />
+              A seasoned professional with expertise in scalable systems and innovative design.<br />
               A seasoned professional with expertise in scalable systems and innovative design.<br />
               A seasoned professional with expertise in scalable systems and innovative design.<br />
               A seasoned professional with expertise in scalable systems and innovative design.

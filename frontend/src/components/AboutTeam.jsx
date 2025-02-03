@@ -1,137 +1,234 @@
-import NavbarDark from './NavbarDark';
-import ContactForm from './ContactForm';
+import PropTypes from "prop-types";
+import { FaLinkedin } from "react-icons/fa";
+import NavbarDark from "./NavbarDark";
+import ContactForm from "./ContactForm";
 
-function Hero() {
+const HeroSection = () => {
   return (
-    <section className="bg-gray-100 py-16 text-center">
-      <div className="container mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-4">
-          We’ve gotten an entire team dedicated to supporting startups,
-          mentor, and investors.
-        </h1>
-        <p className="text-gray-600 mb-8">
-          Explore the remarkable journey of AGS and Ghana Startup Week.
-          Discover how we have empowered entrepreneurs, fostered innovation,
-          and transformed the startup ecosystem in Ghana.
-        </p>
-        <img
-          src="Rectangle 19307.png"
-          alt="Team Photo"
-          className="mx-auto rounded-lg"
-        />
-      </div>
-    </section>
-  );
-}
-
-import PropTypes from 'prop-types';
-
-function ExecutiveCard({ image, name, position, description, linkedin }) {
-  return (
-    <div className="flex flex-col items-center bg-white shadow-md rounded-lg p-6">
-      <div className="w-24 h-24 mb-4">
-        <img src={image} alt={name} className="w-full h-full rounded-lg object-cover shadow" />
-      </div>
-      <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
-      <p className="text-gray-600">{position}</p>
-      <p className="text-sm text-gray-500">{description}</p>
-      <a
-        href={linkedin}
-        target="_blank"
-        rel="noopener"
-        className="mt-4 px-4 py-2 bg-gray-100 text-gray-800 
-        border border-gray-300 rounded-full flex items-center hover:bg-gray-200">
-          <svg
-          xmlns="(link unavailable)"
-          fill="currentColor"
-          className="w-5 h-5 mr-2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M22.23 0H1.77A1.78 1.78 0 000 1.77v20.46A1.78 1.78 0 001.77 24h20.46A1.78 1.78 0 0024 22.23V1.77A1.78 1.78 0 0022.23 0zM7.12 20.36H3.56V9h3.56zM5.34 7.59A2.08 2.08 0 013.2 5.34a2.07 2.07 0 012.14-2.24h.03A2.08 2.08 0 017.55 5.4a2.08 2.08 0 01-2.21 2.19zm14.56 12.77h-3.56v-5.63c0-1.34-.48-2.26-1.69-2.26a1.82 1.82 0 00-1.7 1.2 2.26 2.26 0 00-.11.81v5.88H9.67s.05-9.54 0-10.53h3.56v1.49a3.52 3.52 0 013.19-1.76c2.33 0 4.1 1.52 4.1 4.8z"></path>
-        </svg>
-        LinkedIn
-      </a>
+    <div
+      className="relative bg-cover bg-center h-140 w-full grayscale"
+      style={{
+        backgroundImage: "url('src/assets/images/vision.jpeg')", // Replace with actual image URL
+      }}
+    >
     </div>
   );
-}
+};
 
-function OurExecutive() {
+const BlogSection = () => {
   return (
-    <section className="py-16 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-gray-900">Our Executive</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <ExecutiveCard
-            image="executive1.jpg"
-            name="Mr. Solomon Adjei"
-            position="President"
-            description="Former Co-Founder at Xwp"
-            linkedin="(link unavailable)"
-          />
-          <ExecutiveCard
-            image="executive1.jpg"
-            name="Mr. Solomon Adjei"
-            position="President"
-            description="Former Co-Founder at Xwp"
-            linkedin="(link unavailable)" />
-
-         <ExecutiveCard
-            image="executive1.jpg"
-            name="Mr. Solomon Adjei"
-            position="President"
-            description="Former Co-Founder at Xwp"
-            linkedin="(link unavailable)" />
-
-          <ExecutiveCard
-            image="executive1.jpg"
-            name="Mr. Solomon Adjei"
-            position="President"
-            description="Former Co-Founder at Xwp"
-            linkedin="(link unavailable)"/>
-
-          <ExecutiveCard
-            image="executive1.jpg"
-            name="Mr. Solomon Adjei"
-            position="President"
-            description="Former Co-Founder at Xwp"
-            linkedin="(link unavailable)" />
-
+    <section className="bg-white py-10 mt-12">
+      <div className="max-w-5xl mx-auto bg-white">
+        {/* Header Section */}
+        <div className="p-6 text-center">
+          <h1 className="text-4xl font-bold text-gray-800">
+            We&apos;ve got an entire team dedicated to supporting startups, mentors, and investors.
+          </h1>
         </div>
+        <p className="mb-3 font-sm mt-3 text-center">
+          Explore the remarkable journey of AGS and Ghana Startup Week. Discover how we have empowered
+          entrepreneurs, fostered innovation, and transformed the startup ecosystem in Ghana.
+        </p>
       </div>
     </section>
   );
-}
-
-ExecutiveCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  linkedin: PropTypes.string.isRequired,
 };
 
+// Executive & Board Members Data
+const executives = [
+  {
+    name: "Mr. Solomon Adjei",
+    position: "President",
+    company: "Association of Ghana Startups",
+    linkedin: "https://www.linkedin.com/in/solomon-adjei",
+    image: "src/assets/images/solomon.jpg",
+  },
+  {
+    name: "Jane Doe",
+    position: "Vice President",
+    company: "CEO at StartupX",
+    linkedin: "https://www.linkedin.com/in/jane-doe",
+    image: "src/assets/images/lady.png",
+  },
+  {
+    name: "Michael Johnson",
+    position: "Head of Innovation",
+    company: "Lead Engineer at TechWorld",
+    linkedin: "https://www.linkedin.com/in/michael-johnson",
+    image: "/images/michael.jpg",
+  },
+  {
+    name: "Sarah Williams",
+    position: "Marketing Director",
+    company: "CMO at CreativeHub",
+    linkedin: "https://www.linkedin.com/in/sarah-williams",
+    image: "/images/sarah.jpg",
+  },
+  {
+    name: "David Brown",
+    position: "Chief Strategist",
+    company: "Strategy Lead at GrowthWorks",
+    linkedin: "https://www.linkedin.com/in/david-brown",
+    image: "/images/david.jpg",
+  },
+  {
+    name: "Emily Carter",
+    position: "Operations Manager",
+    company: "Operations Lead at AgileWorks",
+    linkedin: "https://www.linkedin.com/in/emily-carter",
+    image: "/images/emily.jpg",
+  },
+];
+
+const boardMembers = [
+  {
+    name: "John Smith",
+    position: "Board Member",
+    company: "Former CTO at TechCorp",
+    linkedin: "https://www.linkedin.com/in/john-smith",
+    image: "/images/john.jpg",
+  },
+  {
+    name: "Alice Johnson",
+    position: "Board Member",
+    company: "Investor at VentureGrow",
+    linkedin: "https://www.linkedin.com/in/alice-johnson",
+    image: "/images/alice.jpg",
+  },
+  {
+    name: "Robert King",
+    position: "Board Member",
+    company: "Entrepreneur at StartFlow",
+    linkedin: "https://www.linkedin.com/in/robert-king",
+    image: "/images/robert.jpg",
+  },
+  {
+    name: "Jessica Lee",
+    position: "Board Member",
+    company: "CFO at FinanceVision",
+    linkedin: "https://www.linkedin.com/in/jessica-lee",
+    image: "/images/jessica.jpg",
+  },
+  {
+    name: "Daniel White",
+    position: "Board Member",
+    company: "Tech Consultant at InnovateAI",
+    linkedin: "https://www.linkedin.com/in/daniel-white",
+    image: "/images/daniel.jpg",
+  },
+  {
+    name: "Sophia Green",
+    position: "Board Member",
+    company: "HR Director at TalentBridge",
+    linkedin: "https://www.linkedin.com/in/sophia-green",
+    image: "/images/sophia.jpg",
+  },
+  {
+    name: "Ethan Scott",
+    position: "Board Member",
+    company: "Founder at Visionary Labs",
+    linkedin: "https://www.linkedin.com/in/ethan-scott",
+    image: "/images/ethan.jpg",
+  },
+  {
+    name: "Olivia Adams",
+    position: "Board Member",
+    company: "Investor at CapitalWealth",
+    linkedin: "https://www.linkedin.com/in/olivia-adams",
+    image: "/images/olivia.jpg",
+  },
+  {
+    name: "William Taylor",
+    position: "Board Member",
+    company: "Product Manager at NexGen",
+    linkedin: "https://www.linkedin.com/in/william-taylor",
+    image: "/images/william.jpg",
+  },
+];
+
+// Executive Section Component
+const ExecutiveSection = ({ title, members }) => {
+  return (
+    <div className="py-10 mx-16">
+      <h2 className="text-3xl font-bold ml-5 text-gray-800 mt-6 mb-6">{title}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {members.map((member, index) => (
+          <div key={index} className="p-3 rounded-lg text-left bg-gray-100 shadow-lg">
+            {/* Placeholder or Custom Image */}
+            <div className="w-64 h-56 rounded-md mb-4 overflow-hidden bg-gray-300">
+              {member.image ? (
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover rounded-md"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-500">
+                  No Image
+                </div>
+              )}
+            </div>
+
+            {/* Name & LinkedIn Icon */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold">{member.name}</h3>
+                <p className="text-sm text-gray-600">{member.position}</p>
+                <p className="text-sm text-gray-600">{member.company}</p>
+              </div>
+
+              {/* LinkedIn Icon */}
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800"
+              >
+                <FaLinkedin size={24} />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ✅ **Prop Validation**
+ExecutiveSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+      company: PropTypes.string.isRequired,
+      linkedin: PropTypes.string.isRequired,
+      image: PropTypes.string,
+    })
+  ).isRequired,
+};
+
+// Executive Board Component
+const ExecutiveBoard = () => {
+  return (
+    <div>
+      <ExecutiveSection title="Our Executive" members={executives} />
+      <ExecutiveSection title="Our Board of Directors" members={boardMembers} />
+    </div>
+  );
+};
+
+// Main AboutTeam Component
 function AboutTeam() {
   return (
     <>
       <NavbarDark />
-      <Hero />
-      <OurExecutive />
+      <BlogSection />
+      <HeroSection />
+      <ExecutiveBoard />
       <ContactForm />
     </>
   );
 }
 
 export default AboutTeam;
-
-
-
-    
-
-
-
-
-
-
-
-
-

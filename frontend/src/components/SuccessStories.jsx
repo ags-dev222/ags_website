@@ -1,6 +1,6 @@
 import SuccessDiscussion from "./SuccessDiscussion";
 import SuccessRecognitionSection from "./SuccessRecognitionSection";
-import NavbarDark from "./NavbarDark";
+import NavbarBlack from "./NavbarBlack";
 
 const HeroSection = () => {
   return (
@@ -34,7 +34,7 @@ function SuccessStories() {
   return (
     <div className="bg-gray-100 text-gray-800">
 {/* <h1 className="text-4xl font-bold text-center py-2">Success Stories</h1> */}
-      <NavbarDark />
+      <NavbarBlack />
       <HeroSection />
       <SuccessDiscussion />
       <SuccessRecognitionSection/>
