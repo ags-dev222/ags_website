@@ -51,12 +51,10 @@ mongoose
   });
 
 
-  // Serve the React build
-app.use(express.static(path.join(__dirname, "public", "dist")));
+ // Serve static files from the 'public' directory
+// This is where your frontend build files are located
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "dist", "index.html"));
-});
 
 
 // Logging request and authentication status
@@ -82,6 +80,15 @@ app.use('/api/blog', blogRoutes);
 app.use('/api/startups', startupRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/signups', signupRoutes);
+
+
+// Important: Handle React Router by sending all non-API requests to index.html
+app.get('*', (req, res) => {
+  // Don't redirect API calls
+  if (!req.url.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
+});
 
 // If no routes handled the request, it's a 404
 app.use((req, res, next) => {
