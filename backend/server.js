@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import express from 'express';
+import express from "express";
 import cors from 'cors';
 import basicRoutes from './routes/index.js';
 import authRoutes from './routes/auth.js';
@@ -11,6 +11,9 @@ import blogRoutes from './routes/blog.js';
 import testimonialRoutes from './routes/testimonial.js';
 import startupRoutes from './routes/startup.js';
 import signupRoutes from './routes/signup.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 
 
 dotenv.config();
@@ -48,6 +51,11 @@ mongoose
   });
 
 
+ // Serve static files from the 'public' directory
+// This is where your frontend build files are located
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // Logging request and authentication status
 app.use((req, res, next) => {
@@ -72,6 +80,15 @@ app.use('/api/blog', blogRoutes);
 app.use('/api/startups', startupRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/signups', signupRoutes);
+
+
+// Important: Handle React Router by sending all non-API requests to index.html
+app.get('*', (req, res) => {
+  // Don't redirect API calls
+  if (!req.url.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
+});
 
 // If no routes handled the request, it's a 404
 app.use((req, res, next) => {
