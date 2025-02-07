@@ -1,5 +1,5 @@
-import Navbar from "./Navbar";
-import ResourcesAccordion from "./ResourcesAccordion";
+import Navbar from "../components/Navbar";
+import ResourcesAccordion from "../components/ResourcesAccordion";
 function HeroSection() {
   return (
       <section className="bg-black text-white h-[500px] flex items-center justify-center">
@@ -21,7 +21,7 @@ function OverviewSection() {
       </p>
       <div className="mt-8">
         <video controls className="mx-auto rounded-md w-3/4 shadow-md">
-          <source src="video.mp4" type="video/mp4" />
+          <source src="./images/video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

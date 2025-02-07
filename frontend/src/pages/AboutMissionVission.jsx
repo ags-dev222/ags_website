@@ -1,7 +1,7 @@
-import HeroVision from "./Herovision";
-import DiscussVision from "./Discussvision";
-import ContactForm from "./ContactForm";
-import NavbarDark from "./NavbarDark";
+import HeroVision from "../components/Herovision";
+import DiscussVision from "../components/Discussvision";
+import ContactForm from "../components/ContactForm";
+import NavbarDark from "../components/NavbarDark";
 
 const MissionSection = () => {
   return (
@@ -13,7 +13,7 @@ const MissionSection = () => {
           {/* Placeholder */}
           <div className="w-96 h-96 bg-gray-200 flex items-center justify-center rounded-lg overflow-hidden ">
               <img
-                src="./src/assets/images/dart.jpeg"
+                src="./images/dart.jpeg"
                 alt="vision"
                 className="w-full h-full object-cover "
               />

@@ -10,7 +10,7 @@ const Discussvision = () => {
             <div className="w-96 mt-8 mb-8 h-96 bg-gray-200 flex items-center rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-lg">
             <div className="w-96 h-96 bg-gray-200 flex items-center justify-center rounded-lg overflow-hidden ">
               <img
-                src="./src/assets/images/whatwedo.jpeg"
+                src="./images/whatwedo.jpeg"
                 alt="whatwedo"
                 className="w-full h-full object-cover "
               />

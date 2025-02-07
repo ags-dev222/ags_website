@@ -39,7 +39,7 @@ function Hero() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(30deg, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%), url('src/assets/images/a4ddf4b43eeff3a5c6d72e10b8ad3276.jpg')",
+              "linear-gradient(30deg, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0) 100%), url('./images/a4ddf4b43eeff3a5c6d72e10b8ad3276.jpg')",
           }}
         ></div>
 
@@ -90,10 +90,10 @@ function EventsOverview() {
 
             {/* Four Different Images */}
             {[
-              "src/assets/images/blog22.jpeg",
-              "src/assets/images/blog21.jpeg",
-              "src/assets/images/chancellor.jpeg",
-              "src/assets/images/blog22.jpeg",
+              "./images/blog22.jpeg",
+              "./images/blog21.jpeg",
+              "./images/chancellor.jpeg",
+              "./images/blog22.jpeg",
             ].map((img, index) => (
               <div key={index} className="relative">
                 <img src={img} alt={`Event ${index + 1}`} className="rounded-lg w-full h-auto" />
@@ -170,7 +170,7 @@ function OtherEvents() {
             {/* Image Container (Correct Size) */}
             <div className="w-[300px] h-[220px] rounded-lg overflow-hidden flex-shrink-0">
               <img
-                src="src/assets/images/blog21.jpeg"
+                src="./images/blog21.jpeg"
                 alt="Event"
                 className="w-full h-full object-cover"
               />

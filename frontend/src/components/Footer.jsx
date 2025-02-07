@@ -62,7 +62,7 @@ const Footer = () => {
           {/* Logo & Description */}
           <div>
             <img
-              src="/src/assets/images/ags-logo1.png"
+              src="./images/ags-logo1.png"
               alt="Logo"
               className="mb-4"
             />

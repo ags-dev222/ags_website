@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { FaLinkedin } from "react-icons/fa";
-import NavbarDark from "./NavbarDark";
-import ContactForm from "./ContactForm";
+import NavbarDark from "../components/NavbarDark";
+import ContactForm from "../components/ContactForm";
 
 const HeroSection = () => {
   return (
     <div
       className="relative bg-cover bg-center h-140 w-full grayscale"
       style={{
-        backgroundImage: "url('src/assets/images/vision.jpeg')", // Replace with actual image URL
+        backgroundImage: "url('./images/vision.jpeg')", // Replace with actual image URL
       }}
     >
     </div>
@@ -41,35 +41,35 @@ const executives = [
     position: "President",
     company: "Association of Ghana Startups",
     linkedin: "https://www.linkedin.com/in/solomon-adjei",
-    image: "src/assets/images/solomon.jpg",
+    image: "./images/solomon.jpg",
   },
   {
     name: "Jane Doe",
     position: "Vice President",
     company: "CEO at StartupX",
     linkedin: "https://www.linkedin.com/in/jane-doe",
-    image: "src/assets/images/lady.png",
+    image: "./images/lady.png",
   },
   {
     name: "Michael Johnson",
     position: "Head of Innovation",
     company: "Lead Engineer at TechWorld",
     linkedin: "https://www.linkedin.com/in/michael-johnson",
-    image: "/images/michael.jpg",
+    image: "./images/michael.jpg",
   },
   {
     name: "Sarah Williams",
     position: "Marketing Director",
     company: "CMO at CreativeHub",
     linkedin: "https://www.linkedin.com/in/sarah-williams",
-    image: "/images/sarah.jpg",
+    image: "./images/sarah.jpg",
   },
   {
     name: "David Brown",
     position: "Chief Strategist",
     company: "Strategy Lead at GrowthWorks",
     linkedin: "https://www.linkedin.com/in/david-brown",
-    image: "/images/david.jpg",
+    image: "./images/david.jpg",
   },
   {
     name: "Emily Carter",

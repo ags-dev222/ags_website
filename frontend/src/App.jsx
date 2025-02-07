@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
-import ActivitiesPage from './components/EventsSection';
-import RegisterForm from './components/JoinNow';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import ActivitiesPage from './pages/EventsSection';
+import RegisterForm from './pages/JoinNow';
 import EventRegistration from './components/EventRegistration';
-import EcosystemAGS from './components/EcosystemAGS';
+import EcosystemAGS from './pages/EcosystemAGS';
 import ForgotPassword from './components/ForgotPassword';
-import SuccessStories from './components/SuccessStories';
-import AboutTeam from './components/AboutTeam';
-import AboutMissionVission from './components/AboutMissionVission';
-import Resources from './components/Resources';
+import SuccessStories from './pages/SuccessStories';
+import AboutTeam from './pages/AboutTeam';
+import AboutMissionVission from './pages/AboutMissionVission';
+import Resources from './pages/Resources';
 import EventsSection from './components/ActivitiesPage';
-import NewsSection from './components/NewsSection';
+import NewsSection from './pages/NewsSection';
 import Footer from './components/Footer';
 
 function App() {

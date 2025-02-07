@@ -1,6 +1,6 @@
-import OrientationHero from './OrientationHero';
-import AboutEvents from './AboutEvents';
-import DiscussionSection from './DiscussionSection';
+import OrientationHero from '../components/OrientationHero';
+import AboutEvents from '../components/AboutEvents';
+import DiscussionSection from '../components/DiscussionSection';
 
 const events = [
   {
@@ -9,7 +9,7 @@ const events = [
     date: "26.08.2024 | 6:00 PM",
     description:
       "Explore the diverse clubs at CITSA, where students connect, develop new skills, and collaborate on exciting projects. Join today to make the most of your university experience!",
-    image: "src/assets/images/ott.jpeg", // Replace with your actual image path
+    image: "./images/ott.jpeg", // Replace with your actual image path
     link: "#",
   },
   {
@@ -18,7 +18,7 @@ const events = [
     date: "26.08.2024 | 6:00 PM",
     description:
       "Explore the diverse clubs at CITSA, where students connect, develop new skills, and collaborate on exciting projects. Join today to make the most of your university experience!",
-    image: "src/assets/images/ott.jpeg", // Replace with your actual image path
+    image: "./images/ott.jpeg", // Replace with your actual image path
     link: "#",
   },
 ];

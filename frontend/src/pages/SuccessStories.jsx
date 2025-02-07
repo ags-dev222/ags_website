@@ -1,13 +1,13 @@
-import SuccessDiscussion from "./SuccessDiscussion";
-import SuccessRecognitionSection from "./SuccessRecognitionSection";
-import NavbarBlack from "./NavbarBlack";
+import SuccessDiscussion from "../components/SuccessDiscussion";
+import SuccessRecognitionSection from "../components/SuccessRecognitionSection";
+import NavbarBlack from "../components/NavbarBlack";
 
 const HeroSection = () => {
   return (
     <div
       className="relative bg-cover bg-center h-screen mx-auto flex flex-col md:flex-row mt-15"
       style={{
-        backgroundImage: "url('src/assets/images/man.jpeg')", // Replace with your image URL
+        backgroundImage: "url('./images/man.jpeg')", // Replace with your image URL
       }}
     >
       {/* Overlay */}

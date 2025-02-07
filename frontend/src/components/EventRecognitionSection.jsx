@@ -4,7 +4,7 @@ const EventRecognitionSection = () => {
       {/* Full-Width Background Image */}
       <div className="w-full h-[350px] md:h-[400px] lg:h-[450px]">
         <img
-          src="./src/assets/images/home2.png"
+          src="./images/home2.png"
           alt="Event Background"
           className="w-full h-full object-cover"
         />
@@ -42,7 +42,7 @@ const EventRecognitionSection = () => {
           {/* Right Section: Image */}
           <div className="w-40 h-52 bg-yellow-100 flex items-center justify-center rounded-lg overflow-hidden">
             <img
-              src="./src/assets/images/lady.png"
+              src="./images/lady.png"
               alt="Profile"
               className="w-full h-full object-cover"
             />

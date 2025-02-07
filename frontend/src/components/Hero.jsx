@@ -45,7 +45,7 @@ function Hero() {
       {/* Right Image Section */}
       <div className="md:w-1/2 mt-6 md:mt-0 flex justify-center w-600 h-110 ">
         <img
-          src="src/assets/images/ecosystem.jpeg" 
+          src="./images/ecosystem.jpeg" 
           alt="Startup ecosystem meeting"
           className="rounded-4xl shadow-md"
         />

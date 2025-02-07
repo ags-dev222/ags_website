@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BlogHeroSection from "./BlogHeroSection";
+import BlogHeroSection from "../components/BlogHeroSection";
 
 const newsData = [
   {
@@ -8,7 +8,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/orientation.jpeg",
+    image: "./images/orientation.jpeg",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/blog22.jpeg",
+    image: "./images/blog22.jpeg",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 5,
@@ -40,7 +40,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ const newsData = [
     description:
       "About 65 Startups across the country have been honored at the 6th edition of the Young Entrepreneur Awards, held in Accra. The annual award ceremony is aimed at celebrating ambitious...",
     date: "Monday 25th Dec. 2024",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 7,
@@ -56,7 +56,7 @@ const newsData = [
     description:
       "Innovative technology solutions from around the globe were highlighted at the recent Global Tech Summit. Key players in the tech industry were present...",
     date: "Tuesday 10th Jan. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 8,
@@ -64,7 +64,7 @@ const newsData = [
     description:
       "The Sustainable Energy Conference brought together experts to discuss renewable energy initiatives and their future impact...",
     date: "Friday 20th Feb. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 9,
@@ -72,7 +72,7 @@ const newsData = [
     description:
       "Artists and designers from diverse backgrounds showcased their creative projects at the Art & Design Expo held in New York...",
     date: "Wednesday 5th Mar. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 10,
@@ -80,7 +80,7 @@ const newsData = [
     description:
       "Tech experts convene to discuss the rapid evolution of artificial intelligence and its implications for industries worldwide...",
     date: "Saturday 15th Apr. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 11,
@@ -88,7 +88,7 @@ const newsData = [
     description:
       "The Global Health Summit featured cutting-edge medical research and advancements that promise to shape the future of healthcare...",
     date: "Thursday 22nd May. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
   {
     id: 12,
@@ -96,7 +96,7 @@ const newsData = [
     description:
       "Leaders and professionals gather to explore trends in remote work, workplace diversity, and the gig economy...",
     date: "Monday 5th Jun. 2025",
-    image: "src/assets/images/blog233.jpeg",
+    image: "./images/blog233.jpeg",
   },
 ];
 

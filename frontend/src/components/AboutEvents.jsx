@@ -26,7 +26,7 @@ const AboutEvent = () => {
           {/* Top section */}
           <div className="overflow-hidden rounded-lg">
             <img
-              src="src/assets/images/aboutevent.jpeg"
+              src="./images/aboutevent.jpeg"
               alt="Event"
               className="w-100 h-24 md:h-28 object-cover object-top"
             />
@@ -35,7 +35,7 @@ const AboutEvent = () => {
           {/* Middle section */}
           <div className="overflow-hidden rounded-lg">
             <img
-              src="src/assets/images/aboutevent.jpeg"
+              src="./images/aboutevent.jpeg"
               alt="Event"
               className="w-100 h-24 md:h-28 object-cover object-center"
             />
@@ -44,7 +44,7 @@ const AboutEvent = () => {
           {/* Bottom section */}
           <div className="overflow-hidden rounded-lg">
             <img
-              src="src/assets/images/aboutevent.jpeg"
+              src="./images/aboutevent.jpeg"
               alt="Event"
               className="w-100 h-24 md:h-28 object-cover object-bottom"
             />

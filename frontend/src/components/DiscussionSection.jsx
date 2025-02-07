@@ -21,14 +21,14 @@ const DiscussionSection = () => {
     name: "Freeman Pekay",
     title: "Project Manager at AGS",
     role: "Moderator",
-    image: "src/assets/images/speaking.png", // Replace with your actual image path
+    image: "./images/speaking.png", // Replace with your actual image path
   };
 
   const partners = [
-    { name: "NEIP", logo: "src/assets/images/neip.png" },
-    { name: "Partner 2", logo: "src/assets/images/gheip.png" },
-    { name: "Partner 3", logo: "src/assets/images/ghin.png" },
-    { name: "Ghana Digital Centres Limited", logo: "src/assets/images/ghand.png" },
+    { name: "NEIP", logo: "./images/neip.png" },
+    { name: "Partner 2", logo: "./images/gheip.png" },
+    { name: "Partner 3", logo: "./images/ghin.png" },
+    { name: "Ghana Digital Centres Limited", logo: "./images/ghand.png" },
   ];
 
   return (
@@ -38,7 +38,7 @@ const DiscussionSection = () => {
         {/* Placeholder */}
         <div className="w-full md:w-1/2 flex  mt-8 md:mt-0 md:pr-8">
           <div className="w-64 h-80 bg-gray-200 flex items-center justify-center rounded-tl-lg rounded-tr-lg">
-            <img src="src/assets/images/focus.png" alt="focus" />
+            <img src="./images/focus.png" alt="focus" />
           </div>
         </div>
         {/* Discussion Points */}

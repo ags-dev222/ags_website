@@ -8,7 +8,7 @@ const HeroSection = () => {
     <div
       className="absolute inset-0 bg-cover bg-blend-overlay h-screen"
       style={{
-        backgroundImage: "url('src/assets/images/blog1.jpeg')", // Replace with your image URL
+        backgroundImage: "url('./images/blog1.jpeg')", // Replace with your image URL
       }}
     >
       <Navbar />

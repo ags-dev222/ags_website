@@ -7,7 +7,7 @@ const HeroSection = () => {
       className="absolute inset-0.5 w-full h-screen min-h-screen bg-cover bg-center"
       style={{
         backgroundImage:
-          "linear-gradient(42deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0.9) 55%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0) 90%), url('src/assets/images/orientation.jpeg')",
+          "linear-gradient(42deg, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0.9) 55%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0) 90%), url('./images/orientation.jpeg')",
       }}
     >
       <Navbar />

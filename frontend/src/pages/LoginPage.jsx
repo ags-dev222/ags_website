@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
-import NavbarDark from './NavbarDark';
+import NavbarDark from '../components/NavbarDark';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

@@ -33,7 +33,7 @@ const SuccessRecognitionSection = () => {
             {/* Right Section: Image Placeholder */}
             <div className="w-36 h-48 bg-yellow-100 flex items-center justify-center rounded-lg overflow-hidden ">
               <img
-                src="./src/assets/images/lady.png"
+                src="./images/lady.png"
                 alt="Profile"
                 className="w-full h-full object-cover "
               />

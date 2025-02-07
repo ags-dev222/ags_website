@@ -21,7 +21,7 @@ const ManifestoSection = () => {
         {/* Right Image Content */}
         <div className="md:w-1/2">
           <img
-            src="src/assets/images/manifesto.jpg" // Replace with your actual image path
+            src="./images/manifesto.jpg" // Replace with your actual image path
             alt="Manifesto"
             className="w-full h-auto rounded-lg shadow-lg"
           />

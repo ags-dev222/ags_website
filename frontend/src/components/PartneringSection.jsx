@@ -66,19 +66,19 @@ const PartneringSection = () => {
       <div className="max-w-6xl mx-auto">
         <Slider {...settings}>
           <div className="slick-slide flex justify-center mx-4">
-            <img src="src/assets/images/neip.png" alt="Company 1" className="h-24" />
+            <img src="./images/neip.png" alt="Company 1" className="h-24" />
           </div>
           <div className="slick-slide flex justify-center mx-4">
-            <img src="src/assets/images/gheip.png" alt="Company 2" className="h-24" />
+            <img src="./images/gheip.png" alt="Company 2" className="h-24" />
           </div>
           <div className="slick-slide flex justify-center mx-4">
-            <img src="src/assets/images/ghin.png" alt="Company 3" className="h-24" />
+            <img src="./images/ghin.png" alt="Company 3" className="h-24" />
           </div>
           <div className="slick-slide flex justify-center mx-4">
-            <img src="src/assets/images/ghand.png" alt="Company 4" className="h-24" />
+            <img src="./images/ghand.png" alt="Company 4" className="h-24" />
           </div>
           <div className="slick-slide flex justify-center mx-4">
-            <img src="src/assets/images/ags-logo.png" alt="Company 5" className="h-24" />
+            <img src="./images/ags-logo.png" alt="Company 5" className="h-24" />
           </div>
         </Slider>
       </div>

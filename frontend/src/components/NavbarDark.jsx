@@ -43,7 +43,7 @@ const Navbar = () => {
         <div>
           <Link to="/">
             <img
-              src="/src/assets/images/ags-logo1.png"
+              src="./images/ags-logo1.png"
               alt="Logo"
               className="h-10 w-10 md:h-9 md:w-30"
             />
@@ -55,7 +55,6 @@ const Navbar = () => {
           <Dropdown
             label="Explore"
             links={[
-              { to: "/activities", text: "Activities" },
               { to: "/events", text: "Events" },
               { to: "/ecosystem", text: "Ecosystem" },
               { to: "/blog1", text: "Blog" },
@@ -132,7 +131,6 @@ const Navbar = () => {
           <MobileDropdown
             label="Explore"
             links={[
-              { to: "/activities", text: "Activities" },
               { to: "/events", text: "Events" },
               { to: "/ecosystem", text: "Ecosystem" },
               { to: "/resources", text: "Resources" },

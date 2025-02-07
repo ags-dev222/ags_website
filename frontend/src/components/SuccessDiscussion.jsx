@@ -1,22 +1,22 @@
 const SuccessDiscussion = () => {
     const milestones = [
       {
-        icon: "src/assets/images/entrepreneur.png",
+        icon: "./images/entrepreneur.png",
         title: "Entrepreneurs Supported",
         description: "Over 500+ entrepreneurs mentored and guided.",
       },
       {
-        icon: "src/assets/images/funds.png",
+        icon: "./images/funds.png",
         title: "Funds Raised",
         description: "$2 million+ in funding secured for startups.",
       },
       {
-        icon: "src/assets/images/events.png",
+        icon: "./images/events.png",
         title: "Events Conducted",
         description: "100+ workshops, events, and meetups.",
       },
       {
-        icon: "src/assets/images/ment.png",
+        icon: "./images/ment.png",
         title: "Mentorship",
         description: "500+ hours of training provided to startups.",
       },
@@ -30,7 +30,7 @@ const SuccessDiscussion = () => {
           <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0 md:pr-8">
             <div className="w-64 h-96 bg-gray-200 flex items-center justify-center rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-lg">
               <img
-                src="src/assets/images/hands.png"
+                src="./images/hands.png"
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -60,13 +60,13 @@ const SuccessDiscussion = () => {
           <h2 className="text-2xl font-bold mb-6 text-center">Success Stories</h2>
           <div className="w-full h-full bg-gray-200 rounded-tl-lg rounded-tr-lg rounded-bl-lg rounded-br-lg flex items-center justify-center relative">
             <img
-              src="src/assets/images/vidpre.png"
+              src="./images/vidpre.png"
               alt="Video Thumbnail"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <img
-                src="src/assets/images/play.png.svg"
+                src="./images/play.png.svg"
                 alt="Play Button"
                 className="w-16 h-16"
               />

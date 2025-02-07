@@ -6,7 +6,7 @@ const HeroSection = () => {
     <div
       className="relative bg-cover bg-center h-screen"
       style={{
-        backgroundImage: "url('src/assets/images/landing.png')", // Replace with your image URL
+        backgroundImage: "url('./images/landing.png')", // Replace with your image URL
       }}
     >
       {/* Overlay */}

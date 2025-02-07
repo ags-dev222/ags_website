@@ -6,7 +6,7 @@ const StatisticsQuoteSection = () => {
         {/* Top Left - Placeholder (e.g., image or blank) */}
         <div className="bg-gray-200 flex items-center justify-center">
           <img
-            src="src/assets/images/startup.jpeg" // Replace with your actual image path
+            src="./images/startup.jpeg" // Replace with your actual image path
             alt="Placeholder"
             className="w-full h-auto object-cover"
           />
@@ -53,7 +53,7 @@ const StatisticsQuoteSection = () => {
         {/* Bottom Right - Placeholder (e.g., image or blank) */}
         <div className="bg-gray-200 flex items-center justify-center">
           <img
-            src="src/assets/images/start1.jpeg" // Replace with your actual image path
+            src="./images/start1.jpeg" // Replace with your actual image path
             alt="Placeholder"
             className="w-full h-auto object-cover"
           />

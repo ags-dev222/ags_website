@@ -3,7 +3,7 @@ const Herovision = () => {
         <div
             className="relative w-full h-[85vh] bg-cover bg-center flex items-center justify-center"
             style={{
-                backgroundImage: "url('/src/assets/images/vision.jpeg')",
+                backgroundImage: "url('./images/vision.jpeg')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}

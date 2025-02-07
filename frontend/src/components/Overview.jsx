@@ -2,22 +2,22 @@ const investors = [
   {
     name: "Lious John",
     title: "Chief Executive Officer of ALX",
-    image: "src/assets/images/investor.jpeg",
+    image: "./images/investor.jpeg",
   },
   {
     name: "Lious John",
     title: "Chief Executive Officer of ALX",
-    image: "src/assets/images/investor.jpeg",
+    image: "./images/investor.jpeg",
   },
   {
     name: "Lious John",
     title: "Chief Executive Officer of ALX",
-    image: "src/assets/images/investor.jpeg",
+    image: "./images/investor.jpeg",
   },
   {
     name: "Lious John",
     title: "Chief Executive Officer of ALX",
-    image: "src/assets/images/investor.jpeg",
+    image: "./images/investor.jpeg",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function InvestorsAccordion() {
             ${index % 2 === 1 ? "translate-y-1/2" : "translate-y-0"}`}>
             <div className="w-[150px] h-[150px] bg-gray-300 rounded-lg overflow-hidden flex items-center justify-center">
               <img
-                src= "src/assets/images/investor.jpeg"
+                src= "./images/investor.jpeg"
                 alt={investor.name}
                 className="w-full h-full object-cover-object-center"
               />
