@@ -6,9 +6,9 @@ import ContactForm from "../components/ContactForm";
 const HeroSection = () => {
   return (
     <div
-      className="relative bg-cover bg-center h-140 w-full grayscale"
+      className="relative bg-cover bg-center h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] w-full grayscale"
       style={{
-        backgroundImage: "url('./images/vision.jpeg')", // Replace with actual image URL
+        backgroundImage: "url('./images/vision.jpeg')",
       }}
     >
     </div>
@@ -18,14 +18,14 @@ const HeroSection = () => {
 const BlogSection = () => {
   return (
     <section className="bg-white py-10 mt-12">
-      <div className="max-w-5xl mx-auto bg-white">
+      <div className="max-w-4xl lg:max-w-5xl mx-auto bg-white px-4 sm:px-6">
         {/* Header Section */}
-        <div className="p-6 text-center">
-          <h1 className="text-4xl font-bold text-gray-800">
+        <div className="p-4 sm:p-6 text-center">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
             We&apos;ve got an entire team dedicated to supporting startups, mentors, and investors.
           </h1>
         </div>
-        <p className="mb-3 font-sm mt-3 text-center">
+        <p className="mb-3 text-xs sm:text-sm mt-3 text-center px-2 sm:px-0">
           Explore the remarkable journey of AGS and Ghana Startup Week. Discover how we have empowered
           entrepreneurs, fostered innovation, and transformed the startup ecosystem in Ghana.
         </p>
@@ -151,11 +151,11 @@ const ExecutiveSection = ({ title, members }) => {
   return (
     <div className="py-10 mx-16">
       <h2 className="text-3xl font-bold ml-5 text-gray-800 mt-6 mb-6">{title}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
         {members.map((member, index) => (
           <div key={index} className="p-3 rounded-lg text-left bg-gray-100 shadow-lg">
             {/* Placeholder or Custom Image */}
-            <div className="w-64 h-56 rounded-md mb-4 overflow-hidden bg-gray-300">
+            <div className="w-full aspect-square rounded-md mb-4 overflow-hidden bg-gray-300">
               {member.image ? (
                 <img
                   src={member.image}
@@ -172,9 +172,9 @@ const ExecutiveSection = ({ title, members }) => {
             {/* Name & LinkedIn Icon */}
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold">{member.name}</h3>
-                <p className="text-sm text-gray-600">{member.position}</p>
-                <p className="text-sm text-gray-600">{member.company}</p>
+              <h3 className="text-base sm:text-lg font-bold">{member.name}</h3>
+              <p className="text-xs sm:text-sm text-gray-600">{member.position}</p>
+              <p className="text-xs sm:text-sm text-gray-600">{member.company}</p>
               </div>
 
               {/* LinkedIn Icon */}

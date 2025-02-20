@@ -36,7 +36,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 py-4 bg-white text-white md:px-16">
+    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 py-3 sm:py-4 bg-white text-white">
       {/* Left Side */}
       <div className="flex space-x-4 items-center md:space-x-6">
         {/* Logo */}
@@ -82,8 +82,8 @@ const Navbar = () => {
         <div className="relative">
           <input
             type="text"
-            className={`h-10 border-none p-2 text-black rounded-full bg-transparent transition-all duration-500 ease-in-out 
-              ${isSearchOpen ? "w-64 bg-transparent border-b border-black" : "w-10"}`}
+            className={`h-10 border-none p-2 text-black rounded-full bg-transparent transition-all duration-300 ease-in-out 
+              ${isSearchOpen ? "w-48 sm:w-64 bg-transparent border-b border-black" : "w-10"}`}
             placeholder={isSearchOpen ? "Type to Search..." : ""}
             onFocus={() => setIsSearchOpen(true)}
             onBlur={() => setIsSearchOpen(false)}
@@ -120,7 +120,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black text-black flex flex-col items-center space-y-4 py-4 md:hidden">
+        <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-white text-black flex flex-col items-center space-y-4 py-4 overflow-y-auto md:hidden">
           <Link
             to="/"
             className="hover:text-yellow-300"
@@ -176,10 +176,10 @@ const Dropdown = ({ label, links, isActive, onToggle, dropdownRef }) => {
       <AnimatePresence>
         {isActive && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute mt-2 w-40 bg-transparent shadow-lg"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            className="absolute mt-2 w-48 sm:w-56 bg-white shadow-lg rounded-lg"
             id={label.toLowerCase()}
           >
             {links.map((link) => (
@@ -213,10 +213,10 @@ const MobileDropdown = ({ label, links, isActive, onToggle }) => {
       <AnimatePresence>
         {isActive && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-transparent shadow-lg"
+            initial={{ opacity: 0, height: 0, scale: 0.95 }}
+            animate={{ opacity: 1, height: "auto", scale: 1 }}
+            exit={{ opacity: 0, height: 0, scale: 0.95 }}
+            className="w-full bg-white shadow-lg rounded-lg"
             id={label.toLowerCase()}
           >
             {links.map((link) => (
