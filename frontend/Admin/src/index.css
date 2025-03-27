@@ -1,0 +1,59 @@
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* ✅ Base styles (default: Light Mode) */
+body {
+  background-color: white; /* ✅ Light mode background */
+  color: black; /* ✅ Ensure text is black in light mode */
+  font-family: var(--tw-font-sans);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* ✅ Dark Mode */
+body.dark-mode {
+  background-color: #111827; /* ✅ Tailwind gray-900 */
+  color: white; /* ✅ White text for dark mode */
+}
+
+
+/* ✅ Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ✅ Custom Scrollbar (Light Mode) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e5e7eb; /* ✅ Light gray */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #10b981; /* ✅ Tailwind Green-500 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669; /* ✅ Slightly darker green */
+}
+
+/* ✅ Custom Scrollbar (Dark Mode) */
+body.dark-mode ::-webkit-scrollbar-track {
+  background: #374151; /* ✅ Tailwind gray-700 */
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #34d399; /* ✅ Tailwind Green-400 */
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #059669; /* ✅ Slightly darker green */
+}
+
+/* ✅ Hide scrollbar for better UI */
+body.dark-mode ::-webkit-scrollbar-corner {
+  background: #374151;
+}

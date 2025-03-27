@@ -1,119 +1,134 @@
-/**
- * 1. register a user without authentication
- * 2. login a user with auth
- * 3. get a user profile with auth
- * 4. admin only access route with auth
- * 5. registered user access route with auth
- * 6. logout user with auth 
- */
-
-
-import express from 'express';
-import UserService from '../services/user.js';
-import { generateToken } from '../utils/jwt.js';
-import logger from '../utils/log.js';
-import { authenticateWithToken, requireAuth } from './middleware/auth.js';
-import { authorizeRoles } from '../routes/middleware/auth.js';
+import express from "express";
+import UserService from "../services/user.js";
+import { generateToken } from "../utils/jwt.js";
+import logger from "../utils/log.js";
+import { authenticateWithToken, requireAuth } from "./middleware/auth.js";
+import { authorizeRoles } from "../routes/middleware/auth.js";
+import { requestPasswordReset, resetPassword } from "../controllers/authController.js";
 
 const router = express.Router();
 
-// Register Route (No Authentication Required)
-router.post('/registerUser', async (req, res) => {
+/** 
+ * ✅ REGISTER A USER 
+ * - No authentication required
+ * - Default role: "Registered"
+ */
+router.post("/registerUser", async (req, res) => {
   const { email, password, name, role } = req.body;
 
   if (!email || !password || !name) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: "All fields are required" });
   }
-
-  // Set the default role to 'Registered' if no role is specified
-  const userRole = role || 'Registered';  // 'Registered' is default, can be changed based on your logic
 
   try {
     const { user, token } = await UserService.createUser({
       email,
       password,
       name,
-      role: userRole,  // Use the role provided by the user or default
+      role: role || "Registered",
     });
 
     res.status(201).json({
-      message: 'User registered successfully',
+      message: "User registered successfully",
       user: { email: user.email, name: user.name, role: user.role },
       token,
     });
   } catch (error) {
-    log.error('Registration error:', error);
+    logger.error("Registration error:", error);
     res.status(400).json({ error: error.message });
   }
 });
 
-
-// Login Route 
-router.post('/login', authenticateWithToken, requireAuth, async (req, res) => {
+/** 
+ * ✅ LOGIN A USER 
+ * - Authenticates user credentials
+ * - Returns token upon successful login
+ */
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required' });
+    return res.status(400).json({ error: "Email and password are required" });
   }
 
   try {
     const { user, token } = await UserService.authenticateWithPassword(email, password);
 
     if (!user) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // Return the user with the role and the token
     res.json({
-      message: 'Login successful',
-      user: { email: user.email, name: user.name, role: user.role },  
+      message: "Login successful",
+      user: { email: user.email, name: user.name, role: user.role },
       token,
     });
   } catch (error) {
-    log.error('Login error:', error);
-    res.status(500).json({ error: 'An error occurred during login' });
+    logger.error("Login error:", error);
+    res.status(500).json({ error: "An error occurred during login" });
   }
 });
 
-
-// Profile Route (Authentication Required)
-router.get('/me', authenticateWithToken, (req, res) => {
+/** 
+ * ✅ GET USER PROFILE 
+ * - Requires authentication
+ */
+router.get("/me", authenticateWithToken, (req, res) => {
   res.status(200).json(req.user);
 });
 
-// Admin-Only Route (Role-Based Access Control)
-router.get('/adminData', authenticateWithToken,  authorizeRoles('admin'), async (req, res) => {
+/** 
+ * ✅ ADMIN-ONLY ROUTE 
+ * - Requires "admin" role
+ */
+router.get("/adminData", authenticateWithToken, authorizeRoles("admin"), async (req, res) => {
   try {
     const adminData = await UserService.getAdminData();
     res.status(200).json({ success: true, data: adminData });
   } catch (error) {
-    log.error('Error fetching admin data:', error);
-    res.status(500).json({ error: 'Unable to fetch admin data' });
+    logger.error("Error fetching admin data:", error);
+    res.status(500).json({ error: "Unable to fetch admin data" });
   }
 });
 
-
-// Registered User-Only Route
-router.get('/userResources', authenticateWithToken, authorizeRoles('Registered', 'admin'), async (req, res) => {
+/** 
+ * ✅ REGISTERED USERS ROUTE 
+ * - Allows access to users with "Registered" or "admin" role
+ */
+router.get("/userResources", authenticateWithToken, authorizeRoles("Registered", "admin"), async (req, res) => {
   try {
     const userResources = await UserService.getUserResources();
     res.status(200).json({ success: true, data: userResources });
   } catch (error) {
-    log.error('Error fetching user resources:', error);
-    res.status(500).json({ error: 'Unable to fetch user resources' });
+    logger.error("Error fetching user resources:", error);
+    res.status(500).json({ error: "Unable to fetch user resources" });
   }
 });
 
-
-// Logout Route (Authentication Required)
-router.post('/logout', authenticateWithToken, (req, res) => {
+/** 
+ * ✅ LOGOUT 
+ * - Destroys user session
+ */
+router.post("/logout", authenticateWithToken, (req, res) => {
   req.session?.destroy((err) => {
     if (err) {
-      log.error('Error during session destruction:', err);
-      return res.status(500).json({ success: false, message: 'Error logging out' });
+      logger.error("Error during session destruction:", err);
+      return res.status(500).json({ success: false, message: "Error logging out" });
     }
-    res.json({ success: true, message: 'Logged out successfully' });
+    res.json({ success: true, message: "Logged out successfully" });
   });
 });
+
+/** 
+ * ✅ FORGOT PASSWORD 
+ * - Sends password reset link/OTP via email
+ */
+router.post("/forgot-password", requestPasswordReset);
+
+/** 
+ * ✅ RESET PASSWORD 
+ * - Verifies OTP and resets password
+ */
+router.post("/reset-password", resetPassword);
 
 export default router;
