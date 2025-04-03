@@ -1,0 +1,96 @@
+/* Import Tailwind */
+@import "tailwindcss";
+
+/* Layout & Containers */
+.container {
+  max-width: theme("screens.lg");
+  margin: auto;
+  padding-left: theme("spacing.4");
+  padding-right: theme("spacing.4");
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: theme("spacing.2") theme("spacing.4");
+  border-radius: theme("borderRadius.lg");
+  transition: all 0.2s ease-in-out;
+  font-weight: theme("fontWeight.medium");
+}
+
+.btn-primary {
+  background-color: theme("colors.blue.600");
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: theme("colors.blue.700");
+}
+
+.btn-secondary {
+  background-color: theme("colors.gray.600");
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: theme("colors.gray.700");
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
+  box-shadow: theme("boxShadow.md");
+  border-radius: theme("borderRadius.lg");
+  padding: theme("spacing.6");
+}
+
+.card-title {
+  font-size: theme("fontSize.lg");
+  font-weight: theme("fontWeight.semibold");
+  color: theme("colors.gray.800");
+}
+
+.card-content {
+  color: theme("colors.gray.600");
+}
+
+/* Input Styles */
+.input {
+  width: 100%;
+  padding: theme("spacing.2") theme("spacing.3");
+  border-radius: theme("borderRadius.lg");
+  border: 1px solid theme("colors.gray.300");
+  outline: none;
+}
+
+.input:focus {
+  border-color: theme("colors.blue.500");
+  box-shadow: theme("boxShadow.md");
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: theme("spacing.4") theme("spacing.6");
+  box-shadow: theme("boxShadow.md");
+}
+
+.nav-link {
+  color: theme("colors.gray.700");
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: theme("colors.blue.500");
+}
+
+/* Footer */
+.footer {
+  background-color: theme("colors.gray.200");
+  text-align: center;
+  padding: theme("spacing.4");
+  color: theme("colors.gray.700");
+}
