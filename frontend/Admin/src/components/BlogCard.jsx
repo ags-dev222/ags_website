@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
 const BlogCard = ({ blog, onDelete, onEdit }) => {
-  // Initialize state at the top
+  const { id, mainImage, title, description, additionalImages } = blog;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editedTitle, setEditedTitle] = useState('');
-  const [editedDescription, setEditedDescription] = useState('');
-  const [editedMainImage, setEditedMainImage] = useState('');
-  const [editedAdditionalImage1, setEditedAdditionalImage1] = useState(null);
-  const [editedAdditionalImage2, setEditedAdditionalImage2] = useState(null);
+  const [editedTitle, setEditedTitle] = useState(title);
+  const [editedDescription, setEditedDescription] = useState(description);
+  const [editedMainImage, setEditedMainImage] = useState(mainImage);
+  const [editedAdditionalImage1, setEditedAdditionalImage1] = useState(additionalImages?.[0] || null);
+  const [editedAdditionalImage2, setEditedAdditionalImage2] = useState(additionalImages?.[1] || null);
 
   useEffect(() => {
-    if (blog) {
-      setEditedTitle(blog.title || '');
-      setEditedDescription(blog.description || '');
-      setEditedMainImage(blog.mainImage || '');
-      setEditedAdditionalImage1(blog.additionalImages?.[0] || null);
-      setEditedAdditionalImage2(blog.additionalImages?.[1] || null);
-    }
-  }, [blog]);
-
-  // If blog is undefined, return null AFTER initializing hooks
-  if (!blog) return null;
-
-  // eslint-disable-next-line no-unused-vars
-  const { id, mainImage, title, description, additionalImages } = blog;
+    setEditedTitle(title);
+    setEditedDescription(description);
+    setEditedMainImage(mainImage);
+    setEditedAdditionalImage1(additionalImages?.[0] || null);
+    setEditedAdditionalImage2(additionalImages?.[1] || null);
+  }, [title, description, mainImage, additionalImages]);
 
   const handleSave = () => {
     onEdit(id, {
@@ -40,7 +32,7 @@ const BlogCard = ({ blog, onDelete, onEdit }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
       <div className="relative h-40">
-        <img src={mainImage || ''} alt={title || 'No Title'} className="w-full h-full object-cover" />
+        <img src={mainImage} alt={title} className="w-full h-full object-cover" />
         <div className="absolute top-2 right-2">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -51,7 +43,7 @@ const BlogCard = ({ blog, onDelete, onEdit }) => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg shadow z-10">
               <button
-                className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
+                className="flex items-center block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
                 onClick={() => {
                   setDropdownOpen(false);
                   setEditModalOpen(true);
@@ -60,7 +52,7 @@ const BlogCard = ({ blog, onDelete, onEdit }) => {
                 Edit Blog
               </button>
               <button
-                className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600"
+                className="flex items-center block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600"
                 onClick={() => {
                   setDropdownOpen(false);
                   setDeleteModalOpen(true);
@@ -73,8 +65,8 @@ const BlogCard = ({ blog, onDelete, onEdit }) => {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{title || 'No Title'}</h3>
-        <p className="text-gray-500 dark:text-gray-300 text-sm">{description || 'No Description Available'}</p>
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-gray-500 dark:text-gray-300 text-sm">{description}</p>
       </div>
       {editModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
@@ -97,6 +89,51 @@ const BlogCard = ({ blog, onDelete, onEdit }) => {
                 className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 focus:outline-none"
                 rows="3"
               ></textarea>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-gray-300 mb-1">Main Image</label>
+              {editedMainImage && (
+                <img src={editedMainImage} alt="Main Image" className="w-full h-40 object-cover rounded mb-2" />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setEditedMainImage(URL.createObjectURL(e.target.files[0]));
+                  }
+                }}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-gray-300 mb-1">Additional Image 1</label>
+              {editedAdditionalImage1 && (
+                <img src={editedAdditionalImage1} alt="Additional Image 1" className="w-full h-40 object-cover rounded mb-2" />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setEditedAdditionalImage1(URL.createObjectURL(e.target.files[0]));
+                  }
+                }}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 dark:text-gray-300 mb-1">Additional Image 2</label>
+              {editedAdditionalImage2 && (
+                <img src={editedAdditionalImage2} alt="Additional Image 2" className="w-full h-40 object-cover rounded mb-2" />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setEditedAdditionalImage2(URL.createObjectURL(e.target.files[0]));
+                  }
+                }}
+              />
             </div>
             <div className="flex justify-end space-x-4">
               <button

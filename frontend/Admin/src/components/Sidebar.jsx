@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; 
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
-import { AuthContext } from "../context/AuthContext"; 
-
+import { AuthContext } from "../context/AuthContext";
 import {
   Squares2X2Icon,
   CalendarIcon,
@@ -16,13 +15,13 @@ import {
 
 const Sidebar = () => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const { checkPermission, logout } = useContext(AuthContext); 
+  const { checkPermission, logout } = useContext(AuthContext);
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); 
-    navigate("/login"); 
+    logout();
+    navigate("/login");
   };
 
   const menuItems = [
@@ -33,26 +32,25 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className={`h-screen w-60 flex flex-col justify-between transition-all duration-300 shadow-md 
+    <div className={`h-screen w-60 flex flex-col justify-between transition-all duration-300 shadow-md
       ${darkMode ? "bg-gray-900 text-gray-300" : "bg-[#F5F5F5] text-gray-700"}`}>
-
-      {/* 🔹 Logo */}
+      {/* Logo */}
       <div className="p-5 flex items-center space-x-3">
         <img src="/ags-logo.png" alt="AGS Admin Logo" className="h-10 w-auto" />
       </div>
 
-      {/* 🔹 Menu Items */}
+      {/* Menu Items */}
       <nav className="flex-1 mt-4">
         {menuItems.map((item, index) => (
           checkPermission?.(item.roles) && (
             <Link
               key={index}
               to={item.path}
-              className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition 
-                ${location.pathname === item.path 
-                  ? "bg-green-600 text-white" 
-                  : darkMode 
-                    ? "hover:bg-gray-800 text-gray-300" 
+              className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition
+                ${location.pathname === item.path
+                  ? "bg-green-600 text-white"
+                  : darkMode
+                    ? "hover:bg-gray-800 text-gray-300"
                     : "hover:bg-gray-300 text-gray-700"}`}
             >
               {item.icon}
@@ -61,11 +59,11 @@ const Sidebar = () => {
           )
         ))}
 
-        {/* 🔹 User Management (Previously "Users") */}
+        {/* User Management */}
         {checkPermission?.(["admin"]) && (
           <Link
             to="/users"
-            className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition 
+            className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition
               ${location.pathname === "/users"
                 ? "bg-green-600 text-white"
                 : darkMode
@@ -73,15 +71,15 @@ const Sidebar = () => {
                   : "hover:bg-gray-300 text-gray-700"}`}
           >
             <UsersIcon className="w-6 h-6" />
-            <span>User Management</span> {/* ✅ Renamed */}
+            <span>User Management</span>
           </Link>
         )}
 
-        {/* 🔹 Account Settings (Previously "Settings") */}
+        {/* Account Settings */}
         {checkPermission?.(["admin", "editor"]) && (
           <Link
             to="/settings"
-            className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition 
+            className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition
               ${location.pathname === "/settings"
                 ? "bg-green-600 text-white"
                 : darkMode
@@ -89,13 +87,13 @@ const Sidebar = () => {
                   : "hover:bg-gray-300 text-gray-700"}`}
           >
             <Cog6ToothIcon className="w-6 h-6" />
-            <span>Account Settings</span> {/* ✅ Renamed */}
+            <span>Account Settings</span>
           </Link>
         )}
       </nav>
 
-      {/* 🔹 Dark Mode Toggle */}
-      <div className={`flex items-center justify-between px-4 py-3 mx-3 my-2 rounded-lg transition 
+      {/* Dark Mode Toggle */}
+      <div className={`flex items-center justify-between px-4 py-3 mx-3 my-2 rounded-lg transition
         ${darkMode ? "bg-gray-800 text-gray-300" : "bg-gray-200 text-gray-700"}`}>
         <div className="flex items-center space-x-3">
           <MoonIcon className="w-6 h-6" />
@@ -103,19 +101,19 @@ const Sidebar = () => {
         </div>
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className={`w-10 h-5 flex items-center rounded-full p-1 transition 
+          className={`w-10 h-5 flex items-center rounded-full p-1 transition
             ${darkMode ? "bg-green-600" : "bg-gray-400"}`}
         >
-          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition 
+          <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition
             ${darkMode ? "translate-x-5" : "translate-x-0"}`}>
           </div>
         </button>
       </div>
 
-      {/* 🔹 Logout Button */}
+      {/* Logout Button */}
       <button
-        onClick={handleLogout} 
-        className={`flex items-center space-x-3 p-3 mx-3 my-3 rounded-lg transition text-[15px] font-semibold 
+        onClick={handleLogout}
+        className={`flex items-center space-x-3 p-3 mx-3 my-3 rounded-lg transition text-[15px] font-semibold
           ${darkMode ? "text-gray-300 hover:bg-gray-800" : "text-gray-700 hover:bg-gray-300"}`}
       >
         <ArrowLeftOnRectangleIcon className="w-6 h-6" />

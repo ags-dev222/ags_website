@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Events from "./pages/Events";
 import Blog from "./pages/Blog";
 import SiteContent from "./pages/SiteContent";
-// import UsersManagement from "./pages/UsersManagement"; // ✅ NEW - Users Management Page
+import UserManagement from "./pages/UserManagement"; // ✅ NEW - User Management Page
 import Settings from "./pages/Settings"; // ✅ NEW - Settings Page
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -37,7 +37,7 @@ function App() {
               <Route path="blog" element={<Blog />} />
               {/* <Route path="blog/:blogId" element={<BlogDetails />} /> ✅ Added */}
               <Route path="site-content" element={<SiteContent />} />
-              {/* <Route path="users" element={<UsersManagement />} /> ✅ Added */}
+              <Route path="users" element={<UserManagement />} /> ✅ Added
               <Route path="settings" element={<Settings />} /> {/* ✅ Added */}
             </Route>
           </Route>
