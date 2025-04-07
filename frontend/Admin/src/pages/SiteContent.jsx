@@ -12,9 +12,10 @@ import OurTeamEditor from '../components/OurTeamEditor';
 import MissionVisionEditor from '../components/MissionVisionEditor';
 import SuccessStoriesEditor from '../components/SuccessStoriesEditor';
 import SectionCard from '../components/SectionCard';
+import { useContext } from 'react';
 
 const SiteContent = () => {
-  const { darkMode } = React.useContext(ThemeContext);
+  // eslint-disable-next-line no-unused-vars
   const [activeTab] = useState('Sites Content');
   const [subPage, setSubPage] = useState(null);
 
@@ -30,12 +31,12 @@ const SiteContent = () => {
     missionVision: { image: null, title: '', description: '' },
     successStories: { image: null, title: '', description: '' },
   });
-
+  const { darkMode } = useContext(ThemeContext);
   const renderContentArea = () => {
     if (subPage === 'HeroSection') {
       return (
-        <div className="w-full bg-white dark:bg-gray-900">
-          <div className="flex items-center mb-4">
+        <div className={`w-full ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
+          <div className={`flex items-center mb-4 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
             <button
               className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
               onClick={() => setSubPage('Homepage')}
@@ -63,7 +64,7 @@ const SiteContent = () => {
     }
     if (subPage === 'Manifesto') {
       return (
-        <div className="w-full bg-white dark:bg-gray-900">
+        <div className={`w-full ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
           <div className="flex items-center mb-4">
             <button
               className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState, useEffect, useRef } from "react";
 import { BellIcon, TrashIcon } from "@heroicons/react/24/outline"; // Removed unused icons
 import { AnimatePresence, motion } from "framer-motion";
@@ -60,7 +61,7 @@ const Topbar = () => {
     if (user) {
       trackUserAction(user, notifications, setNotifications, "logged in", "info");
     }
-  }, [user]);
+  }, [user, notifications]);
 
   // Clear all notifications
   const clearNotifications = () => {
@@ -240,6 +241,7 @@ const Topbar = () => {
 };
 
 // Export utility functions
+// eslint-disable-next-line react-refresh/only-export-components
 export { trackUserAction, addNotification };
 
 export default Topbar;

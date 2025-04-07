@@ -33,9 +33,8 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="events" element={<Events />} />
-              {/* <Route path="events/:eventId" element={<EventDetails />} /> ✅ Added */}
+              {/* 🔹 Nested Routes */}
               <Route path="blog" element={<Blog />} />
-              {/* <Route path="blog/:blogId" element={<BlogDetails />} /> ✅ Added */}
               <Route path="site-content" element={<SiteContent />} />
               <Route path="users" element={<UserManagement />} /> ✅ Added
               <Route path="settings" element={<Settings />} /> {/* ✅ Added */}
