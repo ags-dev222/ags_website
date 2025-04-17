@@ -6,7 +6,7 @@ import { motion } from "framer-motion"; // For animations
 // import Lottie from "lottie-react"; // For success animation
 // import successAnimation from "../assets/success.json"; // Lottie file
 
-const OTPVerification = () => {
+const OtpVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = useState(""); // New password input
   const [loading, setLoading] = useState(false);
@@ -114,4 +114,4 @@ const OTPVerification = () => {
   );
 };
 
-export default OTPVerification;
+export default OtpVerification;
