@@ -3,20 +3,13 @@ import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from "prop-types"; // Import PropTypes
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdowns, setActiveDropdowns] = useState({});
   const dropdownRefs = useRef({});
-
-  const handleDropdownToggle = (dropdown) => {
-    setActiveDropdowns((prev) => ({
-      ...prev,
-      [dropdown]: prev[dropdown] ? null : dropdown,
-    }));
-  };
 
   const handleClickOutside = (event) => {
     if (
@@ -36,7 +29,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 py-3 sm:py-4 bg-white text-white">
+    <nav className="fixed top-0 left-0 w-full z-20 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-16 py-3 sm:py-4 bg-white text-black">
       {/* Left Side */}
       <div className="flex space-x-4 items-center md:space-x-6">
         {/* Logo */}
@@ -52,19 +45,33 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4 items-center text-black">
-          <Dropdown
-            label="Explore"
-            links={[
-              { to: "/events", text: "Events" },
-              { to: "/ecosystem", text: "Ecosystem" },
-              { to: "/blog1", text: "Blog" },
-              { to: "/resources", text: "Resources" },
-            ]}
-            isActive={activeDropdowns.explore}
-            onToggle={() => handleDropdownToggle("explore")}
-            dropdownRef={(el) => (dropdownRefs.current.explore = el)}
-          />
+          {/* Explore Items as Tabs */}
+          <Link
+            to="/events"
+            className="px-4 py-2 text-black hover:text-yellow-300 hover:bg-gray-200 rounded transition"
+          >
+            Events
+          </Link>
+          <Link
+            to="/ecosystem"
+            className="px-4 py-2 text-black hover:text-yellow-300 hover:bg-gray-200 rounded transition"
+          >
+            Ecosystem
+          </Link>
+          <Link
+            to="/blog1"
+            className="px-4 py-2 text-black hover:text-yellow-300 hover:bg-gray-200 rounded transition"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/resources"
+            className="px-4 py-2 text-black hover:text-yellow-300 hover:bg-gray-200 rounded transition"
+          >
+            Resources
+          </Link>
 
+          {/* About Dropdown */}
           <Dropdown
             label="About"
             links={[
@@ -73,7 +80,7 @@ const Navbar = () => {
               { to: "/success-stories", text: "Success Stories" },
             ]}
             isActive={activeDropdowns.about}
-            onToggle={() => handleDropdownToggle("about")}
+            onToggle={() => setActiveDropdowns((prev) => ({ about: !prev.about }))}
             dropdownRef={(el) => (dropdownRefs.current.about = el)}
           />
         </div>
@@ -128,16 +135,35 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <MobileDropdown
-            label="Explore"
-            links={[
-              { to: "/events", text: "Events" },
-              { to: "/ecosystem", text: "Ecosystem" },
-              { to: "/resources", text: "Resources" },
-            ]}
-            isActive={activeDropdowns.explore}
-            onToggle={() => handleDropdownToggle("explore")}
-          />
+          {/* Explore Items as Tabs */}
+          <Link
+            to="/events"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Events
+          </Link>
+          <Link
+            to="/ecosystem"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Ecosystem
+          </Link>
+          <Link
+            to="/blog1"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/resources"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Resources
+          </Link>
           <MobileDropdown
             label="About"
             links={[
@@ -146,7 +172,7 @@ const Navbar = () => {
               { to: "/success-stories", text: "Success Stories" },
             ]}
             isActive={activeDropdowns.about}
-            onToggle={() => handleDropdownToggle("about")}
+            onToggle={() => setActiveDropdowns((prev) => ({ about: !prev.about }))}
           />
           <Link
             to="/login"

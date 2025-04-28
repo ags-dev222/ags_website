@@ -3,29 +3,31 @@ import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from "prop-types"; // Import PropTypes
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdowns, setActiveDropdowns] = useState({});
-  const dropdownRefs = useRef({});
-
-  const handleDropdownToggle = (dropdown) => {
-    setActiveDropdowns((prev) => ({
-      ...prev,
-      [dropdown]: prev[dropdown] ? null : dropdown,
-    }));
-  };
+  const [activeDropdowns, setActiveDropdowns] = useState({}); // Define activeDropdowns state
+  const dropdownRefs = useRef({}); // Ref for dropdowns
 
   const handleClickOutside = (event) => {
-    if (
-      !Object.values(dropdownRefs.current).some((ref) =>
-        ref?.contains(event.target)
-      )
-    ) {
-      setActiveDropdowns({});
-    }
+    // Close dropdowns when clicking outside
+    Object.keys(dropdownRefs.current).forEach((key) => {
+      if (
+        dropdownRefs.current[key] &&
+        !dropdownRefs.current[key].contains(event.target)
+      ) {
+        setActiveDropdowns((prev) => ({ ...prev, [key]: false }));
+      }
+    });
+  };
+
+  const handleDropdownToggle = (dropdownKey) => {
+    setActiveDropdowns((prev) => ({
+      ...prev,
+      [dropdownKey]: !prev[dropdownKey],
+    }));
   };
 
   useEffect(() => {
@@ -52,19 +54,33 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4 items-center">
-          <Dropdown
-            label="Explore"
-            links={[
-              { to: "/events", text: "Events" },
-              { to: "/ecosystem", text: "Ecosystem" },
-              { to: "/blog1", text: "Blog" },
-              { to: "/resources", text: "Resources" },
-            ]}
-            isActive={activeDropdowns.explore}
-            onToggle={() => handleDropdownToggle("explore")}
-            dropdownRef={(el) => (dropdownRefs.current.explore = el)}
-          />
+          {/* Explore Items as Tabs */}
+          <Link
+            to="/events"
+            className="px-4 py-2 text-white hover:text-yellow-300 hover:bg-gray-800 rounded transition"
+          >
+            Events
+          </Link>
+          <Link
+            to="/ecosystem"
+            className="px-4 py-2 text-white hover:text-yellow-300 hover:bg-gray-800 rounded transition"
+          >
+            Ecosystem
+          </Link>
+          <Link
+            to="/blog1"
+            className="px-4 py-2 text-white hover:text-yellow-300 hover:bg-gray-800 rounded transition"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/resources"
+            className="px-4 py-2 text-white hover:text-yellow-300 hover:bg-gray-800 rounded transition"
+          >
+            Resources
+          </Link>
 
+          {/* About Dropdown */}
           <Dropdown
             label="About"
             links={[
@@ -128,16 +144,35 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <MobileDropdown
-            label="Explore"
-            links={[
-              { to: "/events", text: "Events" },
-              { to: "/ecosystem", text: "Ecosystem" },
-              { to: "/resources", text: "Resources" },
-            ]}
-            isActive={activeDropdowns.explore}
-            onToggle={() => handleDropdownToggle("explore")}
-          />
+          {/* Explore Items as Tabs */}
+          <Link
+            to="/events"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Events
+          </Link>
+          <Link
+            to="/ecosystem"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Ecosystem
+          </Link>
+          <Link
+            to="/blog1"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/resources"
+            className="hover:text-yellow-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Resources
+          </Link>
           <MobileDropdown
             label="About"
             links={[
