@@ -1,217 +1,312 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const CreateBlogWizard = ({ onClose, onFinish }) => {
   const [step, setStep] = useState(1);
-  const [mainImage, setMainImage] = useState(null);
-  const [additionalImage1, setAdditionalImage1] = useState(null);
-  const [additionalImage2, setAdditionalImage2] = useState(null);
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
-  const [extraField, setExtraField] = useState('');
+  const [content, setContent] = useState('');
+  const [images, setImages] = useState([]);
+  const [author, setAuthor] = useState('');
+  const [showValidation, setShowValidation] = useState(false);
 
-  const handleMainImageUpload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setMainImage(URL.createObjectURL(e.target.files[0]));
+  const handleFinish = () => {
+    if (!title || !description || !content || images.length === 0) {
+      setShowValidation(true);
+      return;
     }
+
+    const newBlog = {
+      title,
+      description,
+      content,
+      images,
+      author,
+    };
+
+    onFinish(newBlog);
+    setStep(1);
+    setTitle('');
+    setDescription('');
+    setContent('');
+    setImages([]);
+    setAuthor('');
+    setShowValidation(false);
   };
-
-  const handleAdditionalImage1Upload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setAdditionalImage1(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
-  const handleAdditionalImage2Upload = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setAdditionalImage2(URL.createObjectURL(e.target.files[0]));
-    }
-  };
-
-  const renderStepOne = () => (
-    <div className="p-6 space-y-6 w-full">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Create a Blog</h2>
-        <span className="text-gray-400">1/2</span>
-      </div>
-      <div className="grid grid-cols-3 gap-4 mb-6">
-        <div>
-          <h3 className="text-lg font-medium mb-2">Main Blog Image</h3>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center h-32 cursor-pointer">
-            {mainImage ? (
-              <img
-                src={mainImage}
-                alt="Main Blog Image"
-                className="h-full w-full object-cover rounded"
-              />
-            ) : (
-              <label className="text-sm text-gray-400 p-4 cursor-pointer">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleMainImageUpload}
-                />
-                <div className="flex flex-col items-center">
-                  <span className="text-3xl">+</span>
-                  <span>Main Image</span>
-                </div>
-              </label>
-            )}
-          </div>
-        </div>
-        <div>
-          <h3 className="text-lg font-medium mb-2">Additional Image 1</h3>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center h-32 cursor-pointer">
-            {additionalImage1 ? (
-              <img
-                src={additionalImage1}
-                alt="Additional Image 1"
-                className="h-full w-full object-cover rounded"
-              />
-            ) : (
-              <label className="text-sm text-gray-400 p-4 cursor-pointer">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleAdditionalImage1Upload}
-                />
-                <div className="flex flex-col items-center">
-                  <span className="text-3xl">+</span>
-                  <span>Image 1</span>
-                </div>
-              </label>
-            )}
-          </div>
-        </div>
-        <div>
-          <h3 className="text-lg font-medium mb-2">Additional Image 2</h3>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center h-32 cursor-pointer">
-            {additionalImage2 ? (
-              <img
-                src={additionalImage2}
-                alt="Additional Image 2"
-                className="h-full w-full object-cover rounded"
-              />
-            ) : (
-              <label className="text-sm text-gray-400 p-4 cursor-pointer">
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleAdditionalImage2Upload}
-                />
-                <div className="flex flex-col items-center">
-                  <span className="text-3xl">+</span>
-                  <span>Image 2</span>
-                </div>
-              </label>
-            )}
-          </div>
-        </div>
-      </div>
-      <input
-        type="text"
-        placeholder="Title"
-        className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <select
-        className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none text-gray-500 dark:text-gray-300"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      >
-        <option value="">Select Category</option>
-        <option value="Business">Business</option>
-        <option value="Tech">Tech</option>
-        <option value="Lifestyle">Lifestyle</option>
-      </select>
-      <input
-        type="date"
-        className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none text-gray-500 dark:text-gray-300"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <textarea
-        placeholder="Description"
-        className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none text-gray-500 dark:text-gray-300"
-        rows={3}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></textarea>
-      <div className="flex justify-between items-center mt-4">
-        <button
-          className="px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500"
-          onClick={onClose}
-        >
-          Cancel
-        </button>
-        <button
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-          onClick={() => setStep(2)}
-        >
-          Next
-        </button>
-      </div>
-    </div>
-  );
-
-  const renderStepTwo = () => (
-    <div className="p-6 space-y-6 w-full">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Create a Blog</h2>
-        <span className="text-gray-400">2/2</span>
-      </div>
-      <textarea
-        placeholder="Additional notes or advanced settings..."
-        className="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none text-gray-500 dark:text-gray-300"
-        rows={5}
-        value={extraField}
-        onChange={(e) => setExtraField(e.target.value)}
-      ></textarea>
-      <div className="flex justify-between items-center mt-4">
-        <button
-          className="px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500"
-          onClick={() => setStep(1)}
-        >
-          Previous
-        </button>
-        <button
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-          onClick={() => {
-            const newBlog = {
-              id: Date.now(),
-              mainImage: mainImage || require('../assets/rectangle2.png'), // Fallback to default
-              additionalImages: [additionalImage1, additionalImage2].filter(Boolean),
-              title,
-              description,
-              category,
-              date,
-              extraField,
-            };
-            onFinish(newBlog);
-            onClose();
-          }}
-        >
-          Finish
-        </button>
-      </div>
-    </div>
-  );
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-2xl relative">
-        <button
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-          onClick={onClose}
-        >
-          ✕
-        </button>
-        {step === 1 ? renderStepOne() : renderStepTwo()}
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded shadow-lg w-[600px]">
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-gray-500 text-sm">{step}/4</span>
+          <h3 className="text-lg text-black font-bold">
+            {step === 1
+              ? 'Create a Blog'
+              : step === 2
+              ? 'Blog Details'
+              : step === 3
+              ? 'Blog Content'
+              : 'Author Info'}
+          </h3>
+          <button
+            onClick={() => {
+              onClose();
+              setStep(1);
+            }}
+            className="text-gray-500 hover:text-red-500"
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Step 1: Create a Blog */}
+        {step === 1 && (
+          <>
+            <div className="flex items-center space-x-4 mb-4 flex-wrap">
+              {images.map((image, index) => (
+                <div className="relative" key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-24 h-24 rounded"
+                  />
+                  <button
+                    onClick={() =>
+                      setImages(images.filter((_, i) => i !== index))
+                    }
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-gray-400 text-xs text-center">
+                  <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
+                  blog image(s)
+                </span>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    const newImages = files.map((file) => URL.createObjectURL(file));
+                    setImages((prev) => [...prev, ...newImages]);
+                  }}
+                />
+              </label>
+            </div>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              placeholder="Blog Title"
+            />
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              placeholder="Blog Description"
+            />
+          </>
+        )}
+
+        {/* Step 2: Blog Details */}
+        {step === 2 && (
+          <>
+            <div className="flex items-center space-x-4 mb-4 flex-wrap">
+              {images.map((image, index) => (
+                <div className="relative" key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-24 h-24 rounded"
+                  />
+                  <button
+                    onClick={() =>
+                      setImages(images.filter((_, i) => i !== index))
+                    }
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-gray-400 text-xs text-center">
+                  <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
+                  blog image(s)
+                </span>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    const newImages = files.map((file) => URL.createObjectURL(file));
+                    setImages((prev) => [...prev, ...newImages]);
+                  }}
+                />
+              </label>
+            </div>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              placeholder="Blog Title"
+            />
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              placeholder="Blog Content"
+            />
+          </>
+        )}
+
+        {/* Step 3: Blog Content */}
+        {step === 3 && (
+          <>
+            <div className="flex items-center space-x-4 mb-4 flex-wrap">
+              {images.map((image, index) => (
+                <div className="relative" key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-24 h-24 rounded"
+                  />
+                  <button
+                    onClick={() =>
+                      setImages(images.filter((_, i) => i !== index))
+                    }
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-gray-400 text-xs text-center">
+                  <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
+                  blog image(s)
+                </span>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    const newImages = files.map((file) => URL.createObjectURL(file));
+                    setImages((prev) => [...prev, ...newImages]);
+                  }}
+                />
+              </label>
+            </div>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              placeholder="Blog Content"
+            />
+          </>
+        )}
+
+        {/* Step 4: Author Info */}
+        {step === 4 && (
+          <>
+            <input
+              type="text"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              placeholder="Author Name"
+            />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              placeholder="Blog Title"
+            />
+            <div className="flex items-center space-x-4 mb-4 flex-wrap">
+              {images.map((image, index) => (
+                <div className="relative" key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className="w-24 h-24 rounded"
+                  />
+                  <button
+                    onClick={() =>
+                      setImages(images.filter((_, i) => i !== index))
+                    }
+                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-1 text-xs"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-gray-400 text-xs text-center">
+                  <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
+                  blog image(s)
+                </span>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    const newImages = files.map((file) => URL.createObjectURL(file));
+                    setImages((prev) => [...prev, ...newImages]);
+                  }}
+                />
+              </label>
+            </div>
+          </>
+        )}
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between text-xs mt-12 text-black">
+          {step > 1 ? (
+            <button
+              onClick={() => setStep(step - 1)}
+              className="border px-8 py-2 rounded-full hover:bg-green-500"
+            >
+              Previous
+            </button>
+          ) : (
+            <div></div>
+          )}
+
+          {step < 4 ? (
+            <button
+              onClick={() => setStep(step + 1)}
+              className="border text-black px-8 py-2 rounded-full hover:bg-green-500"
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              onClick={handleFinish}
+              className="border text-black px-8 py-2 rounded-full hover:bg-green-500"
+            >
+              Finish
+            </button>
+          )}
+        </div>
+
+        {showValidation && (
+          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-md p-4 bg-red-100 border border-red-400 text-red-700 text-xs rounded shadow-lg">
+            ⚠️ Please fill all required fields (title, description, content, and at least one image)!
+          </div>
+        )}
       </div>
     </div>
   );

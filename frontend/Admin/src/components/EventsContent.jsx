@@ -1,25 +1,25 @@
 import { useState } from 'react';
 
-const BlogsContent = ({
-  blogs,
-  setBlogs,
-  setShowCreateBlogWizard,
+const EventsContent = ({
+  events,
+  setEvents,
+  setShowModal,
   hasStartedCreating,
   setHasStartedCreating,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const deleteBlog = (index) => {
-    setBlogs(blogs.filter((_, i) => i !== index));
+  const deleteEvent = (index) => {
+    setEvents(events.filter((_, i) => i !== index));
   };
 
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredEvents = events.filter((event) =>
+    event.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <>
-      {(hasStartedCreating || blogs.length > 0) && (
+      {hasStartedCreating || events.length > 0 ? (
         <div className="flex justify-between items-center -mt-9 mb-4">
           <div className="relative w-1/3">
             <svg
@@ -45,47 +45,51 @@ const BlogsContent = ({
             />
           </div>
           <button
-            onClick={() => setShowCreateBlogWizard(true)}
+            onClick={() => setShowModal(true)}
             className="text-sm text-green-600 px-12 py-3 hover:bg-yellow-400 rounded-full border"
           >
-            New Blog
+            New Event
           </button>
         </div>
-      )}
+      ) : null}
 
-      {filteredBlogs.length === 0 && !hasStartedCreating ? (
+      {filteredEvents.length === 0 && !hasStartedCreating ? (
         <div className="flex flex-col items-center justify-center h-64">
           <img
             src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png"
             alt="Empty Box"
             className="w-24 h-24 mb-4 opacity-50"
           />
-          <p className="text-gray-600 text-lg font-semibold mb-4">No Blogs Yet</p>
+          <p className="text-gray-600 text-lg font-semibold mb-4">Nothing Here Yet</p>
           <button
             onClick={() => {
               setHasStartedCreating(true);
-              setShowCreateBlogWizard(true);
+              setShowModal(true);
             }}
             className="text-sm text-gray-600 px-6 py-3 hover:bg-yellow-400 rounded-full border"
           >
-            + Create New Blog
+            + Create New Event
           </button>
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredBlogs.map((blog, index) => (
+          {filteredEvents.map((event, index) => (
             <div key={index} className="bg-white p-4 rounded shadow-md">
-              {blog.images && blog.images.length > 0 && (
+              {event.flyer && (
                 <img
-                  src={blog.images[0]}
-                  alt="Blog Image"
+                  src={event.flyer}
+                  alt="Event Flyer"
                   className="w-full h-32 object-cover rounded mb-2"
                 />
               )}
-              <h4 className="text-lg font-bold text-gray-700">{blog.title}</h4>
-              <p className="text-gray-600 mt-2 truncate">{blog.description}</p>
+              <h4 className="text-lg font-bold text-gray-700">{event.name}</h4>
+              <p className="text-sm text-gray-500">
+                {event.date} - {event.time}
+              </p>
+              <p className="text-gray-500">{event.location}</p>
+              <p className="text-gray-600 mt-2">{event.description}</p>
               <button
-                onClick={() => deleteBlog(index)}
+                onClick={() => deleteEvent(index)}
                 className="mt-2 px-3 py-1 bg-red-500 text-white rounded"
               >
                 Delete
@@ -98,4 +102,4 @@ const BlogsContent = ({
   );
 };
 
-export default BlogsContent;
+export default EventsContent;

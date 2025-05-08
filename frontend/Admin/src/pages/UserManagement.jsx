@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
+import Topbar from '../components/Topbar'; // ✅ Use Topbar from Admin_project
 import UserTable from '../components/UserTable';
 import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
 import { ThemeContext } from '../context/ThemeContext'; // ✅ Import ThemeContext
@@ -16,7 +17,7 @@ function UserManagement() {
       lastName: 'Adjei',
       email: 'corporate@ags.com',
       role: 'Admin',
-      password: 'password',
+      password: '************',
       dateAdded: '02/02/2024',
     },
   ]);
@@ -62,7 +63,7 @@ function UserManagement() {
   };
 
   return (
-    <div className={`flex-1 p-10 ${darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}>
+    <div className="flex-1 p-10 bg-white dark:bg-gray-900 text-black dark:text-white">
       <UserTable
         users={users}
         handleUserChange={handleUserChange}

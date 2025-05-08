@@ -95,7 +95,7 @@ const Login = () => {
 
         {/* Footer - **Fixed at the Bottom** */}
         <p className="text-gray-500 text-sm absolute bottom-4">
-          Copyright © 2025 | Powered by Association Of Ghana Startups
+          Copyright © {new Date().getFullYear()} | Powered by Association Of Ghana Startups
         </p>
       </div>
     </div>

@@ -10,7 +10,7 @@ import UserManagement from "./pages/UserManagement"; // ✅ NEW - User Managemen
 import Settings from "./pages/Settings"; // ✅ NEW - Settings Page
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
-import OtpVerification from "./pages/OtpVerification"; // ✅ NEW - OTP Verification Page
+import OtpVerification from "./pages/OTPVerification"; // ✅ NEW - OTP Verification Page
 import ResetPassword from "./pages/ResetPassword"; // ✅ NEW - Reset Password Page
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -33,8 +33,9 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="events" element={<Events />} />
-              {/* 🔹 Nested Routes */}
+              {/* <Route path="events/:eventId" element={<EventDetails />} /> ✅ Added */}
               <Route path="blog" element={<Blog />} />
+              {/* <Route path="blog/:blogId" element={<BlogDetails />} /> ✅ Added */}
               <Route path="site-content" element={<SiteContent />} />
               <Route path="users" element={<UserManagement />} /> ✅ Added
               <Route path="settings" element={<Settings />} /> {/* ✅ Added */}

@@ -26,7 +26,7 @@ const ResetPassword = () => {
     setError("");
 
     try {
-      const response = await fetch("https://your-backend.com/api/reset-password", {
+      const response = await fetch("http://localhost:5173/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, newPassword }),
@@ -93,7 +93,7 @@ const ResetPassword = () => {
 
       {/* Footer */}
       <footer className="absolute bottom-0 w-full text-center text-sm bg-yellow-200 py-2">
-        Copyright © 2023 | Powered by Association of Ghana Startups
+        Copyright © {new Date().getFullYear()} | Powered by Association of Ghana Startups
       </footer>
     </div>
   );
