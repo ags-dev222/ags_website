@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CreateBlogWizard = ({ onClose, onFinish }) => {
   const [step, setStep] = useState(1);
@@ -8,6 +8,13 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
   const [images, setImages] = useState([]);
   const [author, setAuthor] = useState('');
   const [showValidation, setShowValidation] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check for dark mode preference on mount
+  useEffect(() => {
+    const theme = document.documentElement.classList.contains('dark');
+    setIsDarkMode(theme);
+  }, []);
 
   const handleFinish = () => {
     if (!title || !description || !content || images.length === 0) {
@@ -34,11 +41,11 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow-lg w-[600px]">
+    <div className={`fixed inset-0 flex items-center justify-center backdrop-blur-sm ${isDarkMode ? 'bg-black/40 dark:bg-black/60' : 'bg-white/30'}`}>
+      <div className={`p-6 rounded-xl shadow-lg w-[600px] ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
         <div className="flex justify-between items-center mb-4">
-          <span className="text-gray-500 text-sm">{step}/4</span>
-          <h3 className="text-lg text-black font-bold">
+          <span className="text-sm">{step}/4</span>
+          <h3 className="text-lg font-bold">
             {step === 1
               ? 'Create a Blog'
               : step === 2
@@ -52,7 +59,7 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
               onClose();
               setStep(1);
             }}
-            className="text-gray-500 hover:text-red-500"
+            className="text-sm hover:text-red-500"
           >
             ×
           </button>
@@ -79,8 +86,8 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
                   </button>
                 </div>
               ))}
-              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
-                <span className="text-gray-400 text-xs text-center">
+              <label className="border-dashed border-2 border-gray-300 dark:border-gray-600 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-xs text-center">
                   <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
                   blog image(s)
                 </span>
@@ -101,13 +108,13 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              className={`w-full p-2 text-sm border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-3`}
               placeholder="Blog Title"
             />
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              className={`w-full p-2 border text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-4`}
               placeholder="Blog Description"
             />
           </>
@@ -134,8 +141,8 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
                   </button>
                 </div>
               ))}
-              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
-                <span className="text-gray-400 text-xs text-center">
+              <label className="border-dashed border-2 border-gray-300 dark:border-gray-600 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-xs text-center">
                   <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
                   blog image(s)
                 </span>
@@ -156,13 +163,13 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              className={`w-full p-2 text-sm border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-3`}
               placeholder="Blog Title"
             />
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              className={`w-full p-2 border text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-4`}
               placeholder="Blog Content"
             />
           </>
@@ -189,8 +196,8 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
                   </button>
                 </div>
               ))}
-              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
-                <span className="text-gray-400 text-xs text-center">
+              <label className="border-dashed border-2 border-gray-300 dark:border-gray-600 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-xs text-center">
                   <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
                   blog image(s)
                 </span>
@@ -210,7 +217,7 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full p-2 border text-black text-xs bg-gray-100 border-gray-300 rounded mb-4"
+              className={`w-full p-2 border text-sm ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-4`}
               placeholder="Blog Content"
             />
           </>
@@ -223,14 +230,14 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
               type="text"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              className={`w-full p-2 text-sm border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-3`}
               placeholder="Author Name"
             />
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2 text-black text-xs border bg-gray-100 border-gray-300 rounded mb-3"
+              className={`w-full p-2 text-sm border ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-300'} rounded mb-3`}
               placeholder="Blog Title"
             />
             <div className="flex items-center space-x-4 mb-4 flex-wrap">
@@ -251,8 +258,8 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
                   </button>
                 </div>
               ))}
-              <label className="border-dashed border-2 border-gray-300 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
-                <span className="text-gray-400 text-xs text-center">
+              <label className="border-dashed border-2 border-gray-300 dark:border-gray-600 rounded w-40 h-24 flex items-center justify-center cursor-pointer">
+                <span className="text-xs text-center">
                   <span className="font-bold text-lg">+</span> <br /> Click to attach <br />
                   blog image(s)
                 </span>
@@ -272,41 +279,32 @@ const CreateBlogWizard = ({ onClose, onFinish }) => {
           </>
         )}
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between text-xs mt-12 text-black">
-          {step > 1 ? (
-            <button
-              onClick={() => setStep(step - 1)}
-              className="border px-8 py-2 rounded-full hover:bg-green-500"
-            >
-              Previous
-            </button>
-          ) : (
-            <div></div>
-          )}
-
-          {step < 4 ? (
-            <button
-              onClick={() => setStep(step + 1)}
-              className="border text-black px-8 py-2 rounded-full hover:bg-green-500"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              onClick={handleFinish}
-              className="border text-black px-8 py-2 rounded-full hover:bg-green-500"
-            >
-              Finish
-            </button>
-          )}
-        </div>
-
-        {showValidation && (
-          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-md p-4 bg-red-100 border border-red-400 text-red-700 text-xs rounded shadow-lg">
-            ⚠️ Please fill all required fields (title, description, content, and at least one image)!
+        <div className="flex justify-between">
+          <button
+            onClick={() => setStep(step > 1 ? step - 1 : 1)}
+            className={`px-4 py-2 rounded text-xs ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-200 text-black'}`}
+          >
+            {step > 1 ? 'Back' : 'Cancel'}
+          </button>
+          <div className="flex space-x-2">
+            {step < 4 && (
+              <button
+                onClick={() => setStep(step + 1)}
+                className={`px-4 py-2 rounded text-xs ${isDarkMode ? 'bg-blue-500 text-white' : 'bg-blue-600 text-white'}`}
+              >
+                Next
+              </button>
+            )}
+            {step === 4 && (
+              <button
+                onClick={handleFinish}
+                className={`px-4 py-2 rounded text-xs ${isDarkMode ? 'bg-green-500 text-white' : 'bg-green-600 text-white'}`}
+              >
+                Submit
+              </button>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

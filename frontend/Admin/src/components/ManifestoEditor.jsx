@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ManifestoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
+const ManifestoEditor = ({ initialData = {}, onSave, onClose }) => {
   const [image, setImage] = useState(initialData.image || null);
   const [title, setTitle] = useState(initialData.title || '');
   const [description, setDescription] = useState(initialData.description || '');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Sync dark mode with page theme on mount
+  useEffect(() => {
+    const theme = document.documentElement.classList.contains('dark');
+    setIsDarkMode(theme);
+  }, []);
 
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -19,17 +26,32 @@ const ManifestoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-70 z-50">
-      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-lg p-6 text-black dark:text-white">
+    <div
+      className={`fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 ${
+        isDarkMode ? 'bg-black/40' : 'bg-white/30'
+      }`}
+    >
+      <div
+        className={`relative rounded-lg shadow-lg w-full max-w-lg p-6 ${
+          isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+        }`}
+      >
         <button
-          className="absolute top-3 right-3 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white text-xl"
+          className={`absolute top-3 right-3 text-xl ${
+            isDarkMode ? 'text-gray-300 hover:text-red-400' : 'text-gray-500 hover:text-red-500'
+          }`}
           onClick={onClose}
+          aria-label="Close modal"
         >
           ✕
         </button>
         <h3 className="text-lg font-semibold mb-4">Manifesto</h3>
         <div className="mb-4">
-          <label className="block border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
+          <label
+            className={`block border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
+              isDarkMode ? 'border-gray-600' : 'border-gray-300'
+            }`}
+          >
             <input
               type="file"
               accept="image/*"
@@ -37,38 +59,74 @@ const ManifestoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
               onChange={handleImageUpload}
             />
             {image ? (
-              <img src={image} alt="Uploaded" className="w-32 h-32 mx-auto object-cover rounded" />
+              <img
+                src={image}
+                alt="Uploaded"
+                className="w-32 h-32 mx-auto object-cover rounded"
+              />
             ) : (
               <div className="flex flex-col items-center">
-                <span className="text-3xl text-gray-400 dark:text-gray-500">+</span>
-                <span className="text-sm text-gray-400 dark:text-gray-500">Upload Image (Optional)</span>
+                <span
+                  className={`text-3xl ${isDarkMode ? 'text-gray-400' : 'text-gray-400'}`}
+                >
+                  +
+                </span>
+                <span
+                  className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-400'}`}
+                >
+                  Upload Image (Optional)
+                </span>
               </div>
             )}
           </label>
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+          <label
+            className={`block text-sm font-medium ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}
+          >
+            Title
+          </label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter manifesto title"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+          <label
+            className={`block text-sm font-medium ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}
+          >
+            Description
+          </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter manifesto description"
             rows="5"
           />
         </div>
         <div className="flex space-x-4 mt-4">
           <button
-            className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 dark:hover:bg-green-600"
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode
+                ? 'bg-green-500 hover:bg-green-600'
+                : 'bg-green-600 hover:bg-green-700'
+            }`}
             onClick={() => {
               onSave({ image, title, description });
               onClose();
@@ -77,7 +135,9 @@ const ManifestoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
             Save
           </button>
           <button
-            className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-600"
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode ? 'bg-red-500 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'
+            }`}
             onClick={handleClear}
           >
             Clear

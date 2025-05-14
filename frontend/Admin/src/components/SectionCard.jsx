@@ -1,11 +1,22 @@
 import React from 'react';
 
-const SectionCard = ({ title, onAdd }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex items-center justify-between">
-    <h3 className="text-lg font-semibold">{title}</h3>
+const SectionCard = ({ title, onAdd, isDarkMode }) => (
+  <div
+    className={`rounded-lg shadow-sm p-6 flex items-center justify-between ${
+      isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+    }`}
+  >
+    <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-black'}`}>
+      {title}
+    </h3>
     <button
-      className="text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+      className={`text-2xl ${
+        isDarkMode
+          ? 'text-gray-300 hover:text-gray-100'
+          : 'text-gray-400 hover:text-gray-600'
+      }`}
       onClick={onAdd}
+      aria-label={`Add ${title} section`}
     >
       +
     </button>

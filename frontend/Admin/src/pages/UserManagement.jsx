@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import Topbar from '../components/Topbar'; // ✅ Use Topbar from Admin_project
 import UserTable from '../components/UserTable';
 import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
-import { ThemeContext } from '../context/ThemeContext'; // ✅ Import ThemeContext
+import { ThemeContext } from '../context/ThemeContext';
 import { useContext } from 'react';
 
 function UserManagement() {
   const [activeTab, setActiveTab] = useState('User Management');
-  const { darkMode, setDarkMode } = useContext(ThemeContext); // ✅ Use ThemeContext
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
   const [subPage, setSubPage] = useState(null);
   const [users, setUsers] = useState([
     {
@@ -23,9 +22,6 @@ function UserManagement() {
   ]);
   const [passwordVisibility, setPasswordVisibility] = useState({});
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
-
-
-  
 
   const handleAddUser = () => {
     const maxId = users.length > 0 ? Math.max(...users.map((u) => u.id)) : 0;
@@ -63,21 +59,30 @@ function UserManagement() {
   };
 
   return (
-    <div className="flex-1 p-10 bg-white dark:bg-gray-900 text-black dark:text-white">
-      <UserTable
-        users={users}
-        handleUserChange={handleUserChange}
-        togglePasswordVisibility={togglePasswordVisibility}
-        passwordVisibility={passwordVisibility}
-        handleAddUser={handleAddUser}
-        setShowDeleteConfirm={setShowDeleteConfirm}
-      />
-      {showDeleteConfirm && (
-        <DeleteConfirmationModal
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
+    <div className="flex-1 p-10">
+      <div
+        className={`p-6 rounded-lg ${
+          darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'
+        }`}
+      >
+        <h2 className="text-2xl font-semibold mb-6">{activeTab}</h2>
+        <UserTable
+          users={users}
+          handleUserChange={handleUserChange}
+          togglePasswordVisibility={togglePasswordVisibility}
+          passwordVisibility={passwordVisibility}
+          handleAddUser={handleAddUser}
+          setShowDeleteConfirm={setShowDeleteConfirm}
+          darkMode={darkMode}
         />
-      )}
+        {showDeleteConfirm && (
+          <DeleteConfirmationModal
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+            darkMode={darkMode}
+          />
+        )}
+      </div>
     </div>
   );
 }

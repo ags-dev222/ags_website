@@ -7,22 +7,33 @@ const UserTable = ({
   passwordVisibility,
   handleAddUser,
   setShowDeleteConfirm,
+  darkMode,
 }) => {
   return (
     <div className="w-full">
       {/* All Users and Search Bar */}
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+        <h3
+          className={`text-lg font-semibold ${
+            darkMode ? 'text-white' : 'text-gray-800'
+          }`}
+        >
           All Users ({users.length})
         </h3>
         <div className="relative">
           <input
             type="text"
             placeholder="Search..."
-            className="border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 w-64"
+            className={`border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 ${
+              darkMode
+                ? 'border-gray-600 bg-gray-800 text-white'
+                : 'border-gray-300 bg-white text-gray-800'
+            } w-64`}
           />
           <svg
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500"
+            className={`absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+              darkMode ? 'text-gray-400' : 'text-gray-500'
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -39,26 +50,56 @@ const UserTable = ({
       </div>
 
       {/* Users Table */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-x-auto">
+      <div
+        className={`rounded-lg shadow overflow-x-auto ${
+          darkMode ? 'bg-gray-900' : 'bg-white'
+        }`}
+      >
         <table className="min-w-full">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-700">
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+            <tr
+              className={darkMode ? 'bg-gray-800' : 'bg-gray-100'}
+            >
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 First Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 Last Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 Email
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 Role
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 Password
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+              <th
+                className={`px-6 py-3 text-left text-xs font-medium uppercase tracking-wider ${
+                  darkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}
+              >
                 Date Added
               </th>
               <th className="px-6 py-3"></th>
@@ -68,13 +109,24 @@ const UserTable = ({
             {users.map((user) => {
               const isVisible = passwordVisibility[user.id] || false;
               return (
-                <tr key={user.id} className="border-b dark:border-gray-600">
+                <tr
+                  key={user.id}
+                  className={`border-b ${
+                    darkMode ? 'border-gray-700' : 'border-gray-200'
+                  }`}
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <input
                       type="text"
                       value={user.firstName}
-                      onChange={(e) => handleUserChange(user.id, 'firstName', e.target.value)}
-                      className="w-full p-2 bg-transparent border-none focus:border focus:border-gray-300 dark:focus:border-gray-600 rounded-lg text-gray-800 dark:text-gray-200"
+                      onChange={(e) =>
+                        handleUserChange(user.id, 'firstName', e.target.value)
+                      }
+                      className={`w-full p-2 bg-transparent border-none focus:border rounded-lg ${
+                        darkMode
+                          ? 'focus:border-gray-600 text-white'
+                          : 'focus:border-gray-300 text-gray-800'
+                      }`}
                       placeholder="First Name"
                     />
                   </td>
@@ -82,8 +134,14 @@ const UserTable = ({
                     <input
                       type="text"
                       value={user.lastName}
-                      onChange={(e) => handleUserChange(user.id, 'lastName', e.target.value)}
-                      className="w-full p-2 bg-transparent border-none focus:border focus:border-gray-300 dark:focus:border-gray-600 rounded-lg text-gray-800 dark:text-gray-200"
+                      onChange={(e) =>
+                        handleUserChange(user.id, 'lastName', e.target.value)
+                      }
+                      className={`w-full p-2 bg-transparent border-none focus:border rounded-lg ${
+                        darkMode
+                          ? 'focus:border-gray-600 text-white'
+                          : 'focus:border-gray-300 text-gray-800'
+                      }`}
                       placeholder="Last Name"
                     />
                   </td>
@@ -91,16 +149,28 @@ const UserTable = ({
                     <input
                       type="email"
                       value={user.email}
-                      onChange={(e) => handleUserChange(user.id, 'email', e.target.value)}
-                      className="w-full p-2 bg-transparent border-none focus:border focus:border-gray-300 dark:focus:border-gray-600 rounded-lg text-gray-800 dark:text-gray-200"
+                      onChange={(e) =>
+                        handleUserChange(user.id, 'email', e.target.value)
+                      }
+                      className={`w-full p-2 bg-transparent border-none focus:border rounded-lg ${
+                        darkMode
+                          ? 'focus:border-gray-600 text-white'
+                          : 'focus:border-gray-300 text-gray-800'
+                      }`}
                       placeholder="Email"
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <select
                       value={user.role}
-                      onChange={(e) => handleUserChange(user.id, 'role', e.target.value)}
-                      className="w-full p-2 bg-transparent border-none focus:border focus:border-gray-300 dark:focus:border-gray-600 rounded-lg text-gray-800 dark:text-gray-200 appearance-none"
+                      onChange={(e) =>
+                        handleUserChange(user.id, 'role', e.target.value)
+                      }
+                      className={`w-full p-2 bg-transparent border-none focus:border rounded-lg appearance-none ${
+                        darkMode
+                          ? 'focus:border-gray-600 text-white'
+                          : 'focus:border-gray-300 text-gray-800'
+                      }`}
                     >
                       <option value="Admin">Admin</option>
                       <option value="Staff">Staff</option>
@@ -111,13 +181,23 @@ const UserTable = ({
                       <input
                         type={isVisible ? 'text' : 'password'}
                         value={user.password}
-                        onChange={(e) => handleUserChange(user.id, 'password', e.target.value)}
-                        className="w-full p-2 bg-transparent border-none focus:border focus:border-gray-300 dark:focus:border-gray-600 rounded-lg text-gray-800 dark:text-gray-200"
+                        onChange={(e) =>
+                          handleUserChange(user.id, 'password', e.target.value)
+                        }
+                        className={`w-full p-2 bg-transparent border-none focus:border rounded-lg ${
+                          darkMode
+                            ? 'focus:border-gray-600 text-white'
+                          : 'focus:border-gray-300 text-gray-800'
+                        }`}
                         placeholder="Password"
                       />
                       <button
                         onClick={() => togglePasswordVisibility(user.id)}
-                        className="ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                        className={`ml-2 ${
+                          darkMode
+                            ? 'text-gray-400 hover:text-gray-200'
+                            : 'text-gray-500 hover:text-gray-700'
+                        }`}
                         aria-label={isVisible ? 'Hide password' : 'Show password'}
                       >
                         {isVisible ? (
@@ -160,13 +240,21 @@ const UserTable = ({
                       </button>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap ${
+                      darkMode ? 'text-white' : 'text-gray-800'
+                    }`}
+                  >
                     {user.dateAdded}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       onClick={() => setShowDeleteConfirm(user.id)}
-                      className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-600"
+                      className={`${
+                        darkMode
+                          ? 'text-red-400 hover:text-red-600'
+                          : 'text-red-500 hover:text-red-700'
+                      }`}
                     >
                       <svg
                         className="w-5 h-5"
@@ -195,7 +283,11 @@ const UserTable = ({
       <div className="mt-4 flex items-center">
         <button
           onClick={handleAddUser}
-          className="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-green-700"
+          className={`w-10 h-10 rounded-full flex items-center justify-center ${
+            darkMode
+              ? 'bg-green-700 hover:bg-green-600'
+              : 'bg-green-600 hover:bg-green-700'
+          } text-white`}
         >
           <svg
             className="w-5 h-5"
@@ -204,10 +296,21 @@ const UserTable = ({
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 4v16m8-8H4"
+            />
           </svg>
         </button>
-        <span className="ml-2 text-green-600 font-medium">Add new user</span>
+        <span
+          className={`ml-2 font-medium ${
+            darkMode ? 'text-green-400' : 'text-green-600'
+          }`}
+        >
+          Add new user
+        </span>
       </div>
     </div>
   );

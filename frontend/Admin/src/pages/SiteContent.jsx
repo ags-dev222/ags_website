@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import React, { useState, useEffect } from 'react';
 import HeroSectionEditor from '../components/HeroSectionEditor';
 import ManifestoEditor from '../components/ManifestoEditor';
 import ResourceEditor from '../components/ResourceEditor';
@@ -19,18 +18,29 @@ const renderContentArea = ({
   updateSubPage,
   siteData,
   setSiteData,
-  darkMode,
+  isDarkMode,
 }) => {
   // State for ResourceEditor modal in Homepage
   const [isResourceModalOpen, setIsResourceModalOpen] = useState(false);
 
+  const containerClasses = `w-full ${
+    isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'
+  }`;
+
+  const backButtonClasses = `flex items-center ${
+    isDarkMode
+      ? 'text-gray-300 hover:text-red-400'
+      : 'text-gray-500 hover:text-red-500'
+  }`;
+
   if (subPage === 'HeroSection') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Homepage')}
+            aria-label="Back to Homepage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,11 +72,12 @@ const renderContentArea = ({
 
   if (subPage === 'Manifesto') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Homepage')}
+            aria-label="Back to Homepage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,11 +109,12 @@ const renderContentArea = ({
 
   if (subPage === 'TopPartners') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Homepage')}
+            aria-label="Back to Homepage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -134,13 +146,14 @@ const renderContentArea = ({
 
   if (subPage === 'Video') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Resource Page')}
+            aria-label="Back to Resource Page"
           >
- थी <svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -170,11 +183,12 @@ const renderContentArea = ({
 
   if (subPage === 'Statistics') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Homepage')}
+            aria-label="Back to Homepage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -206,11 +220,12 @@ const renderContentArea = ({
 
   if (subPage === 'Testimonies') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('Homepage')}
+            aria-label="Back to Homepage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -242,11 +257,12 @@ const renderContentArea = ({
 
   if (subPage === 'OurTeam') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('About page')}
+            aria-label="Back to About page"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -278,11 +294,12 @@ const renderContentArea = ({
 
   if (subPage === 'MissionVision') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('About page')}
+            aria-label="Back to About page"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -314,11 +331,12 @@ const renderContentArea = ({
 
   if (subPage === 'SuccessStories') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage('About page')}
+            aria-label="Back to About page"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -350,11 +368,12 @@ const renderContentArea = ({
 
   if (subPage === 'Homepage') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage(null)}
+            aria-label="Back to Sites Content"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -377,32 +396,32 @@ const renderContentArea = ({
           <SectionCard
             title="Hero Section"
             onAdd={() => updateSubPage('HeroSection')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Manifesto"
             onAdd={() => updateSubPage('Manifesto')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Top Partners"
             onAdd={() => updateSubPage('TopPartners')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Resource"
             onAdd={() => setIsResourceModalOpen(true)}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Statistics"
             onAdd={() => updateSubPage('Statistics')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Testimonies"
             onAdd={() => updateSubPage('Testimonies')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
         </div>
         {isResourceModalOpen && (
@@ -423,11 +442,12 @@ const renderContentArea = ({
 
   if (subPage === 'Resource Page') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage(null)}
+            aria-label="Back to Sites Content"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -448,7 +468,6 @@ const renderContentArea = ({
         </div>
         <ResourcePageEditor
           onNavigate={(page) => updateSubPage(page)}
-          darkMode={darkMode}
         />
       </div>
     );
@@ -456,11 +475,12 @@ const renderContentArea = ({
 
   if (subPage === 'About page') {
     return (
-      <div className="w-full bg-white dark:bg-gray-900">
+      <div className={containerClasses}>
         <div className="flex items-center mb-4">
           <button
-            className="flex items-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+            className={backButtonClasses}
             onClick={() => updateSubPage(null)}
+            aria-label="Back to Sites Content"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -483,51 +503,67 @@ const renderContentArea = ({
           <SectionCard
             title="Our Team"
             onAdd={() => updateSubPage('OurTeam')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Mission and Vision"
             onAdd={() => updateSubPage('MissionVision')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
           <SectionCard
             title="Success Stories"
             onAdd={() => updateSubPage('SuccessStories')}
-            darkMode={darkMode}
+            isDarkMode={isDarkMode}
           />
         </div>
       </div>
     );
   }
 
+  // Bar with Homepage, Resource Page, About page
   return (
-    <div className="w-full bg-white dark:bg-gray-900">
+    <div className={containerClasses}>
       <div className="space-y-6">
         <SectionCard
           title="Home page"
           onAdd={() => updateSubPage('Homepage')}
-          darkMode={darkMode}
+          isDarkMode={isDarkMode}
         />
         <SectionCard
           title="Resource Page"
           onAdd={() => updateSubPage('Resource Page')}
-          darkMode={darkMode}
+          isDarkMode={isDarkMode}
         />
         <SectionCard
           title="About page"
           onAdd={() => updateSubPage('About page')}
-          darkMode={darkMode}
+          isDarkMode={isDarkMode}
         />
       </div>
     </div>
-    );
+  );
 };
 
 // SiteContent component
 const SiteContent = () => {
-  const { darkMode } = useContext(ThemeContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('Sites Content');
   const [subPage, setSubPage] = useState(null);
+
+  // Sync dark mode with page theme and observe changes
+  useEffect(() => {
+    const updateTheme = () => {
+      const theme = document.documentElement.classList.contains('dark');
+      setIsDarkMode(theme);
+    };
+    updateTheme(); // Initial check
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const [siteData, setSiteData] = useState({
     heroSection: { image: null, title: '', subtitle: '' },
@@ -548,9 +584,13 @@ const SiteContent = () => {
   };
 
   return (
-    <div className="flex-1 p-10 bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div
+      className={`flex-1 p-10 ${
+        isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'
+      }`}
+    >
       <h2 className="text-2xl font-semibold mb-6">{activeTab}</h2>
-      {renderContentArea({ subPage, updateSubPage, siteData, setSiteData, darkMode })}
+      {renderContentArea({ subPage, updateSubPage, siteData, setSiteData, isDarkMode })}
     </div>
   );
 };

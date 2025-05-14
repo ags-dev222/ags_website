@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
   const [image, setImage] = useState(initialData.image || null);
   const [title, setTitle] = useState(initialData.title || '');
   const [description, setDescription] = useState(initialData.description || '');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Sync dark mode with page theme on mount
+  useEffect(() => {
+    const theme = document.documentElement.classList.contains('dark');
+    setIsDarkMode(theme);
+  }, []);
 
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -25,21 +32,36 @@ const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-70">
-      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-6 overflow-y-auto max-h-[90vh]">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm ${
+        isDarkMode ? 'bg-black/40' : 'bg-white/30'
+      }`}
+    >
+      <div
+        className={`relative rounded-lg shadow-lg w-full max-w-xl p-6 overflow-y-auto max-h-[90vh] ${
+          isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+        }`}
+      >
         {/* Close Button */}
         <button
-          className="absolute top-3 right-3 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white text-xl"
+          className={`absolute top-3 right-3 text-xl ${
+            isDarkMode ? 'text-gray-300 hover:text-red-400' : 'text-gray-500 hover:text-red-500'
+          }`}
           onClick={onClose}
+          aria-label="Close modal"
         >
           ✕
         </button>
 
-        <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Testimonies</h3>
+        <h3 className="text-lg font-semibold mb-4">Testimonies</h3>
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label className="block border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
+          <label
+            className={`block border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
+              isDarkMode ? 'border-gray-600' : 'border-gray-300'
+            }`}
+          >
             <input
               type="file"
               accept="image/*"
@@ -47,11 +69,21 @@ const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
               onChange={handleImageUpload}
             />
             {image ? (
-              <img src={image} alt="Uploaded" className="w-32 h-32 mx-auto object-cover rounded" />
+              <img
+                src={image}
+                alt="Uploaded"
+                className="w-32 h-32 mx-auto object-cover rounded"
+              />
             ) : (
               <div className="flex flex-col items-center">
-                <span className="text-3xl text-gray-400 dark:text-gray-500">+</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
+                <span
+                  className={`text-3xl ${isDarkMode ? 'text-gray-400' : 'text-gray-400'}`}
+                >
+                  +
+                </span>
+                <span
+                  className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-500'}`}
+                >
                   Upload Image (Optional)
                 </span>
               </div>
@@ -61,27 +93,43 @@ const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
 
         {/* Title Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            className={`block text-sm font-medium ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}
+          >
             Title
           </label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter testimony title"
           />
         </div>
 
         {/* Description Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            className={`block text-sm font-medium ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}
+          >
             Description
           </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter testimony description"
             rows="5"
           />
@@ -90,13 +138,21 @@ const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
         {/* Action Buttons */}
         <div className="flex space-x-4">
           <button
-            className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode
+                ? 'bg-green-500 hover:bg-green-600'
+                : 'bg-green-600 hover:bg-green-700'
+            }`}
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode
+                ? 'bg-red-500 hover:bg-red-600'
+                : 'bg-red-600 hover:bg-red-700'
+            }`}
             onClick={handleClear}
           >
             Clear
@@ -108,4 +164,3 @@ const TestimoniesEditor = ({ initialData = {}, onSave, onClose }) => {
 };
 
 export default TestimoniesEditor;
-

@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const VideoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
+const VideoEditor = ({ initialData = {}, onSave, onClose }) => {
   const [videoFile, setVideoFile] = useState(initialData.videoFile || null);
   const [videoTitle, setVideoTitle] = useState(initialData.videoTitle || '');
   const [videoLink, setVideoLink] = useState(initialData.videoLink || '');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const dark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(dark);
+  }, []);
 
   const handleVideoUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -25,55 +31,97 @@ const VideoEditor = ({ initialData = {}, onSave, onClose, darkMode }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-70">
-      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xl p-6 overflow-y-auto max-h-[90vh] text-black dark:text-white">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm ${
+        isDarkMode ? 'bg-black/40' : 'bg-white/30'
+      }`}
+    >
+      <div
+        className={`relative w-full max-w-xl p-6 rounded-lg shadow-lg max-h-[90vh] overflow-y-auto ${
+          isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'
+        }`}
+      >
         <button
-          className="absolute top-3 right-3 text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white text-xl"
           onClick={onClose}
+          className={`absolute top-3 right-3 text-xl ${
+            isDarkMode ? 'text-gray-300 hover:text-red-400' : 'text-gray-500 hover:text-red-500'
+          }`}
         >
           ✕
         </button>
-        <h3 className="text-lg font-semibold mb-4">Video</h3>
+        <h3 className="text-lg font-semibold mb-4">Video Upload</h3>
+
+        {/* Video File Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Video File</label>
+          <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            Video File
+          </label>
           <input
             type="file"
             accept="video/*"
             onChange={handleVideoUpload}
-            className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
           />
-          {videoFile && <p className="text-sm text-gray-500 dark:text-gray-400">{videoFile.name}</p>}
+          {videoFile && (
+            <p className={`text-sm mt-1 ${isDarkMode ? 'text-gray-300' : 'text-gray-500'}`}>{videoFile.name}</p>
+          )}
         </div>
+
+        {/* Video Title Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Video Title</label>
+          <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            Video Title
+          </label>
           <input
             type="text"
             value={videoTitle}
             onChange={(e) => setVideoTitle(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter video title"
           />
         </div>
+
+        {/* Video Link Input */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Video Link</label>
+          <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            Video Link
+          </label>
           <input
             type="text"
             value={videoLink}
             onChange={(e) => setVideoLink(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-black dark:text-white"
+            className={`mt-1 block w-full p-2 border rounded-lg ${
+              isDarkMode
+                ? 'bg-gray-700 border-gray-600 text-white'
+                : 'bg-gray-100 border-gray-300 text-black'
+            }`}
             placeholder="Enter video link"
           />
         </div>
-        <div className="flex space-x-4">
+
+        {/* Action Buttons */}
+        <div className="flex space-x-4 mt-6">
           <button
-            className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 dark:hover:bg-green-600"
             onClick={handleSave}
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode ? 'bg-green-500 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+            }`}
           >
             Save
           </button>
           <button
-            className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 dark:hover:bg-red-600"
             onClick={handleClear}
+            className={`flex-1 py-2 rounded-lg text-white ${
+              isDarkMode ? 'bg-red-500 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'
+            }`}
           >
             Clear
           </button>
