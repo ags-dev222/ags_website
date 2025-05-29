@@ -115,12 +115,6 @@ const Navbar = () => {
 
       {/* Right Side */}
       <div className="hidden md:flex">
-        <Link
-          to="/login"
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded md:px-8"
-        >
-          Login
-        </Link>
       </div>
 
       {/* Mobile Menu Button */}
@@ -183,13 +177,6 @@ const Navbar = () => {
             isActive={activeDropdowns.about}
             onToggle={() => handleDropdownToggle("about")}
           />
-          <Link
-            to="/login"
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Login
-          </Link>
         </div>
       )}
     </nav>

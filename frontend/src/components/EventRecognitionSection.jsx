@@ -2,13 +2,13 @@ const EventRecognitionSection = () => {
   return (
     <section id="events" className="relative bg-gray-50">
       {/* Full-Width Background Image */}
-      <div className="w-full h-[350px] md:h-[400px] lg:h-[450px]">
+      {/* <div className="w-full h-[350px] md:h-[400px] lg:h-[450px]">
         <img
           src="./images/home2.png"
           alt="Event Background"
           className="w-full h-full object-cover"
         />
-      </div>
+      </div> */}
 
       <div className="relative max-w-6xl mx-auto px-4 py-16 flex justify-center">
         {/* Background Shadows for Stacking Effect */}

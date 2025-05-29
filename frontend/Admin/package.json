@@ -37,6 +37,7 @@
     "globals": "^15.15.0",
     "postcss": "^8.5.3",
     "postcss-apply": "^0.12.0",
+    "rollup-plugin-visualizer": "^6.0.1",
     "tailwindcss": "^4.0.12",
     "vite": "^6.2.0"
   }

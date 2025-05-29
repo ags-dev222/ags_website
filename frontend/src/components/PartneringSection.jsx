@@ -65,20 +65,40 @@ const PartneringSection = () => {
       {/* Carousel */}
       <div className="max-w-6xl mx-auto">
         <Slider {...settings}>
-          <div className="slick-slide flex justify-center mx-4">
-            <img src="./images/neip.png" alt="Company 1" className="h-24" />
+          <div className="slick-slide flex justify-center items-center mx-4">
+            <img
+              src="./images/neip.png"
+              alt="Company 1"
+              className="h-24 w-36 object-contain bg-white rounded shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"
+            />
           </div>
-          <div className="slick-slide flex justify-center mx-4">
-            <img src="./images/gheip.png" alt="Company 2" className="h-24" />
+          <div className="slick-slide flex justify-center items-center mx-4">
+            <img
+              src="./images/gheip.png"
+              alt="Company 2"
+              className="h-24 w-36 object-contain bg-white rounded shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"
+            />
           </div>
-          <div className="slick-slide flex justify-center mx-4">
-            <img src="./images/ghin.png" alt="Company 3" className="h-24" />
+          <div className="slick-slide flex justify-center items-center mx-4">
+            <img
+              src="./images/ghin.png"
+              alt="Company 3"
+              className="h-24 w-36 object-contain bg-white rounded shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"
+            />
           </div>
-          <div className="slick-slide flex justify-center mx-4">
-            <img src="./images/ghand.png" alt="Company 4" className="h-24" />
+          <div className="slick-slide flex justify-center items-center mx-4">
+            <img
+              src="./images/ghand.png"
+              alt="Company 4"
+              className="h-24 w-36 object-contain bg-white rounded shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"
+            />
           </div>
-          <div className="slick-slide flex justify-center mx-4">
-            <img src="./images/ags-logo.png" alt="Company 5" className="h-24" />
+          <div className="slick-slide flex justify-center items-center mx-4">
+            <img
+              src="./images/ags-logo.png"
+              alt="Company 5"
+              className="h-24 w-36 object-contain bg-white rounded shadow p-2 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"
+            />
           </div>
         </Slider>
       </div>

@@ -120,6 +120,16 @@ const Footer = () => {
                   Our Activities
                 </a>
               </li>
+              <li>
+                <a
+                  href="http://localhost:5174/login"
+                  className="hover:underline text-green-700 font-semibold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Admin Panel
+                </a>
+              </li>
             </ul>
           </div>
 

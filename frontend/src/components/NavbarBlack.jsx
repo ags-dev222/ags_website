@@ -113,12 +113,12 @@ const NavbarBlack = () => {
 
       {/* Right Side */}
       <div className="hidden md:flex">
-        <Link
+        {/* <Link
           to="/login"
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded md:px-8"
         >
           Login
-        </Link>
+        </Link> */}
       </div>
 
       {/* Mobile Menu Button */}
@@ -196,13 +196,13 @@ const NavbarBlack = () => {
               </Link>
             </div>
           </div>
-          <Link
+          {/* <Link
             to="/login"
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Login
-          </Link>
+          </Link> */}
         </div>
       )}
     </nav>
