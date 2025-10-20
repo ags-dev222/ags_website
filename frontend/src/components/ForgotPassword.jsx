@@ -1,4 +1,4 @@
-import NavbarBlack from './NavbarBlack';
+import Navbar from './Navbar';
 import { useState } from 'react';
 
 function ForgotPassword() {
@@ -12,7 +12,7 @@ function ForgotPassword() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <NavbarBlack />
+      <Navbar theme="light" />
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
         <form onSubmit={handleSubmit}>

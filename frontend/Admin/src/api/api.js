@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5173/"; //  backend API URL
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? process.env.VITE_API_URL || 'https://your-domain.vercel.app'
+  : 'http://localhost:5173'; // backend API URL
 
 // Utility function to handle errors
 const handleRequest = async (request) => {
@@ -34,5 +36,12 @@ export const updateUser = (userId, userData) => handleRequest(() => axios.put(`$
 export const deleteUser = (userId) => handleRequest(() => axios.delete(`${API_BASE_URL}/users/${userId}`));
 
 // 📌 Settings API
-export const fetchSettings = () => handleRequest(() => axios.get(`${API_BASE_URL}/settings`));
-export const updateSettings = (settingsData) => handleRequest(() => axios.put(`${API_BASE_URL}/settings`, settingsData));
+export const fetchSettings = () => handleRequest(() => axios.get(`${API_BASE_URL}/api/content/settings`));
+export const updateSettings = (settingsData) => handleRequest(() => axios.put(`${API_BASE_URL}/api/content/settings`, settingsData));
+
+// 📌 Content Management APIs
+export const fetchHeroSection = () => handleRequest(() => axios.get(`${API_BASE_URL}/api/content/hero`));
+export const updateHeroSection = (data) => handleRequest(() => axios.put(`${API_BASE_URL}/api/content/hero`, data));
+export const updatePageContent = (slug, data) => handleRequest(() => axios.put(`${API_BASE_URL}/api/content/page/${slug}`, data));
+export const fetchPageContent = (slug) => handleRequest(() => axios.get(`${API_BASE_URL}/api/content/page/${slug}`));
+export const fetchAllPages = () => handleRequest(() => axios.get(`${API_BASE_URL}/api/content/admin/pages`));

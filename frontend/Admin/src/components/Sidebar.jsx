@@ -25,10 +25,10 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { name: "Dashboard", path: "/dashboard", icon: <Squares2X2Icon className="w-6 h-6" />, roles: ["admin", "editor", "viewer"] },
-    { name: "Events", path: "/events", icon: <CalendarIcon className="w-6 h-6" />, roles: ["admin", "editor"] },
-    { name: "Blog", path: "/blog", icon: <NewspaperIcon className="w-6 h-6" />, roles: ["admin", "editor"] },
-    { name: "Site Content", path: "/site-content", icon: <WrenchIcon className="w-6 h-6" />, roles: ["admin", "editor"] },
+    { name: "Dashboard", path: "/dashboard", icon: <Squares2X2Icon className="w-6 h-6" />, roles: ["superadmin", "admin", "editor"] },
+    { name: "Events", path: "/events", icon: <CalendarIcon className="w-6 h-6" />, roles: ["superadmin", "admin", "editor"] },
+    { name: "Blog", path: "/blog", icon: <NewspaperIcon className="w-6 h-6" />, roles: ["superadmin", "admin", "editor"] },
+    { name: "Site Content", path: "/site-content", icon: <WrenchIcon className="w-6 h-6" />, roles: ["superadmin", "admin", "editor"] },
   ];
 
   return (
@@ -59,8 +59,8 @@ const Sidebar = () => {
           )
         ))}
 
-        {/* User Management */}
-        {checkPermission?.(["admin"]) && (
+        {/* User Management - Admin and SuperAdmin only */}
+        {checkPermission?.(["superadmin", "admin"]) && (
           <Link
             to="/users"
             className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition
@@ -75,8 +75,8 @@ const Sidebar = () => {
           </Link>
         )}
 
-        {/* Account Settings */}
-        {checkPermission?.(["admin", "editor"]) && (
+        {/* Settings - All admin roles */}
+        {checkPermission?.(["superadmin", "admin", "editor"]) && (
           <Link
             to="/settings"
             className={`flex items-center space-x-4 p-3 rounded-lg mx-3 my-1 font-semibold text-[15px] transition
@@ -87,7 +87,7 @@ const Sidebar = () => {
                   : "hover:bg-gray-300 text-gray-700"}`}
           >
             <Cog6ToothIcon className="w-6 h-6" />
-            <span>Account Settings</span>
+            <span>Settings</span>
           </Link>
         )}
       </nav>

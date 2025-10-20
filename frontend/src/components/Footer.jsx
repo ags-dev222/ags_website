@@ -29,33 +29,40 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-100 text-gray-800 pt-8">
-      {/* Newsletter Section */}
-      <div className="mx-auto max-w-md sm:max-w-xl lg:max-w-2xl bg-green-700 rounded-lg text-white py-6 px-4 sm:px-6 text-center">
-        <h3 className="text-base sm:text-lg font-bold mb-3">
-          Subscribe to our Newsletter to get Updates to our Latest Collection
-        </h3>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-0">
-          <div className="flex items-center border border-white rounded-full px-3 py-1 w-full sm:w-auto">
-            <Mail className="text-white h-5 w-5" />
+    <footer className="bg-gray-50 text-gray-800">
+      {/* Simple Newsletter Section */}
+      <div className="bg-gray-800 py-8 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <h3 className="text-lg font-semibold text-white mb-2">
+            Stay Updated
+          </h3>
+          <p className="text-gray-400 text-sm mb-4">
+            Get the latest startup news and event updates.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Your email"
               value={email}
               onChange={handleChange}
-              className="p-2 sm:p-3 w-full sm:w-64 bg-transparent text-white focus:outline-none placeholder-white"
+              className="flex-1 px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 transition-colors"
             />
+            <button
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                isValid 
+                  ? "bg-green-600 hover:bg-green-700 text-white" 
+                  : "bg-gray-600 text-gray-400 cursor-not-allowed"
+              }`}
+              disabled={!isValid}
+            >
+              Subscribe
+            </button>
           </div>
-          <button
-            className={`px-4 py-2 bg-white font-bold rounded-full transition-all ${
-              isValid ? "text-green-900 hover:bg-gray-200" : "text-gray-700 bg-gray-300 cursor-not-allowed"
-            }`}
-            disabled={!isValid}
-          >
-            Subscribe
-          </button>
+          {error && (
+            <p className="text-red-400 text-xs mt-2">{error}</p>
+          )}
         </div>
-        {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
       </div>
 
       {/* Footer Links */}

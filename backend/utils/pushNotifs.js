@@ -3,22 +3,32 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let serviceAccountKey;
-try {
-  serviceAccountKey = JSON.parse(
-    Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf-8')
-  );
-} catch (error) {
-  console.error('Failed to parse Firebase service account key:', error.message);
-  process.exit(1); 
-}
+let firebaseInitialized = false;
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccountKey),
-});
+if (process.env.FIREBASE_SERVICE_ACCOUNT_BASE64) {
+  try {
+    const serviceAccountKey = JSON.parse(
+      Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf-8')
+    );
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccountKey),
+    });
+    firebaseInitialized = true;
+    console.log('Firebase initialized successfully');
+  } catch (error) {
+    console.error('Failed to parse Firebase service account key:', error.message);
+  }
+} else {
+  console.log('Firebase service account not configured - push notifications will be disabled');
+}
 
 //sending push notifs
 export const sendPushNotification = async (deviceToken, event) => {
+  if (!firebaseInitialized) {
+    console.log('Push notifications are disabled - Firebase not configured');
+    return;
+  }
+
   if (!event.title || !event.date) {
     console.error('Invalid event object:', event);
     return;

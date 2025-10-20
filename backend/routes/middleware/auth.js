@@ -41,12 +41,17 @@ export const authenticateWithToken = async (req, res, next) => {
 
 export const authorizeRoles = (...roles) => {
   return (req, res, next) => {
-    const userRole = req.user.role.toLowerCase();
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    
+    const userRole = req.user.role ? req.user.role.toLowerCase() : 'public';
     const normalizedRoles = roles.map(role => role.toLowerCase());
 
     if (!normalizedRoles.includes(userRole)) {
       return res.status(403).json({
         error: `Access denied. Required roles: ${roles.join(', ')}`,
+        userRole: req.user.role
       });
     }
     next();

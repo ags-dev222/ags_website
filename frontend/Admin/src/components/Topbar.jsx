@@ -26,11 +26,13 @@ const trackUserAction = (user, notifications, setNotifications, action, type = "
 
 const Topbar = () => {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const { user } = useContext(AuthContext);
+  const { user, logout, hasPermission } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [filter, setFilter] = useState("all");
-  const dropdownRef = useRef(null);
+  const notificationDropdownRef = useRef(null);
+  const profileDropdownRef = useRef(null);
   const location = useLocation(); // Added to get current route
 
   // Mapping of route paths to page titles
@@ -68,22 +70,25 @@ const Topbar = () => {
     localStorage.removeItem("notifications");
   };
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
+      if (notificationDropdownRef.current && !notificationDropdownRef.current.contains(event.target)) {
+        setShowNotificationDropdown(false);
+      }
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
       }
     };
 
-    if (showDropdown) {
+    if (showNotificationDropdown || showProfileDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showDropdown]);
+  }, [showNotificationDropdown, showProfileDropdown]);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
@@ -112,7 +117,7 @@ const Topbar = () => {
       {/* Right Section: Notifications, Dark Mode Toggle & User Profile */}
       <div className="flex items-center space-x-6 relative">
         {/* Notifications Icon */}
-        <button className="relative" onClick={() => setShowDropdown(!showDropdown)}>
+        <button className="relative" onClick={() => setShowNotificationDropdown(!showNotificationDropdown)}>
           <BellIcon className={`w-6 h-6 transition ${darkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"}`} />
           {notifications.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
@@ -123,9 +128,9 @@ const Topbar = () => {
 
         {/* Notifications Dropdown with Smooth Animation */}
         <AnimatePresence>
-          {showDropdown && (
+          {showNotificationDropdown && (
             <motion.div
-              ref={dropdownRef}
+              ref={notificationDropdownRef}
               className={`absolute right-0 top-12 w-80 bg-white dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-lg p-4 z-50`}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -222,17 +227,121 @@ const Topbar = () => {
           )}
         </button>
 
-        {/* User Profile */}
-        <div className="flex items-center space-x-3">
-          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition ${darkMode ? "bg-green-600 text-white" : "bg-green-700 text-white"}`}>
-            {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
-          </div>
-          <div>
-            <p className="font-semibold">{user?.name || "User"}</p>
-            <p className={`text-sm transition ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-              {user?.email || "user@example.com"}
-            </p>
-          </div>
+        {/* User Profile Dropdown */}
+        <div className="relative">
+          <button 
+            className="flex items-center space-x-3 hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors duration-200"
+            onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+          >
+            {user?.profilePicture ? (
+              <img 
+                src={user.profilePicture} 
+                alt={user.name} 
+                className="w-10 h-10 rounded-full object-cover border-2 border-green-500"
+              />
+            ) : (
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border-2 border-green-500 transition ${darkMode ? "bg-green-600 text-white" : "bg-green-700 text-white"}`}>
+                {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+              </div>
+            )}
+            <div className="text-left">
+              <p className="font-semibold text-sm">{user?.name || "User"}</p>
+              <p className={`text-xs transition ${darkMode ? "text-gray-400" : "text-gray-500"} capitalize`}>
+                {user?.role || "user"}
+              </p>
+            </div>
+            <svg className={`w-4 h-4 transition-transform duration-200 ${showProfileDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {/* Profile Dropdown Menu */}
+          <AnimatePresence>
+            {showProfileDropdown && (
+              <motion.div
+                ref={profileDropdownRef}
+                className={`absolute right-0 top-14 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700 z-50`}
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                {/* Profile Header */}
+                <div className="p-4 border-b dark:border-gray-700">
+                  <div className="flex items-center space-x-3">
+                    {user?.profilePicture ? (
+                      <img 
+                        src={user.profilePicture} 
+                        alt={user.name} 
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl transition ${darkMode ? "bg-green-600 text-white" : "bg-green-700 text-white"}`}>
+                        {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-semibold">{user?.name || "User"}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{user?.email || "user@example.com"}</p>
+                      <span className={`inline-block px-2 py-1 text-xs rounded-full mt-1 ${
+                        user?.role === 'superadmin' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
+                        user?.role === 'admin' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                        user?.role === 'editor' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
+                        'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+                      } capitalize`}>
+                        {user?.role || 'user'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Menu Items */}
+                <div className="py-2">
+                  <button 
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150 flex items-center space-x-3"
+                    onClick={() => {
+                      setShowProfileDropdown(false);
+                      // Navigate to profile page
+                    }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>My Profile</span>
+                  </button>
+
+                  <button 
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150 flex items-center space-x-3"
+                    onClick={() => {
+                      setShowProfileDropdown(false);
+                      // Navigate to settings
+                    }}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>Settings</span>
+                  </button>
+
+                  <div className="border-t dark:border-gray-700 mt-2 pt-2">
+                    <button 
+                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors duration-150 flex items-center space-x-3"
+                      onClick={() => {
+                        setShowProfileDropdown(false);
+                        logout();
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   res.status(200).send("Welcome to the Association of Ghana Startups Website, let get started!");
 });
 
-app.use("/api/otp", otpRoutes);
+router.use("/api/otp", otpRoutes);
 
 router.get("/ping", (req, res) => {
   res.status(200).send("pong");

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NavbarDark from '../components/NavbarDark';
+import Navbar from '../components/Navbar';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -95,7 +95,7 @@ function RegisterForm() {
           </p>
         </form>
       </div>
-      <NavbarDark />
+      <Navbar theme="light" />
     </div>
   );
 }

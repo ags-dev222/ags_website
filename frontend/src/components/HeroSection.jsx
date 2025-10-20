@@ -47,30 +47,29 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black opacity-70"></div>
 
       {/* Content on Top of Carousel */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-4">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white px-6 max-w-5xl mx-auto">
         {/* Title Text */}
-        <h6 className="text-4xl md:text-5xl font-bold mb-6">
-          Are you part of the dynamic{" "}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+          Join the dynamic{" "}
           <span className="text-yellow-400">
-            Ghana <br />
-            Startup Association
+            Ghana Startup Association
           </span>{" "}
-          Community?
-        </h6>
-        <p className="mb-6">
-          Join us in fostering innovation and growth through transparent and
-          accountable initiatives
+          community
+        </h1>
+        <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl leading-relaxed">
+          Fostering innovation and growth through transparent, accountable initiatives that empower Ghana's next generation of entrepreneurs.
         </p>
 
         {/* Call to Action Buttons */}
-        <div className="flex space-x-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <Link to="/register">
-            <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-1 rounded-lg text-lg font-medium">
-              Join now
+            <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+              Join Now
             </button>
           </Link>
-          <button className="border-2 border-white text-white px-3 py-1 rounded-lg text-lg font-medium hover:bg-white hover:text-black transition flex items-center">
-            Get in Touch <ArrowUpRightIcon className="ml-1 h-7 w-7 text-white" />
+          <button className="border-2 border-white/80 text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center">
+            Get in Touch 
+            <ArrowUpRightIcon className="ml-2 h-5 w-5" />
           </button>
         </div>
       </div>

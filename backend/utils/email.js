@@ -78,6 +78,33 @@ export const sendRSVPEmail = async (userEmail, event) => {
 };
 
 /**
+ * ✅ Sends a General Email (alias for compatibility)
+ * @param {Object} options - Email options
+ * @param {string} options.to - Recipient Email
+ * @param {string} options.subject - Email Subject
+ * @param {string} options.text - Email Body
+ * @param {string} options.html - HTML Body (optional)
+ */
+export const sendEmail = async ({ to, subject, text, html }) => {
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to,
+    subject,
+    text,
+    ...(html && { html })
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`✅ Email sent successfully to ${to}`);
+    return { success: true };
+  } catch (error) {
+    console.error(`❌ Error sending email: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+};
+
+/**
  * ✅ Sends a General Email Notification
  * @param {string} to - Recipient Email
  * @param {string} subject - Email Subject

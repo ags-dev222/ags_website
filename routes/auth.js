@@ -8,9 +8,9 @@
  */
 
 import express from 'express';
-import UserService from '../services/userService.js';
-
-import { generateToken } from '../utils/jwt.js';
+import UserService from '../services/user.js';
+import logger from '../utils/log.js';
+import { generateToken, verifyToken } from '../utils/jwt.js';
 import { authenticateWithToken, requireAuth } from './middleware/auth.js';
 import { authorizeRoles } from '../routes/middleware/auth.js';
 
@@ -145,7 +145,7 @@ router.post('/registerUser', async (req, res) => {
       token,
     });
   } catch (error) {
-    log.error('Registration error:', error);
+    logger.error('Registration error:', error);
     res.status(400).json({ error: error.message });
   }
 });
@@ -184,7 +184,7 @@ router.post('/registerUser', async (req, res) => {
  */
 
 // Login Route 
-router.post('/login', authenticateWithToken, requireAuth, async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -207,7 +207,7 @@ router.post('/login', authenticateWithToken, requireAuth, async (req, res) => {
       refreshToken, // Include refresh token in the response
     });
   } catch (error) {
-    log.error('Login error:', error);
+    logger.error('Login error:', error);
     res.status(500).json({ error: 'An error occurred during login' });
   }
 });
@@ -259,7 +259,7 @@ router.get('/adminData', authenticateWithToken,  authorizeRoles('admin'), async 
     const adminData = await UserService.getAdminData();
     res.status(200).json({ success: true, data: adminData });
   } catch (error) {
-    log.error('Error fetching admin data:', error);
+    logger.error('Error fetching admin data:', error);
     res.status(500).json({ error: 'Unable to fetch admin data' });
   }
 });
@@ -288,7 +288,7 @@ router.get('/userResources', authenticateWithToken, authorizeRoles('Registered',
     const userResources = await UserService.getUserResources();
     res.status(200).json({ success: true, data: userResources });
   } catch (error) {
-    log.error('Error fetching user resources:', error);
+    logger.error('Error fetching user resources:', error);
     res.status(500).json({ error: 'Unable to fetch user resources' });
   }
 });

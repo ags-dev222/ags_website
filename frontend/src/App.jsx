@@ -12,6 +12,8 @@ import AboutMissionVission from './pages/AboutMissionVission';
 import Resources from './pages/Resources';
 import EventsSection from './components/ActivitiesPage';
 import NewsSection from './pages/NewsSection';
+import BlogPost from './pages/BlogPost';
+import AdminRedirect from './pages/AdminRedirect';
 import Footer from './components/Footer';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/about-mission-vission" element={<AboutMissionVission />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/blog1" element={<NewsSection />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/admin" element={<AdminRedirect />} />
         </Routes>
         <Footer />
       </div>

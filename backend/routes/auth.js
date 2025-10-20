@@ -4,7 +4,14 @@ import { generateToken } from "../utils/jwt.js";
 import logger from "../utils/log.js";
 import { authenticateWithToken, requireAuth } from "./middleware/auth.js";
 import { authorizeRoles } from "../routes/middleware/auth.js";
-import { requestPasswordReset, resetPassword } from "../controllers/authController.js";
+import { 
+  requestPasswordReset, 
+  resetPassword, 
+  registerUser, 
+  loginUser, 
+  googleAuth,
+  authLimiter 
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -12,62 +19,17 @@ const router = express.Router();
  * ✅ REGISTER A USER 
  * - No authentication required
  * - Default role: "Registered"
+ * - Enhanced with validation and security
  */
-router.post("/registerUser", async (req, res) => {
-  const { email, password, name, role } = req.body;
-
-  if (!email || !password || !name) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
-
-  try {
-    const { user, token } = await UserService.createUser({
-      email,
-      password,
-      name,
-      role: role || "Registered",
-    });
-
-    res.status(201).json({
-      message: "User registered successfully",
-      user: { email: user.email, name: user.name, role: user.role },
-      token,
-    });
-  } catch (error) {
-    logger.error("Registration error:", error);
-    res.status(400).json({ error: error.message });
-  }
-});
+router.post("/registerUser", authLimiter, registerUser);
 
 /** 
- * ✅ LOGIN A USER 
- * - Authenticates user credentials
- * - Returns token upon successful login
- */
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required" });
-  }
-
-  try {
-    const { user, token } = await UserService.authenticateWithPassword(email, password);
-
-    if (!user) {
-      return res.status(401).json({ error: "Invalid email or password" });
-    }
-
-    res.json({
-      message: "Login successful",
-      user: { email: user.email, name: user.name, role: user.role },
-      token,
-    });
-  } catch (error) {
-    logger.error("Login error:", error);
-    res.status(500).json({ error: "An error occurred during login" });
-  }
-});
+* ✅ LOGIN A USER 
+* - Authenticates user credentials
+* - Returns token upon successful login
+* - Enhanced with rate limiting and security
+*/
+router.post("/login", authLimiter, loginUser);
 
 /** 
  * ✅ GET USER PROFILE 
@@ -130,5 +92,45 @@ router.post("/forgot-password", requestPasswordReset);
  * - Verifies OTP and resets password
  */
 router.post("/reset-password", resetPassword);
+
+/**
+ * ✅ GOOGLE OAUTH LOGIN
+ * - Authenticates user with Google OAuth
+ */
+router.post("/google", googleAuth);
+
+/**
+ * ✅ CREATE ADMIN USER
+ * - Only SuperAdmin can create admin users
+ */
+router.post("/create-admin", authenticateWithToken, authorizeRoles("superadmin"), async (req, res) => {
+  const { email, password, name, role, department } = req.body;
+  
+  try {
+    const { user } = await UserService.createUser({
+      email,
+      password,
+      name,
+      role,
+      department,
+      createdBy: req.user._id,
+      isEmailVerified: true
+    });
+
+    res.status(201).json({
+      message: 'Admin user created successfully',
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        department: user.department
+      }
+    });
+  } catch (error) {
+    logger.error('Admin creation error:', error);
+    res.status(400).json({ error: error.message });
+  }
+});
 
 export default router;

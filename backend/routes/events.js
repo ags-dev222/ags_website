@@ -7,6 +7,9 @@ import {
   deleteEvent,
   getEvents,
   rsvpToEvent,
+  getNextEvent,
+  getUpcomingEvents,
+  getEventById,
 } from '../controllers/events.js';
 
 const router = express.Router();
@@ -28,8 +31,17 @@ router.delete('/:id', authenticateWithToken, requireAuth, authorizeRoles('admin'
 // Public route to get events (No authentication needed)
 router.get('/', getEvents); 
 
+// Public route to get next event for countdown timer
+router.get('/next', getNextEvent);
+
+// Public route to get upcoming events
+router.get('/upcoming', getUpcomingEvents);
+
+// Public route to get event by ID
+router.get('/:id', getEventById);
+
 // Registered Users and Admins can RSVP to events
 // Authenticate token, ensure the user is authenticated, and allow both registered users and admins
-router.post('/:id/rsvp', authenticateWithToken, requireAuth, authorizeRoles('registered', 'admin'), rsvpToEvent); 
+router.post('/:id/rsvp', authenticateWithToken, requireAuth, authorizeRoles('registered', 'admin'), rsvpToEvent);
 
 export default router;

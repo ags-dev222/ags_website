@@ -1,4 +1,4 @@
-import NavbarDark from "./NavbarDark";
+import Navbar from "./Navbar";
 import { useState } from "react";
 import EventRegistrationForm from "./EventRegistrationForm";
 
@@ -67,7 +67,7 @@ function RegistrationForm() {
 
           {/* Include Event Registration Form */}
           <EventRegistrationForm />
-          <NavbarDark />
+          <Navbar theme="light" />
 
           {/* Submit Button */}
           <button

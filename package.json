@@ -6,24 +6,30 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "setup": "node scripts/setup.js",
+    "start": "npm run start:prod",
     "dev": "nodemon server.js",
     "start:dev:frontend": "cd frontend && npm run dev",
     "start:dev:backend": "cd backend && npm run dev",
+    "start:dev:admin": "cd frontend/Admin && npm run dev",
     "start:prod": "cd backend && npm start",
-    "install:all": "npm run install:frontend && npm run install:backend",
+    "install:all": "npm run install:frontend && npm run install:backend && npm run install:admin",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
+    "install:admin": "cd frontend/Admin && npm install",
     "build": "npm run clean && npm run install:all && npm run build:frontend && npm run move:build",
     "build:frontend": "cd frontend && npm run build",
+    "build:admin": "cd frontend/Admin && npm run build",
     "move:build": "rm -rf backend/public && mkdir -p backend/public && cp -r frontend/dist/* backend/public/",
-    "clean": "rm -rf frontend/dist backend/public",
-    "start": "npm run start:prod"
+    "clean": "rm -rf frontend/dist frontend/Admin/dist backend/public"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ags_website": "file:",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.2",
+    "mongoose": "^8.18.0",
     "react-select": "^5.10.0"
   }
 }
